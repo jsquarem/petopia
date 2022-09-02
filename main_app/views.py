@@ -51,11 +51,13 @@ def get_petfinder_request(endpoint = '', query_list = ''):
   response = requests.get(url, headers=headers)
   return response.json()
   
-def home(request):
-  print(update_petfinder_token())
-  response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
-  return render(request, 'home.html', {'response': response})
 
+
+def home(request): 
+  print(update_petfinder_token()) 
+  response = get_pathfinder_request('animals', [('type', 'dog'), ('location', '78729')])
+
+  return render(request, 'home.html', {'response': response})
 def signup(request):
   error_message = ''
   if request.method == 'POST':
