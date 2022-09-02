@@ -18,7 +18,7 @@ def update_petfinder_token():
   return response['access_token']
   
 
-def get_pathfinder_token():
+def get_petfinder_token():
   token_object = Petfinder_API_Token.objects.first()
   # TODO update timezone awareness if we set a server timezone/use tomezones
   token_age = datetime.now(timezone.utc) - token_object.date
@@ -29,7 +29,7 @@ def get_pathfinder_token():
   return token_object.token
 
 # query_list expects a list of key, value tuples ex. [(key, value), (key2, value2), ...]
-def get_pathfinder_request(endpoint = '', query_list = ''):
+def get_petfinder_request(endpoint = '', query_list = ''):
   url = 'https://api.petfinder.com/v2/'
   url = url + endpoint
   query_string = ''
@@ -40,7 +40,11 @@ def get_pathfinder_request(endpoint = '', query_list = ''):
       else:
         query_string = query_string + f'&{query[0]}={query[1]}'
   url = url + query_string
+<<<<<<< HEAD
   token = get_pathfinder_token()
+=======
+  token = get_petfinder_token()
+>>>>>>> main
   headers = CaseInsensitiveDict()
   headers["Accept"] = "application/json"
   headers["Authorization"] = f"Bearer {token}"
@@ -48,6 +52,9 @@ def get_pathfinder_request(endpoint = '', query_list = ''):
   return response.json()
   
 def home(request):
-  print(update_petfinder_token())  
+<<<<<<< HEAD
   response = get_pathfinder_request('animals', [('type', 'dog'), ('location', '78729')])
+=======
+  response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
+>>>>>>> main
   return render(request, 'home.html', {'response': response})
