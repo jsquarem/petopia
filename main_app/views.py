@@ -47,5 +47,5 @@ def get_pathfinder_request(endpoint = '', query_list = ''):
   return response.json()
   
 def home(request):  
-  response = get_pathfinder_request([('type', 'dog'), ('location', '78729')],'animals')
+  response = get_pathfinder_request('animals', [('type', 'dog'), ('location', '78729')])
   return render(request, 'home.html', {'response': response})
