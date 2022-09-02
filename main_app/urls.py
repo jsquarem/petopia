@@ -14,5 +14,5 @@ urlpatterns = [
   path('profile/<int:user_id>/add_photo/', views.add_photo, name='add_photo'),
   path('profile/<int:user_id>/add_favorite/<int:animal_id>', views.add_favorite, name='add_favorite'),
   path('profile/<int:user_id>/delete_favorite/<int:animal_id>', views.delete_favorite, name='delete_favorite'),
-  
+  #somethingelse
 ]
