@@ -40,11 +40,7 @@ def get_petfinder_request(endpoint = '', query_list = ''):
       else:
         query_string = query_string + f'&{query[0]}={query[1]}'
   url = url + query_string
-<<<<<<< HEAD
-  token = get_pathfinder_token()
-=======
   token = get_petfinder_token()
->>>>>>> main
   headers = CaseInsensitiveDict()
   headers["Accept"] = "application/json"
   headers["Authorization"] = f"Bearer {token}"
@@ -52,9 +48,5 @@ def get_petfinder_request(endpoint = '', query_list = ''):
   return response.json()
   
 def home(request):
-<<<<<<< HEAD
-  response = get_pathfinder_request('animals', [('type', 'dog'), ('location', '78729')])
-=======
   response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
->>>>>>> main
   return render(request, 'home.html', {'response': response})
