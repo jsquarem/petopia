@@ -55,7 +55,7 @@ def get_petfinder_request(endpoint = '', query_list = ''):
 
 def home(request): 
   print(update_petfinder_token()) 
-  response = get_pathfinder_request('animals', [('type', 'dog'), ('location', '78729')])
+  response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
 
   return render(request, 'home.html', {'response': response})
 def signup(request):
@@ -107,4 +107,3 @@ def add_favorite(request):
 
 def delete_favorite(request):
   pass
-#something
