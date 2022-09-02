@@ -5,13 +5,13 @@ import csv
 
 from requests.structures import CaseInsensitiveDict
 
-# print(animal_breeds)
-out_array = []
-name = 'Cat'
-breeds = animal_breeds['breeds']
-for breed in breeds:
-  new_row = [name, breed['name']]
-  out_array.append(new_row)
+# # print(animal_breeds)
+# out_array = []
+# name = 'Cat'
+# # breeds = animal_breeds['breeds']
+# for breed in breeds:
+#   new_row = [name, breed['name']]
+#   out_array.append(new_row)
 
 # print(out_array)
 
