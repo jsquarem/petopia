@@ -39,6 +39,7 @@ def get_pathfinder_request(endpoint = '', query_list = ''):
         query_string = query_string + f'?{query[0]}={query[1]}'
       else:
         query_string = query_string + f'&{query[0]}={query[1]}'
+  url = url + query_string
   token = get_pathfinder_token()
   headers = CaseInsensitiveDict()
   headers["Accept"] = "application/json"
@@ -46,6 +47,7 @@ def get_pathfinder_request(endpoint = '', query_list = ''):
   response = requests.get(url, headers=headers)
   return response.json()
   
-def home(request):  
+def home(request):
+  print(update_petfinder_token())  
   response = get_pathfinder_request('animals', [('type', 'dog'), ('location', '78729')])
   return render(request, 'home.html', {'response': response})
