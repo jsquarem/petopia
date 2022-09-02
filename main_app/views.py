@@ -48,5 +48,6 @@ def get_petfinder_request(endpoint = '', query_list = ''):
   return response.json()
   
 def home(request):
+  print(update_petfinder_token())
   response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
   return render(request, 'home.html', {'response': response})
