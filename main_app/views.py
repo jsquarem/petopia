@@ -35,8 +35,10 @@ def get_pathfinder_request(endpoint = '', query_list = ''):
   query_string = ''
   if query_list:
     for i, query in enumerate(query_list):
-      query_string = query_string + '?' if i == 0 else query_string + '&'
-      query_string = query_string + f'{query[0]}={query[1]}'
+      if i == 0:
+        query_string = query_string + f'?{query[0]}={query[1]}'
+      else:
+        query_string = query_string + f'&{query[0]}={query[1]}'
   token = get_pathfinder_token()
   headers = CaseInsensitiveDict()
   headers["Accept"] = "application/json"
