@@ -76,3 +76,34 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+
+def animals_index(request):
+  pass
+
+def animals_detail(request):
+  pass
+
+def view_profile(request):
+  pass
+
+def create_profile(request):
+  pass
+
+def organizations_index(request):
+  pass
+
+def organizations_detail(request):
+  pass
+
+def about(request):  
+  pass
+
+def add_photo(request):
+  pass
+
+def add_favorite(request):
+  pass
+
+def delete_favorite(request):
+  pass
