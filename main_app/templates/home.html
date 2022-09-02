@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Breed</th>
+        <th>Color</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Size</th>
+        <th>Coat</th>
+        <th>Photo</th>
+      </tr>
+      {% for animal in response.animals %}
+      <tr>
+        <td>{{animal.type}}</td>
+        <td>{{animal.name}}</td>
+        <td>{{animal.breeds.primary}}</td>
+        <td>{{animal.colors.primary}}</td>
+        <td>{{animal.age}}</td>
+        <td>{{animal.gender}}</td>
+        <td>{{animal.size}}</td>
+        <td>{{animal.coat}}</td>
+        <td><img src="{{animal.photos.0.small}}" /></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
