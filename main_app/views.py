@@ -118,8 +118,9 @@ def organizations_index(request):
 
 def organizations_detail(request, organization_id):
   organization = get_petfinder_request(f'organizations/{organization_id}') 
+  animals = get_petfinder_request(f'animals', ['organization', organization_id])
   google_map_url = get_google_map_url(organization['organization']['address'])
-  return render(request, 'organizations/detail.html', {'organization': organization, 'google_map_url': google_map_url})
+  return render(request, 'organizations/detail.html', {'organization': organization, 'google_map_url': google_map_url, 'animals': animals})
 
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
