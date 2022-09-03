@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block content %}
 
 <h1>Log In</h1>
 
@@ -9,3 +11,11 @@
     <input type="submit" class="btn" value="login">
     <input type="hidden" name="next" value="{{ next }}">
 </form>
+
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+Don't have an account? <a class="btn btn-outline-info" href="{% url 'signup' %}">Sign Up!</a>
+
+{% endblock %}

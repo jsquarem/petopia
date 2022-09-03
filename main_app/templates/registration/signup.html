@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+
 
 <h1>Sign Up</h1>
 
@@ -7,8 +9,29 @@
 
 <form method="post" action="{% url 'signup' %}">
     {% csrf_token %}
-    {{ form.as_p }}
+        
+        {{ form.first_name.label }}
+        {{ form.first_name }}
+        <br><br>
+        {{ form.last_name.label }}
+        {{ form.last_name }}
+        <br><br>
+        {{ form.email.label }}
+        {{ form.email }}
+        <br><br>
+        {{ form.username.label }}
+        {{ form.username }}
+        <br><br>
+        {{ form.password1.label }}
+        {{ form.password1 }}
+        <br><br>
+        {{ form.password2.label }}
+        {{ form.password2 }}
+        <br><br>
+    {% comment %} {{ form.as_p }} {% endcomment %}
     <input type="submit" class="btn" value="signup">
 </form>
+
+Already have an account? <a class="btn btn-outline-info" href="{% url 'login' %}">Login!</a>
 
 {% endblock %}
