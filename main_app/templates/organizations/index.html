@@ -9,7 +9,7 @@
     <th>Address</th>
     <th>Website</th>
   </tr>
-  {% for organization in response.organizations %}
+  {% for organization in organizations.organizations %}
   <tr>
     <td>
       <a href="{% url 'organizations.detail' organization.id %}">{{organization.name}}</a>
@@ -25,12 +25,6 @@
       {% endif %} {% if organization.address.postcode %}
       {{organization.address.postcode}} {% endif %}
     </td>
-    <td>
-      {% if organization.address.website %} {{organization.address.website}}
-      {% endif %}
-    </td>
-
-    <td></td>
   </tr>
 
   {% endfor %}

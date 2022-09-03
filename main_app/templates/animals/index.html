@@ -13,7 +13,7 @@
     <th>Coat</th>
     <th>Photo</th>
   </tr>
-  {% for animal in response.animals %}
+  {% for animal in animals.animals %}
   <tr>
     <td>{{animal.type}}</td>
     <td><a href="{% url 'animals.detail' animal.id %}">{{animal.name}}</a></td>
