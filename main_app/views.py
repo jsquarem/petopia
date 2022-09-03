@@ -99,10 +99,12 @@ def animals_detail(request, animal_id):
   return render(request, 'animals/detail.html', {'response': response})
 
 def organizations_index(request):
-  pass
+  response = get_petfinder_request(f'organizations/')  
+  return render(request, 'organizations/index.html', {'response': response})
 
-def organizations_detail(request):
-  pass
+def organizations_detail(request, organization_id):  
+  response = get_petfinder_request(f'organizations/{organization_id}')  
+  return render(request, 'organizations/detail.html', {'response': response})
 
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
