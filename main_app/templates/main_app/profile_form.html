@@ -4,7 +4,12 @@
 
 <div class="container-fluid bg-black">
     <div class="col-12 bg-black p1 border text-center border-info">
-        <h1>New Profile</h1>
+        <div class="col-10 bg-black text-start offset-1 p-2 mt-4 border border-info">
+        {% if object %}
+            <h1 class="text-info">Edit <span class="teal-text">{{object.name}}</span></h1> 
+        {% else %}
+        <h1 class="text-info">New Profile</h1>
+        {% endif %}
         <form id="create-profile" action="" method="POST">
             {% csrf_token %}
             <div class="col-10 bg-black text-start offset-1 p-2 mt-4 border border-info">

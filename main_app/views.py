@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from dotenv import load_dotenv
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Petfinder_API_Token, Profile
 from .forms import CreateUserForm
 from datetime import datetime, timezone
@@ -107,6 +107,13 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = ['name', 'bio']
+
+class ProfileDelete(LoginRequiredMixin, DeleteView):
+  model = Profile
+  success_url = '/profiles/create/'
 
 def organizations_index(request):
   pass

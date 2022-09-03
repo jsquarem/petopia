@@ -33,6 +33,11 @@
         </nav>
         <nav class="navbar bg-black">
             <div class="container-fluid">
+                <a class="btn btn-outline-success" href="{% url 'detail.profile' user.id %}">{{ user.username }}</a>
+            </div>
+        </nav>
+        <nav class="navbar bg-black">
+            <div class="container-fluid">
                 <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
             </div>
         </nav>
