@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Petfinder_API_Token, Profile
 from .forms import CreateUserForm
 from datetime import datetime, timezone
+import urllib.parse
 import requests
 from requests.structures import CaseInsensitiveDict
 import os
@@ -54,6 +55,16 @@ def get_petfinder_request(endpoint = '', query_list = ''):
   return response.json()
   
 
+def get_google_map_url(address):
+  url = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyDbzW3rRuc7De1RF3wP0UGbsyj-pZbMbuQ&q='
+  query_string = ''
+  for i, (key, value) in enumerate(address.items()):
+    if value != None and key != 'country':
+      value = value.replace(' ', '+')
+      # add comma between query address values except for last value
+      query_string = query_string + f"{value}," if i < (len(address.items())-2) else query_string + f"{value}"
+  return url + query_string
+
 
 def home(request): 
   response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
@@ -90,21 +101,26 @@ def signup(request):
 
 
 def animals_index(request):
-  response = get_petfinder_request('animals')
-  return render(request, 'animals/index.html', {'response': response})
+  animals = get_petfinder_request('animals')
+  return render(request, 'animals/index.html', {'animals': animals})
 
 
 def animals_detail(request, animal_id):
-  response = get_petfinder_request(f'animals/{animal_id}')  
-  return render(request, 'animals/detail.html', {'response': response})
+  animal = get_petfinder_request(f'animals/{animal_id}')
+  organization_id = animal['animal']['organization_id']
+  organization = get_petfinder_request(f'organizations/{organization_id}')
+  google_map_url = get_google_map_url(organization['organization']['address'])
+  return render(request, 'animals/detail.html', {'animal': animal, 'organization': organization, 'google_map_url': google_map_url})
 
 def organizations_index(request):
-  response = get_petfinder_request(f'organizations/')  
-  return render(request, 'organizations/index.html', {'response': response})
+  organizations = get_petfinder_request(f'organizations/')  
+  return render(request, 'organizations/index.html', {'organizations': organizations})
 
-def organizations_detail(request, organization_id):  
-  response = get_petfinder_request(f'organizations/{organization_id}')  
-  return render(request, 'organizations/detail.html', {'response': response})
+def organizations_detail(request, organization_id):
+  organization = get_petfinder_request(f'organizations/{organization_id}') 
+  animals = get_petfinder_request(f'animals', ['organization', organization_id])
+  google_map_url = get_google_map_url(organization['organization']['address'])
+  return render(request, 'organizations/detail.html', {'organization': organization, 'google_map_url': google_map_url, 'animals': animals})
 
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)

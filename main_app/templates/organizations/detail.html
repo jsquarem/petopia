@@ -1,2 +1,16 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-{{response.organization}} {% endblock %}
+<h1>Organization</h1>
+{{organization.organization}}
+<h1>Map</h1>
+<iframe
+  width="600"
+  height="450"
+  style="border:0"
+  loading="lazy"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  src="{{google_map_url}}">
+</iframe>
+<h1>Animals</h1>
+{{animals.animals}}
+{% endblock %}
