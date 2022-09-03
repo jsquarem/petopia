@@ -56,7 +56,6 @@ def get_petfinder_request(endpoint = '', query_list = ''):
 
 
 def home(request): 
-  print(update_petfinder_token()) 
   response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
   return render(request, 'home.html', {'response': response})
 
@@ -91,10 +90,21 @@ def signup(request):
 
 
 def animals_index(request):
-  pass
+  response = get_petfinder_request('animals')
+  return render(request, 'animals/index.html', {'response': response})
 
-def animals_detail(request):
-  pass
+
+def animals_detail(request, animal_id):
+  response = get_petfinder_request(f'animals/{animal_id}')  
+  return render(request, 'animals/detail.html', {'response': response})
+
+def organizations_index(request):
+  response = get_petfinder_request(f'organizations/')  
+  return render(request, 'organizations/index.html', {'response': response})
+
+def organizations_detail(request, organization_id):  
+  response = get_petfinder_request(f'organizations/{organization_id}')  
+  return render(request, 'organizations/detail.html', {'response': response})
 
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
@@ -114,12 +124,6 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
 class ProfileDelete(LoginRequiredMixin, DeleteView):
   model = Profile
   success_url = '/profiles/create/'
-
-def organizations_index(request):
-  pass
-
-def organizations_detail(request):
-  pass
 
 def add_photo(request):
   pass

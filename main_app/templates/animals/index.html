@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<h1 class="text-center">Animals</h1>
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Breed</th>
+    <th>Color</th>
+    <th>Age</th>
+    <th>Gender</th>
+    <th>Size</th>
+    <th>Coat</th>
+    <th>Photo</th>
+  </tr>
+  {% for animal in response.animals %}
+  <tr>
+    <td>{{animal.type}}</td>
+    <td><a href="{% url 'animals.detail' animal.id %}">{{animal.name}}</a></td>
+    <td>{{animal.breeds.primary}}</td>
+    <td>{{animal.colors.primary}}</td>
+    <td>{{animal.age}}</td>
+    <td>{{animal.gender}}</td>
+    <td>{{animal.size}}</td>
+    <td>{{animal.coat}}</td>
+    <td>
+      <img src="{{animal.photos.0.small}}" />
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
