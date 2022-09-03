@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<h1 class="text-center">Animals</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Address</th>
+    <th>Website</th>
+  </tr>
+  {% for organization in response.organizations %}
+  <tr>
+    <td><a href="{% url 'organizations.detail' organization.id %}">{{organization.name}}</a></td>
+    <td>{{organization.email}}</td>
+    <td>{{organization.phone}}</td>
+    <td>
+      {% if organization.address.address1 %}
+      {{organization.address.address1}}<br />
+      {% endif %}
+      {% if organization.address.address2 %}
+      {{organization.address.address2}}<br />
+      {% endif %}
+      {% if organization.address.city %}
+      {{organization.address.city}},
+      {% endif %}
+      {% if organization.address.state %}
+      {{organization.address.state}} 
+      {% endif %} 
+      {% if organization.address.postcode %}
+      {{organization.address.postcode}}
+      {% endif %}   
+    </td>
+    <td>
+      {% if organization.address.website %}
+      {{organization.address.website}}
+      {% endif %}
+    <td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
