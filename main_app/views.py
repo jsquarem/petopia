@@ -1,20 +1,22 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from dotenv import load_dotenv
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Petfinder_API_Token, Profile
-from .forms import CreateUserForm
-from datetime import datetime, timezone
-import urllib.parse
-import requests
-from requests.structures import CaseInsensitiveDict
-import os
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .models import Petfinder_API_Token, Profile
+from .forms import CreateUserForm
+from datetime import datetime, timezone
+from requests.structures import CaseInsensitiveDict
+from dotenv import load_dotenv
+import requests
+import os
 
+'''
+Petfinder API Functions
+'''
 def update_petfinder_token():
   load_dotenv()
   PETFINDER_API_KEY = os.getenv('PETFINDER_API_KEY')
@@ -53,8 +55,10 @@ def get_petfinder_request(endpoint = '', query_list = ''):
   headers["Authorization"] = f"Bearer {token}"
   response = requests.get(url, headers=headers)
   return response.json()
-  
 
+'''
+Google Maps API Function
+''' 
 def get_google_map_url(address):
   url = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyDbzW3rRuc7De1RF3wP0UGbsyj-pZbMbuQ&q='
   query_string = ''
@@ -65,15 +69,15 @@ def get_google_map_url(address):
       query_string = query_string + f"{value}," if i < (len(address.items())-2) else query_string + f"{value}"
   return url + query_string
 
-
+'''
+View Functions
+'''
 def home(request): 
   response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
   return render(request, 'home.html', {'response': response})
 
-
 def about(request):
   return render(request, 'about.html')
-
 
 def signup(request):
   if request.user.is_authenticated:
@@ -99,11 +103,9 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-
 def animals_index(request):
   animals = get_petfinder_request('animals')
   return render(request, 'animals/index.html', {'animals': animals})
-
 
 def animals_detail(request, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
