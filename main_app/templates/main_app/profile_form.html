@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid bg-black">
+    <div class="col-12 bg-black p1 border text-center border-info">
+        <h1>New Profile</h1>
+        <form id="create-profile" action="" method="POST">
+            {% csrf_token %}
+            <div class="col-10 bg-black text-start offset-1 p-2 mt-4 border border-info">
+                <h5 class="text-white">Profile Name:</h5>
+            </div>
+        <div class="form-floating text-start col-10 offset-1">
+            <h5>{{ form.name }}</h5>
+        </div>
+        <div class="col-10 bg-black text-start offset-1 p-2 mt-4 border border-info">
+            <div class="outline-info"><h5 class="text-white">Profile Description:</h5></div>
+        </div>
+        <div class="form-floating text-start col-10 offset-1">
+            <h5>{{ form.bio }}</h5>
+        </div>
+        <input type="submit" value="Create Profile" class="btn btn-outline-success btn-lg my-4">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
