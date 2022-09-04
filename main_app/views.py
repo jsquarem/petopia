@@ -158,4 +158,4 @@ def delete_favorite(request):
   pass
 
 def lobby(request):
-  return render(request, 'lobby.html')
+  return render(request, 'profiles/lobby.html')
