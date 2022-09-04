@@ -6,12 +6,13 @@
     <div class="col-12 bg-black p1 border text-center border-info">
         <div class="col-10 bg-black text-start offset-1 p-2 mt-4 border border-info">
             <h1 class="text-info">Hello, {{ profile.name }}!</h1>
-                {% for profile in profiles %}
-                {% if request.user == profile.user %}
-                <a class="btn btn-lg btn-outline-info" href="{% url 'profiles_update' profile.id %}">Edit</a>
-                <a class="btn btn-lg btn-outline-danger" href="{% url 'profiles_delete' profile.id %}">Delete</a>
+                {% if request.user.id == profile.user.id %}
+                <a class="btn btn-lg btn-outline-info" href="{% url 'profiles_update' user.id %}">Edit</a>
+                <a class="btn btn-lg btn-outline-danger" href="{% url 'profiles_delete' user.id %}">Delete</a>
                 {% endif %}
-                {% endfor %}
+        </div>
+        <div class="col-10 bg-black text-start offset-1 p-2 mt-4 border border-info">
+            <a class="btn btn-lg btn-outline-danger" href="">Hello There!</a>
         </div>
     </div>
 </div>

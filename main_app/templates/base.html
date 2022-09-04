@@ -31,11 +31,13 @@
                 <span class="text-info">Welcome, {{ request.user }}</span>
             </div>
         </nav>
+            {% if request.user.profile %}
         <nav class="navbar bg-black">
             <div class="container-fluid">
-                <a class="btn btn-outline-success" href="{% url 'detail.profile' user.id %}">{{ user.username }}</a>
+                <a class="btn btn-outline-success" href="{% url 'detail' user.id %}">{{ user.username }}</a>
             </div>
         </nav>
+            {% endif %}
         <nav class="navbar bg-black">
             <div class="container-fluid">
                 <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
