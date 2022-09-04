@@ -156,3 +156,6 @@ def add_favorite(request):
 
 def delete_favorite(request):
   pass
+
+def lobby(request):
+  return render(request, 'lobby.html')
