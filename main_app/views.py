@@ -126,6 +126,9 @@ def organizations_detail(request, organization_id):
 
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
+  print(profile.user.id)
+  print(request.user.id)
+  print(profile.name)
   return render(request, 'profiles/detail.html', { 'profile': profile })
 
 class ProfileCreate(LoginRequiredMixin, CreateView):
@@ -133,6 +136,8 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   fields = ['name', 'bio']
   def form_valid(self, form):
     form.instance.user = self.request.user
+    print(self.request.user)
+    print(self.request.user.id)
     return super().form_valid(form)
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
@@ -151,3 +156,6 @@ def add_favorite(request):
 
 def delete_favorite(request):
   pass
+
+def lobby(request):
+  return render(request, 'profiles/lobby.html')

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container-fluid bg-black text-center">
+    <div class="col-12 bg-black p1 border border-info">
+    <h1 class="text-info">Adoption Lobby Chatroom</h1>
+        <div class="col-10 bg-black text-center offset-1 p-2 mb-4 mt-4 border border-info">
+        <form id="form">
+        <textarea class="text-box text-danger" style="max-height: 55px; font-size: 28px;"
+        placeholder="" id="floatingTextarea" readonly>Warning, No Profanity Filter ~_^!!</textarea>
+        <label for="floatingTextarea" class="text-info"></label>
+        <textarea class="text-box text-warning border border-black" id="messages" readonly></textarea>
+            {% comment %} <input class="text-box" type="text" name="message" /> {% endcomment %}
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text bg-black text-info border border-info" style="max-width: 10vw; margin-left: 2.7vw;" id="inputGroup-sizing-sm">{{ user.username }}</span>
+                <input type="text" name="message" class="form-control text-warning bg-black" style="max-width: 67.7vw" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    let url = `ws://${window.location.host}/ws/socket-server/`
+
+    const chatSocket = new WebSocket(url)
+
+    let textBoxArea = document.querySelector('.text-box');
+    const textBox = document.getElementById('console');
+    let areaText = messages.value;
+
+    chatSocket.onmessage = function(e) {
+        let data = JSON.parse(e.data)
+        console.log('Data:', data)
+
+        if(data.type === 'chat') {
+            let messages = document.getElementById('messages')
+            let areaText = messages.value;
+
+            messages.insertAdjacentHTML('beforeend', `
+                ${data.username}: ${data.message}
+                    `)
+        }
+    }
+
+    let form = document.getElementById('form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        let message = e.target.message.value
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }))
+        form.reset()
+    })
+
+    let startScroll;
+    let stopScroll;
+    function textBoxScroll() {
+        if (!startScroll) {
+            startScroll = setInterval(textScroll, 1000);
+            return
+        }
+    }
+
+    function textScroll() {
+        areaText += Math.random() + '\n';
+        messages.scrollTop = messages.scrollHeight;
+        return
+    }
+
+    function stopTextScroll() {
+        clearInterval(startScroll);
+        startScroll = null;
+        return
+    }
+    textBoxScroll();
+
+</script>
+
+{% endblock %}
