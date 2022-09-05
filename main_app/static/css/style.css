@@ -424,6 +424,32 @@ Last change: 8th June 2018
  .pet-adopt-info span{
      font-weight:500;
 }
+/*=========================== Chatroom ============================ */
+textarea {
+  /* grid-column-start: 4;
+  grid-column-end: 6;
+  grid-row-start: 7; */
+  /* position: relative;
+  display: inline-block; */
+  font-family: monospace;
+  font-size: 1vh;
+  /* font-weight: bold; */
+  /* margin-top: -2.5vh;
+  margin-left: -10vw; */
+  border: 0.25vh solid white;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 0;
+  width: 75vw;
+  height: 20vh;
+  z-index: 3;
+}
+#chat-input {
+  padding: 0;
+  width: 60vw;
+}
+
 /*=========================== About us ============================ */
 /* testimonials */
  .testimonial{
