@@ -446,8 +446,7 @@ textarea {
   z-index: 3;
 }
 #chat-input {
-  padding: 0;
-  width: 60vw;
+  background-color: black;
 }
 
 /*=========================== About us ============================ */

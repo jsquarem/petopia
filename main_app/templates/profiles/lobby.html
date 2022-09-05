@@ -14,8 +14,8 @@
             <textarea class="text-box text-info" id="messages" readonly></textarea>
                 {% comment %} <input class="text-box" type="text" name="message" /> {% endcomment %}
                 <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text bg-black text-info border border-info" style="width: 12vw; margin-left: 11.7vw" id="inputGroup-sizing-sm">{{ user.username }}</span>
-                    <input id="chat-input" type="text" name="message" class="form-control text-black bg-black" style="max-width: 63vw" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    <span class="input-group-text bg-dark text-info border border-info" style="width: 12vw; margin-left: 11.7vw" id="inputGroup-sizing-sm">{{ user.username }}</span>
+                    <input id="chat-input" type="text" name="message" placeholder="Enter your text here!" class="form-control text-info bg-dark" style="max-width: 63vw" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                 </div>
             </form>
     </div>
@@ -44,9 +44,8 @@
             let messages = document.getElementById('messages')
             let areaText = messages.value;
 
-            messages.insertAdjacentHTML('beforeend', `
-                ${data.username}: ${data.message}
-                    `)
+            messages.insertAdjacentHTML('beforeend', 
+            `${data.username}: ${data.message} \n\ `)
         }
     }
 

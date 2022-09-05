@@ -2,13 +2,17 @@
 {% load static %}
 {% block content %}
 
+<div class="jumbotron jumbotron-fluid overlay">
+    <div class="jumbo-heading">
+        <div class="section-heading" data-aos="zoom-in">
+
 <h1>Log In</h1>
 
 <!-- Add the login form -->
-<form method="post" action="{% url 'login' %}">
+<form method="post" class="text-warning" action="{% url 'login' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" class="btn" value="login">
+    <input type="submit" class="btn btn-success" value="login">
     <input type="hidden" name="next" value="{{ next }}">
 </form>
 
@@ -16,6 +20,10 @@
     <p>{{ message }}</p>
 {% endfor %}
 
-Don't have an account? <a class="btn btn-outline-info" href="{% url 'signup' %}">Sign Up!</a>
+<p class="text-danger">Don't have an account?</p> <a class="btn btn-info" href="{% url 'signup' %}">Sign Up!</a>
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}
