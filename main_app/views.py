@@ -11,6 +11,7 @@ from .forms import CreateUserForm
 from datetime import datetime, timezone
 from requests.structures import CaseInsensitiveDict
 from dotenv import load_dotenv
+import urllib.parse
 import requests
 import os
 
@@ -38,16 +39,14 @@ def get_petfinder_token():
   return token_object.token
 
 # query_list expects a list of key, value tuples ex. [(key, value), (key2, value2), ...]
-def get_petfinder_request(endpoint = '', query_list = ''):
+def get_petfinder_request(endpoint = '', query_list = []):
   url = 'https://api.petfinder.com/v2/'
   url = url + endpoint
   query_string = ''
-  if query_list:
+  if len(query_list) > 0:
     for i, query in enumerate(query_list):
-      if i == 0:
-        query_string = query_string + f'?{query[0]}={query[1]}'
-      else:
-        query_string = query_string + f'&{query[0]}={query[1]}'
+      modifier = '?' if i == 0 else '&'
+      query_string = query_string + f'{modifier}{query[0]}={query[1]}'
   url = url + query_string
   token = get_petfinder_token()
   headers = CaseInsensitiveDict()
@@ -115,12 +114,12 @@ def animals_detail(request, animal_id):
   return render(request, 'animals/detail.html', {'animal': animal, 'organization': organization, 'google_map_url': google_map_url})
 
 def organizations_index(request):
-  organizations = get_petfinder_request(f'organizations/')  
+  organizations = get_petfinder_request('organizations/')  
   return render(request, 'organizations/index.html', {'organizations': organizations})
 
 def organizations_detail(request, organization_id):
   organization = get_petfinder_request(f'organizations/{organization_id}') 
-  animals = get_petfinder_request(f'animals', ['organization', organization_id])
+  animals = get_petfinder_request('animals', [('organization', organization_id)])
   google_map_url = get_google_map_url(organization['organization']['address'])
   return render(request, 'organizations/detail.html', {'organization': organization, 'google_map_url': google_map_url, 'animals': animals})
 
@@ -159,3 +158,15 @@ def delete_favorite(request):
 
 def lobby(request):
   return render(request, 'profiles/lobby.html')
+
+def animals_search(request):
+  animals = get_petfinder_request('animals')
+  form = request.POST
+  if len(form) > 0:
+    query_list = []
+    for key, value in form.items():
+      if key != 'csrfmiddlewaretoken' and value != '':
+        query_list.append((key, urllib.parse.quote(value)))
+    if query_list != []:
+      animals = get_petfinder_request('animals', query_list)
+  return render(request, 'animals/search_test.html', {'animals': animals})
