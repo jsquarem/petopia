@@ -151,6 +151,9 @@ def add_favorite(request):
 def delete_favorite(request):
   pass
 
+def lobby(request):
+  return render(request, 'profiles/lobby.html')
+
 def animals_search(request):
   animals = get_petfinder_request('animals')
   form = request.POST
