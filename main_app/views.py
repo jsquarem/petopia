@@ -12,6 +12,7 @@ from .forms import CreateUserForm
 from datetime import datetime, timezone
 from requests.structures import CaseInsensitiveDict
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 import urllib.parse
 import requests
 import os
@@ -55,6 +56,17 @@ def get_petfinder_request(endpoint = '', query_list = []):
   headers["Authorization"] = f"Bearer {token}"
   response = requests.get(url, headers=headers)
   return response.json()
+
+def get_expanded_description(url='', type=''):
+  type = 'animal'
+  if type == 'animal':
+    url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    description = soup.select('div[data-test="Pet_Story_Section"]')
+    description = description[0].contents[3]
+    description = description.contents[0].strip()
+  return HttpResponse(description)
 
 '''
 Google Maps API Function
@@ -128,6 +140,7 @@ def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
   return render(request, 'profiles/detail.html', { 'profile': profile })
 
+
 class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
   fields = ['name', 'bio']
@@ -184,3 +197,4 @@ def contact(request):
     return render(request, 'contact.html', {'confirmation': confirmation})
   else:
     return render(request, 'contact.html')
+
