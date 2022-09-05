@@ -1,9 +1,123 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<h1>Animal</h1>
-{{animal.animal}}
-<h1>Organization</h1>
-{{organization.organization}}
-<h1>Map</h1>
+
+      <!-- /nav --><!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid overlay">
+         <div class="jumbo-heading">
+            <!-- section-heading -->
+            <div class="section-heading" data-aos="zoom-in">
+               <h1>Adopt a Pet</h1>
+            </div>
+            <!-- /section-heading -->
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'animals.index' %}">View All Animals</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Adopt a Pet</li>
+               </ol>
+            </nav>
+         </div>
+         <!-- /jumbo-heading -->
+      </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div class="page">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="row bg-light-custom border-irregular1 block-padding">
+                     <!-- image -->
+                     <div class="col-lg-4 offset-lg-2">
+                        <!-- owl slider -->
+                        <div id="owl-adopt-single" class="owl-carousel top-centered-nav owl-theme" >
+                           <div class="col-md-12">
+                              <!-- image -->
+                              <a href="img/adoption/adoption1.jpg" title="your caption here">
+                              <img src="{{ animal.animal.photos.0.full }}" class="border-irregular1 img-fluid hover-opacity" alt="">
+                              </a>
+                           </div>
+                           <!-- /col-md-12 -->
+                           <div class="col-md-12">
+                              <!-- image -->
+                              <a href="img/adoption/adoptionsingle1.jpg" title="your caption here">
+                              <img src="{{ animal.animal.photos.1.full }}" class="border-irregular2 img-fluid hover-opacity" alt="">
+                              </a>
+                           </div>
+                           <!-- /col-md-12 -->
+                           <div class="col-md-12">
+                              <!-- image -->
+                              <a href="img/adoption/adoptionsingle2.jpg" title="your caption here">
+                              <img src="{{ animal.animal.photos.2.full }}" class="border-irregular1 img-fluid hover-opacity" alt="">
+                              </a>
+                           </div>
+                        </div>
+                        <!-- /owl-carousel -->
+                     </div>
+                     <!-- /col-md -->
+                     <!-- adoption info  -->
+                     <div class="col-lg-4 res-margin mt-5 text-xs-center">
+                        <h4><strong>Pet name:</strong> {{ animal.animal.name }}</h4>
+                        <div class="row">
+                           <div class="col-sm-6">
+                              <ul class="list-unstyled pet-adopt-info">
+                                 <li class="h7">Gender: <span>{{ animal.animal.gender }}</span></li>
+                                 <li class="h7">Age: <span>{{ animal.animal.age }}</span></li>
+                                 <li class="h7">Breed: <span>{{ animal.animal.breeds.primary }}</span></li>
+                              </ul>
+                           </div>
+                           <div class="col-sm-6">
+                              <ul class="list-unstyled pet-adopt-info">
+                                                               <li class="h7">Size: <span>{{ animal.animal.size }}</span></li>
+                                 <li class="h7">Neutered: <span>{% if animal.animal.attributes.spayed_neutered %}Yes{% else %}No{% endif %}</span></li>
+                                  <li class="h7">Vaccinated: <span>{% if animal.animal.attributes.shots_current %}Yes{% else %}No{% endif %}</span></li>
+                              </ul>
+                           </div>
+
+                           <!-- /div-->
+                        </div>
+                        <!-- /row-->
+                        <p class="font-weight-bold">{{ animal.animal.description }}</p>
+                     <div>
+                                                                                           <span class="h7">Characteristics:  </span><span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
+                     </div>
+
+                        <!-- button -->
+                        <a href="#" class="btn btn-primary " data-aos="zoom-in" >Adopt now!</a>
+                     </div>
+                     <!-- /col-md -->
+                  </div>
+                  <!-- /row-->
+                  <div class="col-md-12 mt-5">
+                     <h1>About {{ animal.animal.name }}</h1>
+                     <!-- ul custom-->
+                     <ul class="custom list-inline font-weight-bold">
+                         {% if animal.animal.environment.dogs %}<li class="list-inline-item">Friendly to other dogs</li>{% else %}{% endif %}
+                         {% if animal.animal.environment.cats %}<li class="list-inline-item">Friendly to other cats</li>{% else %}{% endif %}
+                         {% if animal.animal.environment.children %}<li class="list-inline-item">Good with Kids</li>{% else %}{% endif %}
+                     </ul>
+                     <p>Elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas ellus
+                        ac sodales felis tiam non metus. lorem ipsum dolor sit amet, consectetur adipisicing elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset campas fincas
+                     </p>
+                     <p>Elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas ellus
+                        ac sodales felis tiam non metus. lorem ipsum dolor sit amet, consectetur adipisicing elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset campas fincas
+                     </p>
+
+<div class="card bg-light-custom" style="width: 25rem;">
+  <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ organization.organization.name }}</h5>
+    <p class="card-text">{{ organization.organization.mission_statement }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ organization.organization.address.city}}, {{ organization.organization.address.state }}</li>
+    <li class="list-group-item">{{ organization.organization.email }}</li>
+    <li class="list-group-item">{{ organization.organization.phone }}</li>
+  </ul>
+  <div class="card-body">
+    <a href="{{ organization.organization.url }}" class="card-link">Website</a>
+{#    <a href="#" class="card-link">Another link</a>#}
+  </div>
+</div>
+<h3>Location</h3>
 <iframe
   width="600"
   height="450"
@@ -13,4 +127,25 @@
   referrerpolicy="no-referrer-when-downgrade"
   src="{{google_map_url}}">
 </iframe>
+
+                     <div class="alert alert-primary mt-5" role="alert">
+                        <h6 class="text-light">Adoption Rules</h6>
+                        <p>Elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas ellus
+                           ac sodales felis tiam non metus. lorem ipsum dolor sit amet, consectetur adipisicing elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset campas fincas
+                        </p>
+                     </div>
+                     <!-- /alert-->
+                     <p class="custom-link"><a href="{% url 'animals.index' %}">« Go back to adoption gallery</a></p>
+                  </div>
+                  <!-- /col-md-->
+               </div>
+               <!-- /col-lg-->
+            </div>
+            <!-- /row-->
+         </div>
+         <!-- /container-->
+      </div>
+      <!-- /page -->
+
+        <script src="{% static 'js/active/animal-detail.js' %}"></script>
 {% endblock %}
