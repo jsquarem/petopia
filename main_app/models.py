@@ -8,7 +8,7 @@ class Petfinder_API_Token(models.Model):
   date = models.DateTimeField(auto_now=True)
 
 class Profile(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+  user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
   name = models.CharField(max_length=24)
   bio = models.TextField(max_length=240)
 
@@ -16,4 +16,4 @@ class Profile(models.Model):
     return self.name
 
   def get_absolute_url(self):
-    return reverse('detail.profile', kwargs={'user_id': self.id})
+    return reverse('detail', kwargs={'user_id': self.user.id})

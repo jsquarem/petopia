@@ -71,50 +71,73 @@
             <!-- End Top bar -->
             <!-- Navbar Starts -->
             <div class="navbar container-fluid">
-               <div class="container ">
-                  <!-- logo -->
-                  <a class="navbar-brand" href="{% url 'home' %}">
-                  <i class="flaticon-dog-20"></i><img id="logo" src="{% static 'assets/logo.svg' %}">
-                  </a>
-                  <!-- Navbartoggler -->
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggle-icon">
-                  <i class="fas fa-bars"></i>
-                  </span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarResponsive">
-                     <ul class="navbar-nav ml-auto">
+                <div class="container ">
+                    <!-- logo -->
+                    <a class="navbar-brand" href="{% url 'home' %}">
+                    <i class="flaticon-dog-20"></i><img id="logo" src="{% static 'assets/logo.svg' %}">
+                    </a>
+                    <!-- Navbartoggler -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggle-icon">
+                    <i class="fas fa-bars"></i>
+                    </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
                         <!-- menu item -->
                         <li id="link-home" class="nav-item">
-                           <a class="nav-link" href="{% url 'home' %}">Home
-                           </a>
+                            <a class="nav-link" href="{% url 'home' %}">Home
+                            </a>
                         </li>
                         <!-- menu item -->
-                        <li id="link-animals" class="nav-item">
-                           <a class="nav-link" href="{% url 'animals.index' %}">View All Animals
-                           </a>
+                        {% if user.is_authenticated %}
+                        {% if request.user.profile %}
+                        <li id="link-home" class="nav-item">
+                            <a class="nav-link" href="{% url 'detail' user.id %}">{{ user.username }}
+                            </a>
                         </li>
+                        
+                        <!-- menu item -->
+                        <li id="link-animals" class="nav-item">
+                            <a class="nav-link" href="{% url 'animals.index' %}">View All Animals
+                            </a>
+                        </li>
+                        <!-- menu item -->
+                        {% endif %}
+                        <li id="link-home" class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        <!-- menu item -->
+                        {% else %}
+                        <li id="link-about" class="nav-item">
+                            <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                        </li>
+                        <!-- menu item -->
+                        <li id="link-about" class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        {% endif %}
                         <!-- menu item -->
                         <li id="link-about" class="nav-item">
                             <a class="nav-link" href="{% url 'about' %}">About</a>
                         </li>
                         <!-- menu item -->
                         <li id="link-animals" class="nav-item">
-                           <a class="nav-link" href="#">Contact
-                           </a>
+                            <a class="nav-link" href="#">Contact
+                            </a>
                         </li>
                         <!-- menu item -->
-                     </ul>
-                     <!--/ul -->
-                  </div>
-                  <!--collapse -->
-               </div>
-               <!-- /container -->
+                        </ul>
+                        <!--/ul -->
+                    </div>
+                    <!--collapse -->
+                </div>
+                <!-- /container -->
             </div>
             <!-- /navbar -->
-         </div>
-         <!--/row -->
-      </nav>
+        </div>
+        <!--/row -->
+    </nav>
         <!-- /nav -->
 
 {#<body>#}
