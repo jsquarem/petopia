@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -165,3 +166,21 @@ def animals_search(request):
     if query_list != []:
       animals = get_petfinder_request('animals', query_list)
   return render(request, 'animals/search_test.html', {'animals': animals})
+
+def contact(request):
+  if request.method == 'POST':
+    confirmation = {}
+    message_name = request.POST['name']
+    message_email = request.POST['email']
+    message = request.POST['message']
+    send_mail(
+      f'Contact Request - {message_name}',
+      message,
+      message_email,
+      ['jeffjmart@gmail.com']
+    )
+    confirmation['message'] = 'Thank you for yor message, we will respond as soon as we can.'
+    confirmation['name'] = message_name
+    return render(request, 'contact.html', {'confirmation': confirmation})
+  else:
+    return render(request, 'contact.html')
