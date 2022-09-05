@@ -4,7 +4,232 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33f3f4ba-9793-4a87-aed0-e1431b1753a2" name="Changes" comment="added base.html file in templates folder" />
+    <list default="true" id="33f3f4ba-9793-4a87-aed0-e1431b1753a2" name="Changes" comment="added base.html file in templates folder">
+      <change afterPath="$PROJECT_DIR$/main_app/static/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/assets/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/assets/logo75.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/assets/photos/dog-shower.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/assets/photos/happy-girl-hugging-dog-with-her-mother.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/assets/photos/happy-pet-dogs-playing-grass.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/assets/photos/woman-playing-with-her-dog-winter-day.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/css/plugins.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/404.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/about1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/about2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoption1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoption2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoption3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoption4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoption5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoption6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoption7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoption8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoptionsingle1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/adoption/adoptionsingle2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/blog.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/blurbimg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/calltoaction.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/gallery/gallery9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/jumbotron.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/mapmarker.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/service-single/feature1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/service-single/feature2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/service-single/feature3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/service-single/feature4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/service-single/feature5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/services/service1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/services/service2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/services/service3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/services/service4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/services/service5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/services2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/services3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/slide1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/slide2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/slide3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/slide4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/team/team1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/team/team2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/team/team3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/team/team4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/img/team/team5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/active/about.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/active/animal-detail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/active/animals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/active/home.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/contact.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/counter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/custom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/mailchimp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/plugins.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/prefixfree.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/js/respond.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/styles/adoption.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/styles/agility.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/styles/dogwalker.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/styles/maincolors.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/styles/pethotel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/styles/petshop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/styles/vetclinic.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/js/bootstrap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/bootstrap/js/bootstrap.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/jquery/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/css/layerslider.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/js/greensock.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/js/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/js/layerslider.kreaturamedia.jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/js/layerslider.load.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/js/layerslider.transitions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/gradient-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/gradient-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/gradient-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/gradient-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/gradient-circle-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/grid_hard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/grid_medium.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/grid_small.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/grid_stripes_left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/overlays/grid_stripes_right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/plugins/debug/layerslider.debug.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/plugins/debug/layerslider.debug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/plugins/origami/layerslider.origami.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/plugins/origami/layerslider.origami.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/plugins/popup/layerslider.popup.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/plugins/popup/layerslider.popup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/plugins/timeline/layerslider.timeline.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/plugins/timeline/layerslider.timeline.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark/shadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark3d/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark3d/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark3d/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark3d/shadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark3d/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlessdark3d/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight/shadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight3d/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight3d/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight3d/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight3d/shadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight3d/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/borderlesslight3d/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/carousel/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/carousel/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/carousel/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/carousel/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/carousel/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/darkskin/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/darkskin/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/darkskin/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/darkskin/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/darkskin/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/defaultskin/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/defaultskin/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/defaultskin/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/defaultskin/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/defaultskin/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidth/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidth/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidth/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidth/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidth/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidthdark/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidthdark/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidthdark/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidthdark/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/fullwidthdark/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/glass/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/glass/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/glass/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/glass/shadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/glass/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/glass/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/lightskin/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/lightskin/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/lightskin/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/lightskin/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/lightskin/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/minimal/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/minimal/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/minimal/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/minimal/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/minimal/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/noskin/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/noskin/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/noskin/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/noskin/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/noskin/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/numbers/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/numbers/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/numbers/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/outline/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/outline/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/outline/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/photogallery/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/photogallery/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/photogallery/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/photogallery/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/roundedflat/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/roundedflat/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/roundedflat/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v5/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v5/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v5/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v5/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v5/skin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v6/info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v6/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v6/nothumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/static/vendor/layerslider/skins/v6/skin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/consumers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/migrations/0002_profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/migrations/0002_profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/migrations/0003_remove_profile_id_alter_profile_user.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/routing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/animals/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/animals/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/animals/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/animals/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/animals/search_test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/main_app/profile_confirm_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/main_app/profile_confirm_delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/main_app/profile_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/main_app/profile_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/profiles/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/profiles/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/profiles/lobby.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petopia/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/petopia/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,23 +257,24 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2EDgGT5AYxTIMqdwfmKAH7OZRhb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/olu/code/djangoland/petopia",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/olu/code/djangoland/petopia&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="petopia" type="Python.DjangoServer" factoryName="Django server">
       <module name="petopia" />
@@ -96,6 +322,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

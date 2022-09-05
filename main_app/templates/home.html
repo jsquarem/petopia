@@ -1,46 +1,89 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'css/style.css' %}"
-    />
-    <title>Document</title>
-  </head>
-  <body>
-    <table>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Breed</th>
-        <th>Color</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Size</th>
-        <th>Coat</th>
-        <th>Photo</th>
-      </tr>
-      {% for animal in response.animals %}
-      <tr>
-        <td>{{animal.type}}</td>
-        <td>{{animal.name}}</td>
-        <td>{{animal.breeds.primary}}</td>
-        <td>{{animal.colors.primary}}</td>
-        <td>{{animal.age}}</td>
-        <td>{{animal.gender}}</td>
-        <td>{{animal.size}}</td>
-        <td>{{animal.coat}}</td>
-        <td><img src="{{animal.photos.0.small}}" /></td>
-      </tr>
-      {% endfor %}
-    </table>
-  </body>
-</html>
+	 <!-- ==== Slider ==== -->
+      <div id="slider" style="width:1200px;height:800px;margin:0 auto;margin-bottom: 0px;">
+         <!-- Slide 1 -->
+         <div class="ls-slide" data-ls="duration:4000; transition2d:7; kenburnszoom:out; kenburnsrotate:-5; kenburnsscale:1.2;">
+            <!-- bg image  -->
+            <img src="{% static 'assets/photos/dog-shower.jpeg' %}" class="ls-bg" alt="" />
+            <!-- text  -->
+            <div class="ls-l header-wrapper" data-ls="offsetyin:150; durationin:700; delayin:200; easingin:easeOutQuint; rotatexin:20; scalexin:1.4; offsetyout:600; durationout:400; parallaxlevel:0;">
+               <div class="header-text dog-elements">
+                  <h1>Adopt a pet today!</h1>
+                  <!--the div below is hidden on small screens  -->
+                  <div class="d-none d-sm-block">
+                     <p class="header-p">Search our list of dogs, cats and other pets available for adoption near you</p>
+                     <a class="btn btn-primary " href="{% url 'animals.index' %}">Adopt Today</a>
+                  </div>
+                  <!--/d-none  -->
+               </div>
+               <!-- header-text  -->
+            </div>
+            <!-- ls-l  -->
+         </div>
+         <!-- ls-slide -->
+         <!-- Slide 2 -->
+         <div class="ls-slide" data-ls="duration:4000; transition2d:7; kenburnszoom:out; kenburnsrotate:-5; kenburnsscale:1.2;">
+            <!-- bg image  -->
+            <img src="{% static 'assets/photos/happy-girl-hugging-dog-with-her-mother.jpeg' %}" class="ls-bg" alt="" />
+            <!-- text  -->
+            <div class="ls-l header-wrapper" data-ls="offsetyin:150; durationin:700; delayin:200; easingin:easeOutQuint; rotatexin:20; scalexin:1.4; offsetyout:600; durationout:400; parallaxlevel:0;">
+               <div class="header-text cat-elements">
+                  <h1>Find your forever friend today!</h1>
+                  <!--the div below is hidden on small screens  -->
+                  <div class="d-none d-sm-block">
+                     <p class="header-p">Your next lifelong companion is waiting for you at Petopia</p>
+                     <a class="btn btn-primary " href="{% url 'animals.index' %}">Find A Pet</a>
+                  </div>
+                  <!--/d-none  -->
+               </div>
+               <!-- header-text  -->
+            </div>
+            <!-- ls-l  -->
+         </div>
+         <!-- ls-slide -->
+         <!-- Slide 3 -->
+         <div class="ls-slide" data-ls="duration:4000; transition2d:7; kenburnszoom:out; kenburnsrotate:-5; kenburnsscale:1.2;">
+            <!-- bg image  -->
+            <img src="{% static 'assets/photos/happy-pet-dogs-playing-grass.jpeg' %}" class="ls-bg" alt="" />
+            <!-- text  -->
+            <div class="ls-l header-wrapper" data-ls="offsetyin:150; durationin:700; delayin:200; easingin:easeOutQuint; rotatexin:20; scalexin:1.4; offsetyout:600; durationout:400; parallaxlevel:0;">
+               <div class="header-text dog-elements">
+                  <h1>The Petopia Story</h1>
+                  <!--the div below is hidden on small screens  -->
+                  <div class="d-none d-sm-block">
+                     <p class="header-p">Learn more about our mission to help people find their furry companions.</p>
+                     <a class="btn btn-primary " href="{% url 'about' %}">Our services</a>
+                  </div>
+                  <!--/d-none  -->
+               </div>
+               <!-- header-text  -->
+            </div>
+            <!-- ls-l  -->
+         </div>
+         <!-- ls-slide -->
+         <!-- Slide 4 -->
+         <div class="ls-slide" data-ls="duration:4000; transition2d:7; kenburnszoom:out; kenburnsrotate:-5; kenburnsscale:1.2;">
+            <!-- bg image  -->
+            <img src="{% static 'assets/photos/woman-playing-with-her-dog-winter-day.jpeg' %}" class="ls-bg" alt="" />
+            <!-- text  -->
+            <div class="ls-l header-wrapper" data-ls="offsetyin:150; durationin:700; delayin:200; easingin:easeOutQuint; rotatexin:20; scalexin:1.4; offsetyout:600; durationout:400; parallaxlevel:0;">
+               <div class="header-text cat-elements">
+                  <h1>Meet The Team</h1>
+                  <!-- the div below is hidden on small screens  -->
+                  <div class="d-none d-sm-block">
+                     <p class="header-p">Meet the team behind Petopia.</p>
+                     <a class="btn btn-primary " href="team.html">Our Team</a>
+                  </div>
+                  <!--/d-none  -->
+               </div>
+               <!-- header-text  -->
+            </div>
+            <!-- ls-l  -->
+         </div>
+         <!-- ls-slide -->
+      </div>
+      <!-- /slider -->
 
+    <script src="{% static 'js/active/home.js' %}"></script>
 {% endblock %}
