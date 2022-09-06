@@ -1,16 +1,13 @@
 {
   "breeds": [
     {
-      "name": "Affenpinscher",
-      "_links": { "type": { "href": "/v2/types/dog" } }
+      "name": "Affenpinscher"
     },
     {
-      "name": "Afghan Hound",
-      "_links": { "type": { "href": "/v2/types/dog" } }
+      "name": "Afghan Hound"
     },
     {
-      "name": "Airedale Terrier",
-      "_links": { "type": { "href": "/v2/types/dog" } }
+      "name": "Airedale Terrier"
     },
     { "name": "Akbash", "_links": { "type": { "href": "/v2/types/dog" } } },
     { "name": "Akita", "_links": { "type": { "href": "/v2/types/dog" } } },
