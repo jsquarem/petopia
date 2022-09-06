@@ -2,25 +2,30 @@
 {% load static %}
 {% block content %}
 
-
-<div class="container-fluid bg-black text-center">
-    <div class="col-12 bg-black p1 border border-info">
-    <h1 class="text-info">Adoption Lobby Chatroom</h1>
-        <div class="col-10 bg-black text-center offset-1 p-2 mb-4 mt-4 border border-info">
-        <form id="form">
-        <textarea class="text-box text-danger" style="max-height: 55px; font-size: 28px;"
-        placeholder="" id="floatingTextarea" readonly>Warning, No Profanity Filter ~_^!!</textarea>
-        <label for="floatingTextarea" class="text-info"></label>
-        <textarea class="text-box text-warning border border-black" id="messages" readonly></textarea>
-            {% comment %} <input class="text-box" type="text" name="message" /> {% endcomment %}
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text bg-black text-info border border-info" style="max-width: 10vw; margin-left: 2.7vw;" id="inputGroup-sizing-sm">{{ user.username }}</span>
-                <input type="text" name="message" class="form-control text-warning bg-black" style="max-width: 67.7vw" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            </div>
-        </form>
-        </div>
+<div class="jumbotron jumbotron-fluid overlay">
+    <div class="jumbo-heading">
+        <!-- section-heading -->
+        <div class="section-heading" data-aos="zoom-in">
+            <h1>Adoption Lobby Chatroom</h1>
+            <form id="form">
+            <textarea class="text-box text-danger" style="max-height: 55px; font-size: 28px;"
+            placeholder="" id="floatingTextarea" readonly>Warning, No Profanity Filter ~_^!!</textarea>
+            <label for="floatingTextarea" class="text-info"></label>
+            <textarea class="text-box text-info" id="messages" readonly></textarea>
+                {% comment %} <input class="text-box" type="text" name="message" /> {% endcomment %}
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text bg-dark text-info border border-info" style="width: 12vw; margin-left: 11.7vw" id="inputGroup-sizing-sm">{{ user.username }}</span>
+                    <input id="chat-input" type="text" name="message" placeholder="Enter your text here!" class="form-control text-info bg-dark" style="max-width: 63vw" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </form>
+    </div>
+    <!-- /section-heading -->
     </div>
 </div>
+
+
+
+
 <script type="text/javascript">
 
     let url = `ws://${window.location.host}/ws/socket-server/`
@@ -39,9 +44,8 @@
             let messages = document.getElementById('messages')
             let areaText = messages.value;
 
-            messages.insertAdjacentHTML('beforeend', `
-                ${data.username}: ${data.message}
-                    `)
+            messages.insertAdjacentHTML('beforeend', 
+            `${data.username}: ${data.message} \n\ `)
         }
     }
 

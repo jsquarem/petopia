@@ -424,6 +424,31 @@ Last change: 8th June 2018
  .pet-adopt-info span{
      font-weight:500;
 }
+/*=========================== Chatroom ============================ */
+textarea {
+  /* grid-column-start: 4;
+  grid-column-end: 6;
+  grid-row-start: 7; */
+  /* position: relative;
+  display: inline-block; */
+  font-family: monospace;
+  font-size: 1vh;
+  /* font-weight: bold; */
+  /* margin-top: -2.5vh;
+  margin-left: -10vw; */
+  border: 0.25vh solid white;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 0;
+  width: 75vw;
+  height: 20vh;
+  z-index: 3;
+}
+#chat-input {
+  background-color: black;
+}
+
 /*=========================== About us ============================ */
 /* testimonials */
  .testimonial{
@@ -1911,4 +1936,236 @@ img.border-irregular1.img-fluid {
     height: 16rem;
     width: 16rem;
     object-fit: cover;
+}
+
+th {
+    /*font-family: Lato-Bold;*/
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.4;
+    background-color: #6c7ae0;
+}
+
+td {
+    /*font-family: Lato-Regular;*/
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.4;
+}
+
+.table100 {
+    position: relative;
+    /*padding-top: 60px;*/
+}
+
+.table100 {
+    background-color: #fff;
+}
+.m-b-110 {
+    margin-bottom: 110px;
+}
+
+.table100-head {
+    /*position: absolute;*/
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.column1 {
+    width: 30%;
+    padding-left: 40px;
+}
+
+.column2 {
+    width: 20%;
+}
+
+.column3 {
+    width: 20%;
+}
+
+.column4 {
+    width: 30%;
+}
+
+/*.column5 {*/
+/*    width: 13%;*/
+/*}*/
+
+.table100-head th {
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+th, td {
+    font-weight: unset;
+    padding-right: 10px;
+}
+
+.table100 {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 40px 0rgba(0,0,0,.15);
+    -moz-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow: 0 0 40px 0 rgb(0 0 0 / 15%);
+    -o-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -ms-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+}
+
+.table100 .table100-body tr:nth-child(even) {
+    background-color: #f8f6ff;
+}
+
+table {
+    width: 100%;
+
+}
+
+/*center the text in table header cells */
+th {
+    text-align: center;
+}
+
+td.cell100.column1 > a {
+    font-size: 20px;
+}
+
+tr > .cell100 {
+    font-size: 20px;
+}
+
+.organizationcontainer {
+    display: flex;
+    flex-direction: row;
+/*    center all the contents of the div */
+    justify-content: center;
+
+
+}
+
+.organizationmap {
+    padding: 50px;
+}
+
+.organizationbox, .petbox {
+    border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
+}
+
+.organizationboxheader, .petboxheader {
+    padding-top: 2rem;
+    text-align: center;
+}
+
+#petdetailphotoheight {
+    height: 100%;
+}
+
+#welcometext {
+    color: white;
+}
+
+#welcometext {
+    padding-left: 0.2rem!important;
+
+}
+
+.contact-info {
+        border-radius: 75px 22px 115px 35px/8px 65px 7px 85px;
+        background-color: #456990!important;
+}
+
+#signupform {
+    /*padding: 3rem;*/
+}
+
+div#signupformbox {
+    justify-content: center;
+}
+
+label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right; /*Change to right here if you want it close to the inputs*/
+    padding-right: 1rem;
+    font-size: 20px;
+}
+
+#id_first_name, #id_last_name, #id_email, #id_username, #id_password1, #id_password2 {
+    display: inline-block;
+    float: left;
+}
+
+
+input#id_first_name, input#id_last_name, input#id_email, input#id_username, input#id_password, input#id_password1, input#id_password2 {
+        border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
+}
+
+.signupformfield {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: white;
+    font-family:'Quicksand', sans-serif;
+}
+
+form#signupform {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+}
+
+input#submit_btn {
+    float: right;
+    margin: 1rem;
+}
+
+input#submit_btn:hover {
+    background: green!important;
+}
+
+.page {
+    padding-top: 30px;
+    margin-bottom: 85px;
+}
+
+#loginform > label {
+    margin-top: 0!important;
+    margin-bottom: 1rem!important;
+    /*padding-bottom: 1rem;*/
+
+}
+
+.loginflexbox > label {
+        text-align: left;
+        color: white;
+    font-family:'Quicksand', sans-serif;
+}
+
+#loginformbox {
+    padding-top: 2.5rem;
+}
+
+#loginform > #id_username {
+    margin-bottom: 1rem;
+}
+
+.loginflexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+div.loginflexbox {
+    align-items: center;
+box-sizing: border-box;
+color:  #808080;
+display: flex;
+flex-direction: column;
+font-family: "Open Sans", sans-serif;
+justify-content: space-between;
+line-height: 24px;
+text-align: left;
 }

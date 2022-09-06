@@ -35,7 +35,14 @@
                     <div class="card bg-light-custom">
                         <div class="thumbnail text-center">
                             <!-- Image -->
-                            <img src="{{ animal.photos.0.medium }}" class="border-irregular1 img-fluid" alt="">
+{#                            <img src="{{ animal.photos.0.medium }}" class="border-irregular1 img-fluid" alt="">#}
+                              <img src="{% if animal.photos.0.medium %}{{ animal.photos.0.medium }}
+                                        {% else %}
+                                            {% if animal.type == 'Dog' %}{% static 'assets/dogplaceholder.png' %}
+                                            {% elif animal.type == 'Cat'%}{% static 'assets/catplaceholder.png' %}
+                                            {% else %}{% static 'assets/dogplaceholder.png' %}
+                                            {% endif %}
+                                        {% endif %}" class="border-irregular1 img-fluid" alt="">
                                     <!-- Name -->
                                     <div class="caption-adoption">
                                        <h6 class="adoption-header">{{ animal.name }}</h6>

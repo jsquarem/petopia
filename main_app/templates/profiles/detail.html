@@ -2,18 +2,22 @@
 {% load static %}
 {% block content %}
 
-<div class="container-fluid bg-black">
-    <div class="col-12 bg-black p1 border text-center border-info">
-        <div class="col-10 bg-black text-start offset-1 p-2 mt-4 border border-info">
-            <h1 class="text-info">Hello, {{ profile.name }}!</h1>
-                {% for profile in profiles %}
-                {% if request.user == profile.user %}
-                <a class="btn btn-lg btn-outline-info" href="{% url 'profiles_update' profile.id %}">Edit</a>
-                <a class="btn btn-lg btn-outline-danger" href="{% url 'profiles_delete' profile.id %}">Delete</a>
-                {% endif %}
-                {% endfor %}
-        </div>
+<!-- Jumbotron -->
+<div class="jumbotron jumbotron-fluid overlay">
+
+<div class="jumbo-heading">
+<!-- section-heading -->
+    <div class="section-heading" data-aos="zoom-in">
+        <h1>Welcome, {{ profile.name }}!</h1>
+        {% if request.user == profile.user %}
+                <a class="btn btn-lg btn-outline-info" href="{% url 'profiles_update' user.id %}">Edit</a>
+                <a class="btn btn-lg btn-outline-danger" href="{% url 'profiles_delete' user.id %}">Delete</a>
+        {% endif %}
+            <h3 class="text-white">Speak with other Adopters!</h3>
+            <a class="btn btn-lg btn-outline-success" href="{% url 'lobby' %}">Adopter Chatroom</a>
     </div>
+</div>
+<!-- /jumbo-heading -->
 </div>
 
 {% endblock %}

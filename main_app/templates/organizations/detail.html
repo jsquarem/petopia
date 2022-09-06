@@ -1,16 +1,80 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<h1>Organization</h1>
-{{organization.organization}}
-<h1>Map</h1>
-<iframe
-  width="600"
-  height="450"
+
+          <!-- /nav --><!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid overlay">
+         <div class="jumbo-heading">
+            <!-- section-heading -->
+            <div class="section-heading" data-aos="zoom-in">
+               <h1>Organization Details</h1>
+            </div>
+            <!-- /section-heading -->
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'animals.index' %}">View All Organizations</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Organization Details</li>
+               </ol>
+            </nav>
+         </div>
+         <!-- /jumbo-heading -->
+      </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div class="page">
+         <div class="container">
+
+
+<div class="organizationbox bg-light-custom">
+    <h1 class="organizationboxheader">{{ organization.organization.name }}</h1>
+    <div class="organizationcontainer">
+{#<div class="card bg-light-custom" style="width: 25rem;">#}
+    <div class="card bg-light-custom">
+{#  <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">#}
+    {% if organization.organization.photos %}
+    <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">
+    {% else %}
+    {% endif %}
+  <div class="card-body">
+{#    <h5 class="card-title">{{ organization.organization.name }}</h5>#}
+{#    <p class="card-text">{{ organization.organization.mission_statement }}</p>#}
+          <p class="card-text">{% if organization.organization.mission_statement %}{{ organization.organization.mission_statement }}{% else %}{% endif %}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ organization.organization.address.city}}, {{ organization.organization.address.state }}</li>
+          {% if organization.organization.email %}
+    <li class="list-group-item">{{ organization.organization.email }}</li>
+            {% else %}
+            {% endif %}
+            {% if organization.organization.phone %}
+    <li class="list-group-item">{{ organization.organization.phone }}</li>
+              {% else %}
+                {% endif %}
+
+  </ul>
+  <div class="card-body">
+    <a href="{{ organization.organization.url }}" class="card-link">Website</a>
+{#    <a href="#" class="card-link">Another link</a>#}
+  </div>
+</div>
+    <div class="organizationmap">
+    <iframe
+  width="450"
+  height="650"
   style="border:0"
   loading="lazy"
   allowfullscreen
   referrerpolicy="no-referrer-when-downgrade"
   src="{{google_map_url}}">
 </iframe>
-<h1>Animals</h1>
-{{animals.animals}}
+    </div>
+        </div>
+
+    </div>
+
+                      </div>
+         <!-- /container-->
+      </div>
+      <!-- /page -->
+
+        <script src="{% static 'js/active/organization-detail.js' %}"></script>
 {% endblock %}

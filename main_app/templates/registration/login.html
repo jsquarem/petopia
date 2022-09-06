@@ -2,20 +2,115 @@
 {% load static %}
 {% block content %}
 
-<h1>Log In</h1>
 
-<!-- Add the login form -->
-<form method="post" action="{% url 'login' %}">
+                  <!-- /nav --><!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid overlay">
+         <div class="jumbo-heading">
+            <!-- section-heading -->
+            <div class="section-heading" data-aos="zoom-in">
+               <h1>Log In</h1>
+            </div>
+{#            <!-- /section-heading -->#}
+{#            <nav aria-label="breadcrumb">#}
+{#               <ol class="breadcrumb">#}
+{#                  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>#}
+{#                  <li class="breadcrumb-item"><a href="{% url 'animals.index' %}">View All Organizations</a></li>#}
+{#                  <li class="breadcrumb-item active" aria-current="page">Organization Details</li>#}
+{#               </ol>#}
+{#            </nav>#}
+         </div>
+         <!-- /jumbo-heading -->
+      </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div class="page pb-0">
+         <div class="container">
+
+                     <div  class="col-lg-8 offset-lg-2 text-center">
+               <h3>Welcome back, friend</h3>
+{#               <p>Aliquam erat lorem ipsum volutpat In id fermentum augue, ut pellentesque leo. Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>#}
+            </div>
+
+            <div id="signupformbox" class="row">
+               <!-- contact-info-->
+               <div id="loginformbox" class="contact-info col-lg-5">
+
+                   {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
+
+
+
+<form id="loginform" method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="btn" value="login">
-    <input type="hidden" name="next" value="{{ next }}">
+    <div class="loginflexbox">
+{##}
+{#        <label class="signupformfield">{{ form.first_name.label }}</label>#}
+{#        {{ form.first_name }}#}
+{#        <br><br>#}
+{#        <label class="signupformfield">{{ form.last_name.label }}</label>#}
+{#        {{ form.last_name }}#}
+{#        <br><br>#}
+{#        <label class="signupformfield">{{ form.email.label }}</label>#}
+{#        {{ form.email }}#}
+{#        <br><br>#}
+{#        <label class="signupformfield">{{ form.username.label }}</label>#}
+{#        {{ form.username }}#}
+{#        <br><br>#}
+{#        <label class="signupformfield">{{ form.password1.label }}</label>#}
+{#        {{ form.password1 }}#}
+{#        <br><br>#}
+{#        <label class="signupformfield">{{ form.password2.label }}</label>#}
+{#        {{ form.password2 }}#}
+{#        <br><br>#}
+    {% comment %} {{ form.as_p }} {% endcomment %}
+    {{ form.as_table }}
+        </div>
+        <input type="hidden" name="next" value="{{ next }}">
+    <input type="submit" id="submit_btn" class="btn btn-primary" value="login">
 </form>
 
-{% for message in messages %}
-    <p>{{ message }}</p>
-{% endfor %}
 
-Don't have an account? <a class="btn btn-outline-info" href="{% url 'signup' %}">Sign Up!</a>
+
+
+               </div>
+               <!-- /col-lg-->
+
+            </div>
+            <!-- /row-->
+
+         </div>
+
+         <!-- /container -->
+      </div>
+
+
+
+
+
+
+
+
+
+
+        <script src="{% static 'js/active/organization-detail.js' %}"></script>
+
+
+
+
+
+
+
+{#<!-- Add the login form -->#}
+{#<form method="post" action="{% url 'login' %}">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <input type="submit" class="btn" value="login">#}
+{#    <input type="hidden" name="next" value="{{ next }}">#}
+{#</form>#}
+
+{#{% for message in messages %}#}
+{#    <p>{{ message }}</p>#}
+{#{% endfor %}#}
+
+{#Don't have an account? <a class="btn btn-outline-info" href="{% url 'signup' %}">Sign Up!</a>#}
 
 {% endblock %}

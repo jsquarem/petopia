@@ -37,6 +37,7 @@
 
 </head>
 
+
 <body id="top">
 
         <!-- nav start -->
@@ -84,14 +85,19 @@
                   </button>
                   <div class="collapse navbar-collapse" id="navbarResponsive">
                      <ul class="navbar-nav ml-auto">
-                        <!-- menu item -->
-                        <li id="link-home" class="nav-item">
-                           <a class="nav-link" href="{% url 'home' %}">Home
-                           </a>
-                        </li>
+{#                        <!-- menu item -->#}
+{#                        <li id="link-home" class="nav-item">#}
+{#                           <a class="nav-link" href="{% url 'home' %}">Home#}
+{#                           </a>#}
+{#                        </li>#}
                         <!-- menu item -->
                         <li id="link-animals" class="nav-item">
                            <a class="nav-link" href="{% url 'animals.index' %}">View All Animals
+                           </a>
+                        </li>
+                         <!-- menu item -->
+                        <li id="link-organizations" class="nav-item">
+                           <a class="nav-link" href="{% url 'organizations.index' %}">View All Organizations
                            </a>
                         </li>
                         <!-- menu item -->
@@ -99,11 +105,44 @@
                             <a class="nav-link" href="{% url 'about' %}">About</a>
                         </li>
                         <!-- menu item -->
-                        <li id="link-animals" class="nav-item">
+                        <li id="link-contact" class="nav-item">
                            <a class="nav-link" href="#">Contact
                            </a>
                         </li>
                         <!-- menu item -->
+
+                                         {% if user.is_authenticated %}
+
+
+
+                                                                     <li class="nav-item dropdown active">
+                           <a id="myaccount" class="nav-link dropdown-toggle" href="#" id="others-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           My Account
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="others-dropdown">
+{#                              <a class="dropdown-item" href="team.html">Our Team</a>#}
+{#                              <a class="dropdown-item" href="blog.html">Blog Home</a>#}
+                              <a class="dropdown-item" href="{% url 'detail.profile' user.id %}">Profile</a>
+                              <a class="dropdown-item" href="#">Account Settings</a>
+                              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                           </div>
+                        </li>
+                        <!-- menu item -->
+                                                                      <li id="link-welcome" class="nav-item">
+                    <span id="welcometext" class="nav-link">Welcome, {{ request.user }}</span>
+                        </li>
+                        <!-- menu item -->
+                                                         {% else %}
+                                             <li id="link-signup" class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                        </li>
+                        <!-- menu item -->
+                                                                                <li id="link-login" class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <!-- menu item -->
+
+                                     {% endif %}
                      </ul>
                      <!--/ul -->
                   </div>

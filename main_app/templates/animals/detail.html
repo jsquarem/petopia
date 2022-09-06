@@ -24,68 +24,84 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-12">
-                  <div class="row bg-light-custom border-irregular1 block-padding">
-                     <!-- image -->
-                     <div class="col-lg-4 offset-lg-2">
-                        <!-- owl slider -->
-                        <div id="owl-adopt-single" class="owl-carousel top-centered-nav owl-theme" >
-                           <div class="col-md-12">
-                              <!-- image -->
-                              <a href="img/adoption/adoption1.jpg" title="your caption here">
-                              <img src="{{ animal.animal.photos.0.full }}" class="border-irregular1 img-fluid hover-opacity" alt="">
-                              </a>
-                           </div>
-                           <!-- /col-md-12 -->
-                           <div class="col-md-12">
-                              <!-- image -->
-                              <a href="img/adoption/adoptionsingle1.jpg" title="your caption here">
-                              <img src="{{ animal.animal.photos.1.full }}" class="border-irregular2 img-fluid hover-opacity" alt="">
-                              </a>
-                           </div>
-                           <!-- /col-md-12 -->
-                           <div class="col-md-12">
-                              <!-- image -->
-                              <a href="img/adoption/adoptionsingle2.jpg" title="your caption here">
-                              <img src="{{ animal.animal.photos.2.full }}" class="border-irregular1 img-fluid hover-opacity" alt="">
-                              </a>
-                           </div>
-                        </div>
-                        <!-- /owl-carousel -->
-                     </div>
-                     <!-- /col-md -->
-                     <!-- adoption info  -->
-                     <div class="col-lg-4 res-margin mt-5 text-xs-center">
-                        <h4><strong>Pet name:</strong> {{ animal.animal.name }}</h4>
-                        <div class="row">
-                           <div class="col-sm-6">
-                              <ul class="list-unstyled pet-adopt-info">
-                                 <li class="h7">Gender: <span>{{ animal.animal.gender }}</span></li>
-                                 <li class="h7">Age: <span>{{ animal.animal.age }}</span></li>
-                                 <li class="h7">Breed: <span>{{ animal.animal.breeds.primary }}</span></li>
-                              </ul>
-                           </div>
-                           <div class="col-sm-6">
-                              <ul class="list-unstyled pet-adopt-info">
-                                                               <li class="h7">Size: <span>{{ animal.animal.size }}</span></li>
-                                 <li class="h7">Neutered: <span>{% if animal.animal.attributes.spayed_neutered %}Yes{% else %}No{% endif %}</span></li>
-                                  <li class="h7">Vaccinated: <span>{% if animal.animal.attributes.shots_current %}Yes{% else %}No{% endif %}</span></li>
-                              </ul>
-                           </div>
+                   <div class="bg-light-custom petbox">
+                       <h1 class="petboxheader">Pet Details</h1>
+                      <div class="row border-irregular1 block-padding">
+                         <!-- image -->
+                         <div class="col-lg-4 offset-lg-2">
+                            <!-- owl slider -->
+                            <div id="owl-adopt-single" class="owl-carousel top-centered-nav owl-theme" >
+                                {% for i in animal.animal.photos %}
+    <div class="col-md-12">
 
-                           <!-- /div-->
-                        </div>
-                        <!-- /row-->
-                        <p class="font-weight-bold">{{ animal.animal.description }}</p>
-                     <div>
-                                                                                           <span class="h7">Characteristics:  </span><span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
-                     </div>
+        <!-- image -->
+            <a href="img/adoption/adoption1.jpg" title="your caption here">
+                <img src="{{  i.full }}" id="petdetailphotoheight" class="border-irregular1 img-fluid hover-opacity" alt="">
+            </a>
 
-                        <!-- button -->
-                        <a href="#" class="btn btn-primary " data-aos="zoom-in" >Adopt now!</a>
-                     </div>
-                     <!-- /col-md -->
-                  </div>
-                  <!-- /row-->
+    </div>
+                                {% endfor %}
+<!-- /col-md-12 -->
+{#                               <div class="col-md-12">#}
+{#                                  <!-- image -->#}
+{#                                  <a href="img/adoption/adoption1.jpg" title="your caption here">#}
+{#                                  <img src="{{ animal.animal.photos.0.full }}" class="border-irregular1 img-fluid hover-opacity" alt="">#}
+{#                                  </a>#}
+{#                               </div>#}
+{#                               <!-- /col-md-12 -->#}
+{#                               <div class="col-md-12">#}
+{#                                  <!-- image -->#}
+{#                                  <a href="img/adoption/adoptionsingle1.jpg" title="your caption here">#}
+{#                                  <img src="{{ animal.animal.photos.1.full }}" class="border-irregular2 img-fluid hover-opacity" alt="">#}
+{#                                  </a>#}
+{#                               </div>#}
+{#                               <!-- /col-md-12 -->#}
+{#                               <div class="col-md-12">#}
+{#                                  <!-- image -->#}
+{#                                  <a href="img/adoption/adoptionsingle2.jpg" title="your caption here">#}
+{#                                  <img src="{{ animal.animal.photos.2.full }}" class="border-irregular1 img-fluid hover-opacity" alt="">#}
+{#                                  </a>#}
+{#                               </div>#}
+                            </div>
+                            <!-- /owl-carousel -->
+                         </div>
+                         <!-- /col-md -->
+                         <!-- adoption info  -->
+                         <div class="col-lg-4 res-margin mt-5 text-xs-center">
+                            <h4><strong>Pet name:</strong> {{ animal.animal.name }}</h4>
+                            <div class="row">
+                               <div class="col-sm-6">
+                                  <ul class="list-unstyled pet-adopt-info">
+                                     <li class="h7">Type: <span>{{ animal.animal.type }}</span></li>
+                                                                           <li class="h7">Breed: <span>{{ animal.animal.breeds.primary }}</span></li>
+                                     <li class="h7">Age: <span>{{ animal.animal.age }}</span></li>
+
+                                  </ul>
+                               </div>
+                               <div class="col-sm-6">
+                                  <ul class="list-unstyled pet-adopt-info">
+                                                                   <li class="h7">Size: <span>{{ animal.animal.size }}</span></li>
+                                     <li class="h7">Neutered: <span>{% if animal.animal.attributes.spayed_neutered %}Yes{% else %}No{% endif %}</span></li>
+                                      <li class="h7">Vaccinated: <span>{% if animal.animal.attributes.shots_current %}Yes{% else %}No{% endif %}</span></li>
+                                                                       <li class="h7">Gender: <span>{{ animal.animal.gender }}</span></li>
+                                  </ul>
+                               </div>
+
+                               <!-- /div-->
+                            </div>
+                            <!-- /row-->
+                            <p class="font-weight-bold">{{ animal.animal.description }}</p>
+                         <div>
+                                                                                               <span class="h7">Characteristics:  </span><span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
+                         </div>
+
+                            <!-- button -->
+                            <a href="#" class="btn btn-primary " data-aos="zoom-in" >Adopt now!</a>
+                         </div>
+                         <!-- /col-md -->
+                      </div>
+                      <!-- /row-->
+                   </div>
                   <div class="col-md-12 mt-5">
                      <h1>About {{ animal.animal.name }}</h1>
                      <!-- ul custom-->
@@ -101,7 +117,11 @@
                         ac sodales felis tiam non metus. lorem ipsum dolor sit amet, consectetur adipisicing elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset campas fincas
                      </p>
 
-<div class="card bg-light-custom" style="width: 25rem;">
+<div class="organizationbox bg-light-custom">
+    <h1 class="organizationboxheader">Organization Details</h1>
+    <div class="organizationcontainer">
+{#<div class="card bg-light-custom" style="width: 25rem;">#}
+    <div class="card bg-light-custom">
   <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{ organization.organization.name }}</h5>
@@ -117,17 +137,25 @@
 {#    <a href="#" class="card-link">Another link</a>#}
   </div>
 </div>
-<h3>Location</h3>
-<iframe
-  width="600"
-  height="450"
+    <div class="organizationmap">
+    <iframe
+  width="450"
+  height="650"
   style="border:0"
   loading="lazy"
   allowfullscreen
   referrerpolicy="no-referrer-when-downgrade"
   src="{{google_map_url}}">
 </iframe>
+    </div>
+        </div>
 
+    </div>
+
+                      </div>
+         <!-- /container-->
+      </div>
+      <!-- /page -->
                      <div class="alert alert-primary mt-5" role="alert">
                         <h6 class="text-light">Adoption Rules</h6>
                         <p>Elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas ellus

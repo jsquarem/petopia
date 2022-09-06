@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -11,6 +12,7 @@ from .forms import CreateUserForm
 from datetime import datetime, timezone
 from requests.structures import CaseInsensitiveDict
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 import urllib.parse
 import requests
 import os
@@ -54,6 +56,17 @@ def get_petfinder_request(endpoint = '', query_list = []):
   headers["Authorization"] = f"Bearer {token}"
   response = requests.get(url, headers=headers)
   return response.json()
+
+def get_expanded_description(url='', type=''):
+  type = 'animal'
+  if type == 'animal':
+    url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    description = soup.select('div[data-test="Pet_Story_Section"]')
+    description = description[0].contents[3]
+    description = description.contents[0].strip()
+  return HttpResponse(description)
 
 '''
 Google Maps API Function
@@ -127,6 +140,7 @@ def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
   return render(request, 'profiles/detail.html', { 'profile': profile })
 
+
 class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
   fields = ['name', 'bio']
@@ -165,3 +179,22 @@ def animals_search(request):
     if query_list != []:
       animals = get_petfinder_request('animals', query_list)
   return render(request, 'animals/search_test.html', {'animals': animals})
+
+def contact(request):
+  if request.method == 'POST':
+    confirmation = {}
+    message_name = request.POST['name']
+    message_email = request.POST['email']
+    message = request.POST['message']
+    send_mail(
+      f'Contact Request - {message_name}',
+      message,
+      message_email,
+      ['jeffjmart@gmail.com']
+    )
+    confirmation['message'] = 'Thank you for yor message, we will respond as soon as we can.'
+    confirmation['name'] = message_name
+    return render(request, 'contact.html', {'confirmation': confirmation})
+  else:
+    return render(request, 'contact.html')
+
