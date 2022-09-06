@@ -59,13 +59,17 @@ def get_petfinder_request(endpoint = '', query_list = []):
 
 def get_expanded_description(url, type):
   # type = 'animal'
-  if type == 'animal':
     # url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
+  response = requests.get(url)
+  soup = BeautifulSoup(response.content, 'html.parser')  
+  if type == 'animal':
     description = soup.select('div[data-test="Pet_Story_Section"]')
     description = description[0].contents[3]
     description = description.contents[0].strip()
+  if type == 'organization':
+    mission_elements = soup.find('h2', string='Our Mission')
+    mission_sibling = mission_elements.find_next_siblings('p')
+    description = mission_sibling[0].text.strip()
   return description
 
 # Valid values for the view areguement are: 'animal/detail', 'animal/index', 'organization/detail', and 'organization/index'
@@ -79,9 +83,9 @@ def clean_api_response(view, data):
     if description and description.endswith('...'):
       url = data['animal']['url']
       description = get_expanded_description(url, 'animal')
-    data['animal']['description'] = description
     if len(name) > 15:
-      data['animal']['name'] = 'Captain Cuddles'
+      data['animal']['name'] = 'Captain Cuddles'    
+    data['animal']['description'] = description
   
   if view == 'animals/index':
     for i, animal in enumerate(data['animals']):
@@ -90,11 +94,15 @@ def clean_api_response(view, data):
         data['animals'][i]['name'] = 'Captain Cuddles'
   
   if view == 'organizations/detail':
+    print('in organization')
     description = data['organization']['mission_statement']        
     if description is None or description == '':
       organization_name = data['organization']['name']
       description = f'{organization_name} is a cool place to adopt pets.'
-      data['organization']['mission_statement'] = description
+    if description and description.endswith('...'):
+      url = data['organization']['url']
+      description = get_expanded_description(url, 'organization')    
+    data['organization']['mission_statement'] = description
   return data
 
 
@@ -155,8 +163,9 @@ def animals_detail(request, animal_id):
   animal_clean = clean_api_response('animals/detail', animal)
   organization_id = animal['animal']['organization_id']
   organization = get_petfinder_request(f'organizations/{organization_id}')
+  organization_clean = clean_api_response('organizations/detail', organization)
   google_map_url = get_google_map_url(organization['organization']['address'])
-  return render(request, 'animals/detail.html', {'animal': animal_clean, 'organization': organization, 'google_map_url': google_map_url})
+  return render(request, 'animals/detail.html', {'animal': animal_clean, 'organization': organization_clean, 'google_map_url': google_map_url})
 
 def organizations_index(request):
   organizations = get_petfinder_request('organizations/')  
