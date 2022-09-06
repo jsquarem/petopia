@@ -90,7 +90,7 @@
                                <!-- /div-->
                             </div>
                             <!-- /row-->
-                            <p class="font-weight-bold">{{ animal.animal.description }}</p>
+                            
                          <div>
                                                                                                <span class="h7">Characteristics:  </span><span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
                          </div>
@@ -110,12 +110,7 @@
                          {% if animal.animal.environment.cats %}<li class="list-inline-item">Friendly to other cats</li>{% else %}{% endif %}
                          {% if animal.animal.environment.children %}<li class="list-inline-item">Good with Kids</li>{% else %}{% endif %}
                      </ul>
-                     <p>Elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas ellus
-                        ac sodales felis tiam non metus. lorem ipsum dolor sit amet, consectetur adipisicing elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset campas fincas
-                     </p>
-                     <p>Elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas ellus
-                        ac sodales felis tiam non metus. lorem ipsum dolor sit amet, consectetur adipisicing elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset campas fincas
-                     </p>
+                     <p class="font-weight-bold">{{ animal.animal.description }}</p>
 
 <div class="organizationbox bg-light-custom">
     <h1 class="organizationboxheader">Organization Details</h1>

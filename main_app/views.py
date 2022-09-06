@@ -57,16 +57,54 @@ def get_petfinder_request(endpoint = '', query_list = []):
   response = requests.get(url, headers=headers)
   return response.json()
 
-def get_expanded_description(url='', type=''):
-  type = 'animal'
+def get_expanded_description(url, type):
+  # type = 'animal'
+    # url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
+  response = requests.get(url)
+  soup = BeautifulSoup(response.content, 'html.parser')  
   if type == 'animal':
-    url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
     description = soup.select('div[data-test="Pet_Story_Section"]')
     description = description[0].contents[3]
     description = description.contents[0].strip()
-  return HttpResponse(description)
+  if type == 'organization':
+    mission_elements = soup.find('h2', string='Our Mission')
+    mission_sibling = mission_elements.find_next_siblings('p')
+    description = mission_sibling[0].text.strip()
+  return description
+
+# Valid values for the view areguement are: 'animal/detail', 'animal/index', 'organization/detail', and 'organization/index'
+def clean_api_response(view, data):  
+  if view == 'animals/detail':
+    description = data['animal']['description']
+    name = data['animal']['name']
+    type = data['animal']['type']    
+    if description is None or description == '':  
+      description = f'{name} the {type} is looking to share their love with you.'
+    if description and description.endswith('...'):
+      url = data['animal']['url']
+      description = get_expanded_description(url, 'animal')
+    if len(name) > 15:
+      data['animal']['name'] = 'Captain Cuddles'    
+    data['animal']['description'] = description
+  
+  if view == 'animals/index':
+    for i, animal in enumerate(data['animals']):
+      name = animal['name']
+      if len(name) > 15:
+        data['animals'][i]['name'] = 'Captain Cuddles'
+  
+  if view == 'organizations/detail':
+    print('in organization')
+    description = data['organization']['mission_statement']        
+    if description is None or description == '':
+      organization_name = data['organization']['name']
+      description = f'{organization_name} is a cool place to adopt pets.'
+    if description and description.endswith('...'):
+      url = data['organization']['url']
+      description = get_expanded_description(url, 'organization')    
+    data['organization']['mission_statement'] = description
+  return data
+
 
 '''
 Google Maps API Function
@@ -116,15 +154,18 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def animals_index(request):
-  animals = get_petfinder_request('animals')
-  return render(request, 'animals/index.html', {'animals': animals})
+  animals = get_petfinder_request('animals')  
+  animals_clean = clean_api_response('animals/index', animals)
+  return render(request, 'animals/index.html', {'animals': animals_clean})
 
 def animals_detail(request, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
+  animal_clean = clean_api_response('animals/detail', animal)
   organization_id = animal['animal']['organization_id']
   organization = get_petfinder_request(f'organizations/{organization_id}')
+  organization_clean = clean_api_response('organizations/detail', organization)
   google_map_url = get_google_map_url(organization['organization']['address'])
-  return render(request, 'animals/detail.html', {'animal': animal, 'organization': organization, 'google_map_url': google_map_url})
+  return render(request, 'animals/detail.html', {'animal': animal_clean, 'organization': organization_clean, 'google_map_url': google_map_url})
 
 def organizations_index(request):
   organizations = get_petfinder_request('organizations/')  
@@ -132,9 +173,11 @@ def organizations_index(request):
 
 def organizations_detail(request, organization_id):
   organization = get_petfinder_request(f'organizations/{organization_id}') 
+  organization_clean = clean_api_response('organizations/detail', organization)
   animals = get_petfinder_request('animals', ['organization', organization_id])
+  animals_clean = clean_api_response('animals/index', animals)
   google_map_url = get_google_map_url(organization['organization']['address'])
-  return render(request, 'organizations/detail.html', {'organization': organization, 'google_map_url': google_map_url, 'animals': animals})
+  return render(request, 'organizations/detail.html', {'organization': organization_clean, 'google_map_url': google_map_url, 'animals': animals_clean})
 
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
