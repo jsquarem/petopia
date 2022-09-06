@@ -1,22 +1,52 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-<h1 class="text-center">Animals</h1>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Address</th>
-    <th>Website</th>
+
+    	  <!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid overlay">
+         <div class="jumbo-heading">
+            <!-- section-heading -->
+            <div class="section-heading" data-aos="zoom-in">
+               <h1>Organizations</h1>
+            </div>
+            <!-- /section-heading -->
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Organizations</li>
+               </ol>
+            </nav>
+         </div>
+         <!-- /jumbo-heading -->
+      </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div class="page">
+         <div class="container block-padding pt-0">
+
+         <div class="table100 ver1 m-b-110">
+         <div class="table100-head">
+ <table>
+ <thead>
+  <tr class="row100 head">
+    <th class="cell100 column1">Name</th>
+    <th class="cell100 column2">Email</th>
+    <th class="cell100 column3">Phone</th>
+    <th class="cell100 column4">Address</th>
+{#    <th class="cell100 column5">Website</th>#}
   </tr>
+ </thead>
+ </table>
+         </div>
+            <div class="table100-body js-pscroll ps ps-active-y">
+<table>
   {% for organization in organizations.organizations %}
-  <tr>
-    <td>
+  <tr class="row100 body">
+    <td class="cell100 column1">
       <a href="{% url 'organizations.detail' organization.id %}">{{organization.name}}</a>
     </td>
-    <td>{{organization.email}}</td>
-    <td>{{organization.phone}}</td>
-    <td>
+    <td class="cell100 column2">{{organization.email}}</td>
+    <td class="cell100 column3">{{organization.phone}}</td>
+    <td class="cell100 column4">
       {% if organization.address.address1 %} {{organization.address.address1}}<br />
       {% endif %} {% if organization.address.address2%}
       {{organization.address.address2}}<br />
@@ -25,7 +55,19 @@
       {% endif %} {% if organization.address.postcode %}
       {{organization.address.postcode}} {% endif %}
     </td>
-  </tr>;
+  </tr>
+
   {% endfor %}
 </table>
+            </div>
+         </div>
+</div>
+            <!-- /col-md -->
+         </div>
+         <!-- /container -->
+      </div>
+      <!-- /page -->
+
+
+        <script src="{% static 'js/active/organizations.js' %}"></script>
 {% endblock %}
