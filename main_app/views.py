@@ -7,7 +7,8 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Petfinder_API_Token, Profile
+from .models import Petfinder_API_Token, Profile, Favorite
+from django.contrib.auth.models import User
 from .forms import CreateUserForm
 from datetime import datetime, timezone
 from requests.structures import CaseInsensitiveDict
@@ -16,6 +17,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import requests
 import os
+import json
 
 '''
 Petfinder API Functions
@@ -202,8 +204,8 @@ class ProfileDelete(LoginRequiredMixin, DeleteView):
 def add_photo(request):
   pass
 
-def add_favorite(request):
-  pass
+# def add_favorite(request):
+#   pass
 
 def delete_favorite(request):
   pass
@@ -241,3 +243,89 @@ def contact(request):
   else:
     return render(request, 'contact.html')
 
+# class Favorite:
+#   def __init__(self, user_id, animal_id, name, gender, age, breed, size, sterile, shots, description, tags, photos, env_dogs, env_cats, env_child, org_name, org_mission, org_city, org_state, org_email, org_phone, org_url):
+#     self.user_id = user_id
+#     self.animal_id = animal_id
+#     self.name = name
+#     self.gender = gender
+#     self.age = age
+#     self.breed = breed
+#     self.size = size
+#     self.sterile = sterile
+#     self.shots = shots
+#     self.description = description
+#     self.tags = tags
+#     self.photos = photos
+#     self.env_dogs = env_dogs
+#     self.env_cats = env_cats 
+#     self.env_child = env_child
+#     self.org_name = org_name
+#     self.org_mission = org_mission 
+#     self.org_city = org_city
+#     self.org_state = org_state
+#     self.org_email = org_email
+#     self.org_phone = org_phone
+#     self.org_url = org_url
+
+#   def __str__(self):
+#     return self.name
+
+  # @classmethod
+  # def from_json(cls, json_string):
+  #   json_dict = json.loads(json_string)
+  #   return Favorite(**json_dict)
+
+  # def __repr__(self):
+  #   return f'<Favorite { self.name }>'
+
+
+def add_favorite(request, user_id, animal_id):
+  animal = get_petfinder_request(f'animals/{animal_id}')
+  animal_clean = clean_api_response('animals/detail', animal)
+  organization_id = animal['animal']['organization_id']
+  organization = get_petfinder_request(f'organizations/{organization_id}')
+  organization_clean = clean_api_response('organizations/detail', organization)
+  google_map_url = get_google_map_url(organization['organization']['address'])
+  photo_list = animal['animal']['photos']
+  new_photo_list = []
+  for photo in photo_list:
+    photo_url = photo['full']
+    new_photo_list.append(photo_url)
+  print(new_photo_list, '<- Photo List')
+  
+  new_favorite = Favorite.objects.create(
+    user = User.objects.get(id=user_id),
+    animal_id=animal_clean['animal']['id'],
+    name=animal_clean['animal']['name'],
+    gender=animal_clean['animal']['gender'],
+    age=animal_clean['animal']['age'],
+    breed=animal_clean['animal']['breeds']['primary'],
+    size=animal_clean['animal']['size'],
+    sterile=animal_clean['animal']['attributes']['spayed_neutered'],
+    shots=animal_clean['animal']['attributes']['shots_current'],
+    description=animal_clean['animal']['description'],
+    tags=animal_clean['animal']['tags'],
+    photos = new_photo_list,
+    env_dogs=animal_clean['animal']['environment']['dogs'],
+    env_cats=animal_clean['animal']['environment']['cats'],
+    env_child=animal_clean['animal']['environment']['children'],
+    org_name=organization_clean['organization']['name'],
+    org_mission=organization_clean['organization']['mission_statement'],
+    org_city=organization_clean['organization']['address']['city'],
+    org_state=organization_clean['organization']['address']['state'],
+    org_email=organization_clean['organization']['email'],
+    org_phone=organization_clean['organization']['phone'],
+    org_url=organization_clean['organization']['url']
+  )
+  print(new_favorite, '<- New Favorite Animal')
+  return redirect('animals.detail', animal_id=animal_id)
+
+
+def favorites_index(request, user_id):
+  favorites = Favorite.objects.get(user_id=user_id)
+  return render(request, 'favorites/index.html', { 'favorites': favorites })
+
+def favorites_detail(request, favorite_id):
+  favorites = Favorite.objects.get(id=favorite_id)
+  return render(request, 'favorites/detail.html', { 'favorites': favorites })

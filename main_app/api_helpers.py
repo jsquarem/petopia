@@ -27,5 +27,33 @@ from requests.structures import CaseInsensitiveDict
 #     csvwriter = csv.writer(csvfile) 
 #     csvwriter.writerows(out_array)
 
+import json
 
+class Favorite:
+    def __init__(self, id, name, gender, age, breed):
+        self.id = id
+        self.name = name
+        self.gender = gender
+        self.age = age
+        self.breed = breed
 
+    @classmethod
+    def from_json(cls, json_string):
+        json_dict = json.loads(json_string)
+        return Favorite(**json_dict)
+
+    def __repr__(self):
+        return f'<Favorite { self.name }, {self.gender} { self.breed }>'
+
+json_string = '''{
+    "id": "123",
+    "name": "Ace",
+    "gender": "Male",
+    "age": "1",
+    "breed": "Sphinx"
+}'''
+
+favorite = Favorite.from_json(json_string)
+
+print(favorite)
+print(favorite.gender)
