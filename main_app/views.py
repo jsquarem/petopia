@@ -44,19 +44,22 @@ def get_petfinder_token():
 
 # query_list expects a list of key, value tuples ex. [(key, value), (key2, value2), ...]
 def get_petfinder_request(endpoint = '', query_list = []):
-  url = 'https://api.petfinder.com/v2/'
-  url = url + endpoint
+  url = 'https://api.petfinder.com'
+  if '/v2/' not in endpoint:
+    url += '/v2/'
+  url += endpoint
   query_string = ''
   if len(query_list) > 0:
     for i, query in enumerate(query_list):
       modifier = '?' if i == 0 else '&'
-      query_string = query_string + f'{modifier}{query[0]}={query[1]}'
-  url = url + query_string
+      query_string += f'{modifier}{query[0]}={query[1]}'
+  url +=  query_string
   token = get_petfinder_token()
   headers = CaseInsensitiveDict()
   headers["Accept"] = "application/json"
   headers["Authorization"] = f"Bearer {token}"
   response = requests.get(url, headers=headers)
+  print(response.json(), '<-response.json()')
   return response.json()
 
 def get_expanded_description(url, type):
@@ -96,7 +99,6 @@ def clean_api_response(view, data):
         data['animals'][i]['name'] = 'Captain Cuddles'
   
   if view == 'organizations/detail':
-    print('in organization')
     description = data['organization']['mission_statement']        
     if description is None or description == '':
       organization_name = data['organization']['name']
@@ -156,9 +158,15 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def animals_index(request):
-  animals = get_petfinder_request('animals')  
+  api_current_url = request.META['QUERY_STRING']
+  api_current_url = urllib.parse.unquote(api_current_url)
+  if api_current_url:
+    animals = get_petfinder_request(api_current_url)
+  else:
+    animals = get_petfinder_request('animals')
+  api_next_url = urllib.parse.quote(animals['pagination']['_links']['next']['href'], safe='')
   animals_clean = clean_api_response('animals/index', animals)
-  return render(request, 'animals/index.html', {'animals': animals_clean})
+  return render(request, 'animals/index.html', {'animals': animals_clean, 'api_next_url': api_next_url})
 
 def animals_detail(request, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
