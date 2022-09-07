@@ -1,251 +1,597 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-    	  <!-- Jumbotron -->
-      <div class="jumbotron jumbotron-fluid overlay">
-         <div class="jumbo-heading">
-            <!-- section-heading -->
-            <div class="section-heading" data-aos="zoom-in">
-               <h1>Adoption</h1>
-            </div>
-            <!-- /section-heading -->
-            <nav aria-label="breadcrumb">
-               <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Adoption</li>
-               </ol>
-            </nav>
-         </div>
-         <!-- /jumbo-heading -->
+<!-- Jumbotron -->
+<div class="jumbotron jumbotron-fluid overlay">
+   <div class="jumbo-heading">
+      <!-- section-heading -->
+      <div class="section-heading" data-aos="zoom-in">
+         <h1>Adoption</h1>
       </div>
-      <!-- /jumbotron -->
-      <!-- ==== Page Content ==== -->
-      <div class="page">
-         <div class="container block-padding pt-0">
-            <div class="col-lg-8 offset-lg-2 text-center">
-               <h3>Find a new furry Friend</h3>
-               <p>Aliquam erat lorem ipsum volutpat In id fermentum augue, ut pellentesque leo. Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
+      <!-- /section-heading -->
+      <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Adoption</li>
+         </ol>
+      </nav>
+   </div>
+   <!-- /jumbo-heading -->
+</div>
+<!-- /jumbotron -->
+<!-- ==== Page Content ==== -->
+<div class="page">
+   <div class="container block-padding pt-0">
+      <div class="col-lg-8 offset-lg-2 text-center">
+         <h3>Find a new furry Friend</h3>
+         <p>Aliquam erat lorem ipsum volutpat In id fermentum augue, ut pellentesque leo. Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
+      </div>
+      <div class="searchformcontainer">
+         <form method="post" action="">
+            {% csrf_token %}
+            <div class="container d-lg-flex justify-content-around align-items-lg-center">
+               <div class="searchselectfield" style="padding-bottom: 11px;">
+                  <label class="fieldlabel">Type</label>
+                  <select name="type" id="type" onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);" class="form-control">
+                     <option value="">--Select--</option>
+                     <option value="Cat">Cat</option>
+                     <option value="Dog">Dog</option>
+                  </select>
+               </div>
+               <div class="searchselectfield" style="padding-bottom: 11px;">
+                  <label class="fieldlabel">Breed</label>
+                  <select name="breed" id="breed" class="form-control">
+                     <option value="">--Select a Type--</option>
+                  </select>
+               </div>
+               <div class="searchselectfield" style="padding-bottom: 11px;">
+                  <label class="fieldlabel">Color</label>
+                  <select name="color" id="color" class="form-control">
+                     <option value="">--Select a Type--</option>
+                  </select>
+               </div>
+               <div class="searchselectfield" style="padding-bottom: 11px;">
+                  <label class="fieldlabel">Age</label>
+                  <select name="age" id="age" class="form-control">
+                     <option value="">--Select--</option>
+                     <option value="baby">Baby</option>
+                     <option value="young">Young</option>
+                     <option value="adult">Adult</option>
+                     <option value="senior">Senior</option>
+                  </select>
+               </div>
+               <div class="searchselectfield" style="padding-bottom: 11px;">
+                  <label class="fieldlabel">Gender</label>
+                  <select name="gender" id="gender" class="form-control">
+                     <option value="">--Select--</option>
+                     <option value="male">Male</option>
+                     <option value="Female">Female</option>
+                  </select>
+               </div>
+               <div class="searchselectfield" style="padding-bottom: 11px;">
+                  <label class="fieldlabel">Coat</label>
+                  <select name="coat" id="coat" class="form-control">
+                     <option value="">--Select--</option>
+                     <option value="short">Short</option>
+                     <option value="medium">Medium</option>
+                     <option value="long">Long</option>
+                     <option value="wire">Wire</option>
+                     <option value="hairless">Hairless</option>
+                     <option value="curly">Curly</option>
+                  </select>
+               </div>
+               <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
             </div>
-
-
-                 <div class="searchformcontainer">
-
-  <form method="post" action="">
-          {% csrf_token %}
-        <div class="container d-lg-flex justify-content-around align-items-lg-center">
-            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Type</label><select name="type" id="type" onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);" class="form-control">
-
-    <option value="">--Select--</option>
-    <option value="Cat">Cat</option>
-    <option value="Dog">Dog</option>
-
-                </select></div>
-            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Breed</label><select name="breed" id="breed" class="form-control">
-
-    <option value="">--Select a Type--</option>
-
-                </select></div>
-            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Color</label><select name="color" id="color" class="form-control">
-
-    <option value="">--Select a Type--</option>
-
-                </select></div>
-            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Age</label><select name="age" id="age" class="form-control">
-
-    <option value="">--Select--</option>
-    <option value="baby">Baby</option>
-    <option value="young">Young</option>
-    <option value="adult">Adult</option>
-    <option value="senior">Senior</option>
-
-                </select></div>
-            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Gender</label><select name="gender" id="gender" class="form-control">
-
-    <option value="">--Select--</option>
-    <option value="male">Male</option>
-    <option value="Female">Female</option>
-
-                </select></div>
-            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Coat</label><select name="coat" id="coat" class="form-control">
-
-    <option value="">--Select--</option>
-    <option value="short">Short</option>
-    <option value="medium">Medium</option>
-    <option value="long">Long</option>
-    <option value="wire">Wire</option>
-    <option value="hairless">Hairless</option>
-    <option value="curly">Curly</option>
-
-                </select></div>
-{#            <button class="btn btn-primary searchsubmitbutton" type="submit">Search</button>#}
-              <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
-        </div>
-    </form>
-
-         </div>
-
-
-
-
-
-           {% for i in "12" %}
-    <div class="row mt-5">
-        {% for i in "1234" %}
-            {% for animal in animals.animals %}
-            <!-- Pet  -->
-                <div class="adopt-card col-md-6 col-xl-3 res-margin">
-                    <div class="card bg-light-custom">
-                        <div class="thumbnail text-center">
-                            <!-- Image -->
+         </form>
+      </div>
+{% for i in "12" %}
+   <div class="row mt-5">
+   {% for i in "1234" %}
+      {% for animal in animals.animals %}
+         <!-- Pet  -->
+      <div class="adopt-card col-md-6 col-xl-3 res-margin">
+         <div class="card bg-light-custom">
+            <div class="thumbnail text-center">
+                  <!-- Image -->
 {#                            <img src="{{ animal.photos.0.medium }}" class="border-irregular1 img-fluid" alt="">#}
-                              <img src="{% if animal.photos.0.medium %}{{ animal.photos.0.medium }}
-                                        {% else %}
-                                            {% if animal.type == 'Dog' %}{% static 'assets/dogplaceholder.png' %}
-                                            {% elif animal.type == 'Cat'%}{% static 'assets/catplaceholder.png' %}
-                                            {% else %}{% static 'assets/dogplaceholder.png' %}
-                                            {% endif %}
-                                        {% endif %}" class="border-irregular1 img-fluid" alt="">
-                                    <!-- Name -->
-                                    <div class="caption-adoption">
-                                       <h6 class="adoption-header">{{ animal.name }}</h6>
-                                       <!-- List -->
-                                       <ul class="list-unstyled">
-                                           <li><strong>Type:</strong> {{ animal.type }}</li>
-                                          <li><strong>Gender:</strong> {{ animal.gender }}</li>
-                                          <li><strong>Neutered: </strong>
-                                            {% if animal.attributes.spayed_neutered %}
-                                                Yes
-                                            {% else %}
-                                                No
-                                            {% endif %}
-                                          </li>
-                                          <li><strong>Age:</strong> {{ animal.age }}</li>
-                                       </ul>
-                                       <!-- Buttons -->
-                                       <div class="text-center">
-                                          <a href="{% url 'animals.detail' animal.id %}" class="btn btn-primary">More Info</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- /thumbnail -->
-                              </div>
-                              <!-- /card -->
-                           </div>
-                           <!-- /adopt-card -->
-            <!-- /pet -->
-        {% endfor %}
-    {% endfor %}
-    </div>
-{% endfor %}
-
-            <!-- /row -->
-            <div class="col-md-12 mt-5">
-               <!-- pagination -->
-               <nav aria-label="pagination">
-
-                  {% comment %} "pagination": {
-                     "count_per_page": 20,
-                     "total_count": 123667,
-                     "current_page": 2,
-                     "total_pages": 6184,
-                     "_links": {
-                       "previous": {
-                         "href": "/v2/animals?page=1&type=dog"
-                       },
-                       "next": {
-                         "href": "/v2/animals?page=3&type=dog"
-                       }
-                     }
-                   } {% endcomment %}
-
-                  {% comment %} color #9a9a9a for disabled links in pagination {% endcomment %}
-                  <ul class="pagination float-right">
-                     <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
-                        <a class="page-link" href="{{pagination.previous_url}}" tabindex="-1">Previous</a>
+                  <img src="{% if animal.photos.0.medium %}{{ animal.photos.0.medium }}
+                              {% else %}
+                                 {% if animal.type == 'Dog' %}{% static 'assets/dogplaceholder.png' %}
+                                 {% elif animal.type == 'Cat'%}{% static 'assets/catplaceholder.png' %}
+                                 {% else %}{% static 'assets/dogplaceholder.png' %}
+                                 {% endif %}
+                              {% endif %}" class="border-irregular1 img-fluid" alt="">
+                        <!-- Name -->
+               <div class="caption-adoption">
+                  <h6 class="adoption-header">{{ animal.name }}</h6>
+                  <!-- List -->
+                  <ul class="list-unstyled">
+                        <li><strong>Type:</strong> {{ animal.type }}</li>
+                     <li><strong>Gender:</strong> {{ animal.gender }}</li>
+                     <li><strong>Neutered: </strong>
+                        {% if animal.attributes.spayed_neutered %}
+                           Yes
+                        {% else %}
+                           No
+                        {% endif %}
                      </li>
-                     {% for page in pagination.pages %}
-                     <li class="page-item"><a class="page-link{% if page.page_number == pagination.current_page %} active{% endif %}" href="{{page.page_url}}">{{page.page_number}}</a></li>
-                     {% endfor %}
-
-                     <li class="page-item"><a class="page-link" href="{{pagination.next_chunk}}">+5</a></li>
-                     <li class="page-item"><a class="page-link" href="{{pagination.last_page.url}}">{{pagination.last_page.page_number}}</a></li>
-                     <li class="page-item"><a class="page-link" href="{{pagination.next_url}}">Next</a></li>
+                     <li><strong>Age:</strong> {{ animal.age }}</li>
                   </ul>
-               </nav>
-               <!-- /nav -->
+                  <!-- Buttons -->
+                  <div class="text-center">
+                     <a href="{% url 'animals.detail' animal.id %}" class="btn btn-primary">More Info</a>
+                  </div>
+               </div>
             </div>
-            <!-- /col-md -->
+            <!-- /thumbnail -->
          </div>
-         <!-- /container -->
+         <!-- /card -->
       </div>
-      <!-- /page -->
+      <!-- /adopt-card -->
+         <!-- /pet -->
+      {% endfor %}
+   {% endfor %}
+   </div>
+{% endfor %}
+<!-- /row -->
+      <div class="col-md-12 mt-5">
+         <!-- pagination -->
+         <nav aria-label="pagination">
+            <ul class="pagination float-right">
+               <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
+                  <a class="page-link" href="{{pagination.previous_url}}" tabindex="-1">Previous</a>
+               </li>
+               {% for page in pagination.pages %}
+               <li class="page-item"><a class="page-link{% if page.page_number == pagination.current_page %} active{% endif %}" href="{{page.page_url}}">{{page.page_number}}</a></li>
+               {% endfor %}
+               <li class="page-item"><a class="page-link" href="{{pagination.next_chunk}}">+5</a></li>
+               <li class="page-item"><a class="page-link" href="{{pagination.last_page.url}}">{{pagination.last_page.page_number}}</a></li>
+               <li class="page-item"><a class="page-link" href="{{pagination.next_url}}">Next</a></li>
+            </ul>
+         </nav>
+         <!-- /nav -->
+      </div>
+      <!-- /col-md -->
+   </div>
+   <!-- /container -->
+</div>
+<!-- /page -->
 
+<script src="{% static 'js/active/animals.js' %}"></script>
 
-
-
-{#<h1 class="text-center">Animals</h1>#}
-{#<table>#}
-{#  <tr>#}
-{#    <th>Type</th>#}
-{#    <th>Name</th>#}
-{#    <th>Breed</th>#}
-{#    <th>Color</th>#}
-{#    <th>Age</th>#}
-{#    <th>Gender</th>#}
-{#    <th>Size</th>#}
-{#    <th>Coat</th>#}
-{#    <th>Photo</th>#}
-{#  </tr>#}
-{#  {% for animal in animals.animals %}#}
-{#  <tr>#}
-{#    <td>{{animal.type}}</td>#}
-{#    <td><a href="{% url 'animals.detail' animal.id %}">{{animal.name}}</a></td>#}
-{#    <td>{{animal.breeds.primary}}</td>#}
-{#    <td>{{animal.colors.primary}}</td>#}
-{#    <td>{{animal.age}}</td>#}
-{#    <td>{{animal.gender}}</td>#}
-{#    <td>{{animal.size}}</td>#}
-{#    <td>{{animal.coat}}</td>#}
-{#    <td>#}
-{#      <img src="{{animal.photos.0.small}}" />#}
-{#    </td>#}
-{#  </tr>#}
-{#  {% endfor %}#}
-{#</table>#}
-    <script src="{% static 'js/active/animals.js' %}"></script>
-
-            <script>
-  function dynamicDropDown(type) {
-    switch (type)
-    {
+<script>
+   function dynamicDropDown(type) {
+      let i = '';
+      switch (type)
+      {
+      
       case "Cat":
-        document.getElementById("breed").options[0] = new Option("--Select--", "");
-        document.getElementById("breed").options[1] = new Option("British Shorthair", "British Shorthair");
-        document.getElementById("breed").options[2] = new Option("Burmese", "Burmese");
-        document.getElementById("breed").options[3] = new Option("Burmilla", "Burmilla");
-        document.getElementById("breed").options[4] = new Option("Calico", "Calico");
-
-        document.getElementById("color").options[0] = new Option("--Select--", "");
-        document.getElementById("color").options[1] = new Option("Cream / Ivory", "Cream / Ivory");
-        document.getElementById("color").options[2] = new Option("Dilute Calico", "Dilute Calico");
-        document.getElementById("color").options[3] = new Option("Dilute Tortoiseshell", "Dilute Tortoiseshell");
-        document.getElementById("color").options[4] = new Option("Gray & White", "Gray & White");
-        break;
+         document.getElementById("breed").options[0] = new Option("--Select--", "");
+         i = 1;
+         for(breed of breeds['Cat']) {
+            document.getElementById("breed").options[i] = new Option(breed, breed);
+            i++;
+         }
+         document.getElementById("color").options[0] = new Option("--Select--", "");
+         i = 1;
+         for(color of colors['Cat']) {
+            document.getElementById("color").options[i] = new Option(color, color); 
+            i++;           
+         }
+         break;
       case "Dog":
-        document.getElementById("breed").options[0] = new Option("--Select--", "");
-        document.getElementById("breed").options[1] = new Option("Affenpinscher", "Affenpinscher");
-        document.getElementById("breed").options[2] = new Option("Afghan Hound", "Afghan Hound");
-        document.getElementById("breed").options[3] = new Option("Airedale Terrier", "Airedale Terrier");
-        document.getElementById("breed").options[4] = new Option("Akbash", "Akbash");
-
-        document.getElementById("color").options[0] = new Option("--Select--", "");
-        document.getElementById("color").options[1] = new Option("Bicolor", "Bicolor");
-        document.getElementById("color").options[2] = new Option("Black", "Black");
-        document.getElementById("color").options[3] = new Option("Brindle", "Brindle");
-        document.getElementById("color").options[4] = new Option("Brown / Chocolate", "Brown / Chocolate");
-        break;
-    }
-
-  }
+         document.getElementById("breed").options[0] = new Option("--Select--", "");
+         i = 1;
+         for(breed of breeds['Dog']) {
+            document.getElementById("breed").options[i] = new Option(breed, breed);
+            i++;
+         }
+         document.getElementById("color").options[0] = new Option("--Select--", "");
+         i = 1;
+         for(color of colors['Dog']) {
+            document.getElementById("color").options[i] = new Option(color, color);  
+            i++          
+         }
+         break;
+      }
+   }
+   breeds = {
+      "Dog": [
+         "Airedale Terrier",
+         "Akbash",
+         "Akita",
+         "Alaskan Malamute",
+         "American Bulldog",
+         "American Bully",
+         "American Eskimo Dog",
+         "American Foxhound",
+         "American Hairless Terrier",
+         "American Staffordshire Terrier",
+         "American Water Spaniel",
+         "Anatolian Shepherd",
+         "Appenzell Mountain Dog",
+         "Aussiedoodle",
+         "Australian Cattle Dog / Blue Heeler",
+         "Australian Kelpie",
+         "Australian Shepherd",
+         "Australian Terrier",
+         "Basenji",
+         "Basset Hound",
+         "Beagle",
+         "Bearded Collie",
+         "Beauceron",
+         "Bedlington Terrier",
+         "Belgian Shepherd / Laekenois",
+         "Belgian Shepherd / Malinois",
+         "Belgian Shepherd / Sheepdog",
+         "Belgian Shepherd / Tervuren",
+         "Bernedoodle",
+         "Bernese Mountain Dog",
+         "Bichon Frise",
+         "Black and Tan Coonhound",
+         "Black Labrador Retriever",
+         "Black Mouth Cur",
+         "Black Russian Terrier",
+         "Bloodhound",
+         "Blue Lacy",
+         "Bluetick Coonhound",
+         "Boerboel",
+         "Bolognese",
+         "Border Collie",
+         "Border Terrier",
+         "Borzoi",
+         "Boston Terrier",
+         "Bouvier des Flandres",
+         "Boxer",
+         "Boykin Spaniel",
+         "Briard",
+         "Brittany Spaniel",
+         "Brussels Griffon",
+         "Bull Terrier",
+         "Bullmastiff",
+         "Cairn Terrier",
+         "Canaan Dog",
+         "Cane Corso",
+         "Cardigan Welsh Corgi",
+         "Carolina Dog",
+         "Catahoula Leopard Dog",
+         "Cattle Dog",
+         "Caucasian Sheepdog / Caucasian Ovtcharka",
+         "Cavachon",
+         "Cavalier King Charles Spaniel",
+         "Cavapoo",
+         "Chesapeake Bay Retriever",
+         "Chihuahua",
+         "Chinese Crested Dog",
+         "Chinese Foo Dog",
+         "Chinook",
+         "Chiweenie",
+         "Chocolate Labrador Retriever",
+         "Chow Chow",
+         "Cirneco dell'Etna",
+         "Clumber Spaniel",
+         "Cockapoo",
+         "Cocker Spaniel",
+         "Collie",
+         "Coonhound",
+         "Corgi",
+         "Coton de Tulear",
+         "Curly-Coated Retriever",
+         "Dachshund",
+         "Dalmatian",
+         "Dandie Dinmont Terrier",
+         "Doberman Pinscher",
+         "Dogo Argentino",
+         "Dogue de Bordeaux",
+         "Dutch Shepherd",
+         "English Bulldog",
+         "English Cocker Spaniel",
+         "English Coonhound",
+         "English Foxhound",
+         "English Pointer",
+         "English Setter",
+         "English Shepherd",
+         "English Springer Spaniel",
+         "English Toy Spaniel",
+         "Entlebucher",
+         "Eskimo Dog",
+         "Feist",
+         "Field Spaniel",
+         "Fila Brasileiro",
+         "Finnish Lapphund",
+         "Finnish Spitz",
+         "Flat-Coated Retriever",
+         "Fox Terrier",
+         "Foxhound",
+         "French Bulldog",
+         "Galgo Spanish Greyhound",
+         "German Pinscher",
+         "German Shepherd Dog",
+         "German Shorthaired Pointer",
+         "German Spitz",
+         "German Wirehaired Pointer",
+         "Giant Schnauzer",
+         "Glen of Imaal Terrier",
+         "Golden Retriever",
+         "Goldendoodle",
+         "Gordon Setter",
+         "Great Dane",
+         "Great Pyrenees",
+         "Greater Swiss Mountain Dog",
+         "Greyhound",
+         "Hamiltonstovare",
+         "Harrier",
+         "Havanese",
+         "Hound",
+         "Hovawart",
+         "Husky",
+         "Ibizan Hound",
+         "Icelandic Sheepdog",
+         "Illyrian Sheepdog",
+         "Irish Setter",
+         "Irish Terrier",
+         "Irish Water Spaniel",
+         "Irish Wolfhound",
+         "Italian Greyhound",
+         "Jack Russell Terrier",
+         "Japanese Chin",
+         "Jindo",
+         "Kai Dog",
+         "Karelian Bear Dog",
+         "Keeshond",
+         "Kerry Blue Terrier",
+         "Kishu",
+         "Klee Kai",
+         "Komondor",
+         "Kuvasz",
+         "Kyi Leo",
+         "Labradoodle",
+         "Labrador Retriever",
+         "Lakeland Terrier",
+         "Lancashire Heeler",
+         "Leonberger",
+         "Lhasa Apso",
+         "Lowchen",
+         "Lurcher",
+         "Maltese",
+         "Maltipoo",
+         "Manchester Terrier",
+         "Maremma Sheepdog",
+         "Mastiff",
+         "McNab",
+         "Miniature Bull Terrier",
+         "Miniature Dachshund",
+         "Miniature Pinscher",
+         "Miniature Poodle",
+         "Miniature Schnauzer",
+         "Mixed Breed",
+         "Morkie",
+         "Mountain Cur",
+         "Mountain Dog",
+         "Munsterlander",
+         "Neapolitan Mastiff",
+         "New Guinea Singing Dog",
+         "Newfoundland Dog",
+         "Norfolk Terrier",
+         "Norwegian Buhund",
+         "Norwegian Elkhound",
+         "Norwegian Lundehund",
+         "Norwich Terrier",
+         "Nova Scotia Duck Tolling Retriever",
+         "Old English Sheepdog",
+         "Otterhound",
+         "Papillon",
+         "Parson Russell Terrier",
+         "Patterdale Terrier / Fell Terrier",
+         "Pekingese",
+         "Pembroke Welsh Corgi",
+         "Peruvian Inca Orchid",
+         "Petit Basset Griffon Vendeen",
+         "Pharaoh Hound",
+         "Pit Bull Terrier",
+         "Plott Hound",
+         "Pointer",
+         "Polish Lowland Sheepdog",
+         "Pomeranian",
+         "Pomsky",
+         "Poodle",
+         "Portuguese Podengo",
+         "Portuguese Water Dog",
+         "Presa Canario",
+         "Pug",
+         "Puggle",
+         "Puli",
+         "Pumi",
+         "Pyrenean Shepherd",
+         "Rat Terrier",
+         "Redbone Coonhound",
+         "Retriever",
+         "Rhodesian Ridgeback",
+         "Rottweiler",
+         "Rough Collie",
+         "Saint Bernard",
+         "Saluki",
+         "Samoyed",
+         "Sarplaninac",
+         "Schipperke",
+         "Schnauzer",
+         "Schnoodle",
+         "Scottish Deerhound",
+         "Scottish Terrier",
+         "Sealyham Terrier",
+         "Setter",
+         "Shar-Pei",
+         "Sheep Dog",
+         "Sheepadoodle",
+         "Shepherd",
+         "Shetland Sheepdog / Sheltie",
+         "Shiba Inu",
+         "Shih poo",
+         "Shih Tzu",
+         "Shollie",
+         "Siberian Husky",
+         "Silky Terrier",
+         "Skye Terrier",
+         "Sloughi",
+         "Smooth Collie",
+         "Smooth Fox Terrier",
+         "South Russian Ovtcharka",
+         "Spaniel",
+         "Spanish Water Dog",
+         "Spinone Italiano",
+         "Spitz",
+         "Staffordshire Bull Terrier",
+         "Standard Poodle",
+         "Standard Schnauzer",
+         "Sussex Spaniel",
+         "Swedish Vallhund",
+         "Tennessee Treeing Brindle",
+         "Terrier",
+         "Thai Ridgeback",
+         "Tibetan Mastiff",
+         "Tibetan Spaniel",
+         "Tibetan Terrier",
+         "Tosa Inu",
+         "Toy Fox Terrier",
+         "Toy Manchester Terrier",
+         "Treeing Walker Coonhound",
+         "Vizsla",
+         "Weimaraner",
+         "Welsh Springer Spaniel",
+         "Welsh Terrier",
+         "West Highland White Terrier / Westie",
+         "Wheaten Terrier",
+         "Whippet",
+         "White German Shepherd",
+         "Wire Fox Terrier",
+         "Wirehaired Dachshund",
+         "Wirehaired Pointing Griffon",
+         "Wirehaired Terrier",
+         "Xoloitzcuintli / Mexican Hairless",
+         "Yellow Labrador Retriever",
+         "Yorkshire Terrier",
+      ],
+      "Cat": [
+         "Abyssinian",
+         "American Bobtail",
+         "American Curl",
+         "American Shorthair",
+         "American Wirehair",
+         "Applehead Siamese",
+         "Balinese",
+         "Bengal",
+         "Birman",
+         "Bombay",
+         "British Shorthair",
+         "Burmese",
+         "Burmilla",
+         "Calico",
+         "Canadian Hairless",
+         "Chartreux",
+         "Chausie",
+         "Chinchilla",
+         "Cornish Rex",
+         "Cymric",
+         "Devon Rex",
+         "Dilute Calico",
+         "Dilute Tortoiseshell",
+         "Domestic Long Hair",
+         "Domestic Medium Hair",
+         "Domestic Short Hair",
+         "Egyptian Mau",
+         "Exotic Shorthair",
+         "Extra-Toes Cat / Hemingway Polydactyl",
+         "Havana",
+         "Himalayan",
+         "Japanese Bobtail",
+         "Javanese",
+         "Korat",
+         "LaPerm",
+         "Maine Coon",
+         "Manx",
+         "Munchkin",
+         "Nebelung",
+         "Norwegian Forest Cat",
+         "Ocicat",
+         "Oriental Long Hair",
+         "Oriental Short Hair",
+         "Oriental Tabby",
+         "Persian",
+         "Pixiebob",
+         "Ragamuffin",
+         "Ragdoll",
+         "Russian Blue",
+         "Scottish Fold",
+         "Selkirk Rex",
+         "Siamese",
+         "Siberian",
+         "Silver",
+         "Singapura",
+         "Snowshoe",
+         "Somali",
+         "Sphynx / Hairless Cat",
+         "Tabby",
+         "Tiger",
+         "Tonkinese",
+         "Torbie",
+         "Tortoiseshell",
+         "Toyger",
+         "Turkish Angora",
+         "Turkish Van",
+         "Tuxedo",
+         "York Chocolate",
+      ]
+   }
+   colors = {
+      "Dog": [
+         'Apricot / Beige',
+         'Bicolor',
+         'Black',
+         'Brindle',
+         'Brown / Chocolate',
+         'Golden',
+         'Gray / Blue / Silver',
+         'Harlequin',
+         'Merle (Blue)',
+         'Merle (Red)',
+         'Red / Chestnut / Orange',
+         'Sable',
+         'Tricolor (Brown, Black, & White)',
+         'White / Cream',
+         'Yellow / Tan / Blond / Fawn',
+      ],
+      'Cat': [
+         'Black',
+         'Black & White / Tuxedo',
+         'Blue Cream',
+         'Blue Point',
+         'Brown / Chocolate',
+         'Buff & White',
+         'Buff / Tan / Fawn',
+         'Calico',
+         'Chocolate Point',
+         'Cream / Ivory',
+         'Cream Point',
+         'Dilute Calico',
+         'Dilute Tortoiseshell',
+         'Flame Point',
+         'Gray & White',
+         'Gray / Blue / Silver',
+         'Lilac Point',
+         'Orange & White',
+         'Orange / Red',
+         'Seal Point',
+         'Smoke',
+         'Tabby (Brown / Chocolate)',
+         'Tabby (Buff / Tan / Fawn)',
+         'Tabby (Gray / Blue / Silver)',
+         'Tabby (Leopard / Spotted)',
+         'Tabby (Orange / Red)',
+         'Tabby (Tiger Striped)',
+         'Torbie',
+         'Tortoiseshell',
+         'White',
+      ]
+   }
 </script>
 
 
