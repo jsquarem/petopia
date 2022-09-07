@@ -126,44 +126,6 @@
          </div>
          <!-- /card -->
       </div>
-      <!-- /adopt-card -->
-         <!-- /pet -->
-      {% endfor %}
-   {% endfor %}
-   </div>
-{% endfor %}
-<!-- /row -->
-      <div class="col-md-12 mt-5">
-         <!-- pagination -->
-         <nav aria-label="pagination">
-            <ul class="pagination float-right">
-               <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
-                  <a class="page-link" href="{{pagination.previous_url}}" tabindex="-1">Previous</a>
-               </li>
-               {% for page in pagination.pages %}
-               <li class="page-item"><a class="page-link{% if page.page_number == pagination.current_page %} active{% endif %}" href="{{page.page_url}}">{{page.page_number}}</a></li>
-               {% endfor %}
-               <li class="page-item"><a class="page-link" href="{{pagination.next_chunk}}">+5</a></li>
-               <li class="page-item"><a class="page-link" href="{{pagination.last_page.url}}">{{pagination.last_page.page_number}}</a></li>
-               <li class="page-item"><a class="page-link" href="{{pagination.next_url}}">Next</a></li>
-            </ul>
-         </nav>
-         <!-- /nav -->
-      </div>
-      <!-- /col-md -->
-   </div>
-   <!-- /container -->
-</div>
-<!-- /page -->
-
-<script src="{% static 'js/active/animals.js' %}"></script>
-
-<script>
-   function dynamicDropDown(type) {
-      let i = '';
-      switch (type)
-      {
-      
       case "Cat":
          document.getElementById("breed").options[0] = new Option("--Select--", "");
          i = 1;

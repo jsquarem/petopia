@@ -401,11 +401,11 @@ def add_favorite(request, user_id, animal_id):
 
 
 def favorites_index(request, user_id):
-  favorites = Favorite.objects.get(user_id=user_id)
+  favorites = Favorite.objects.filter(user_id=user_id)
   return render(request, 'favorites/index.html', { 'favorites': favorites })
 
 def favorites_detail(request, favorite_id):
-  favorites = Favorite.objects.get(id=favorite_id)
+  favorites = Favorite.objects.filter(id=favorite_id)
   return render(request, 'favorites/detail.html', { 'favorites': favorites })
 
 class FavoriteDelete(DeleteView):
