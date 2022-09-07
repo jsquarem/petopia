@@ -106,7 +106,7 @@
                         </li>
                         <!-- menu item -->
                         <li id="link-contact" class="nav-item">
-                           <a class="nav-link" href="#">Contact
+                           <a class="nav-link" href="{% url 'contact' %}">Contact
                            </a>
                         </li>
                         <!-- menu item -->
@@ -115,7 +115,7 @@
 
 
 
-                                                                     <li class="nav-item dropdown active">
+                                                                     <li class="nav-item dropdown">
                            <a id="myaccount" class="nav-link dropdown-toggle" href="#" id="others-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            My Account
                            </a>
@@ -302,6 +302,8 @@
       <script src="{%  static 'js/contact.js' %}"></script>
 	  <!-- Prefix free -->
       <script src="{% static 'js/prefixfree.min.js' %}"></script>
+
+            <script src="{% static 'js/main.js' %}"></script>
 {% comment %} <script defer src="{% static 'js/app.js' %}"></script> {% endcomment %}
 </body>
 </html>

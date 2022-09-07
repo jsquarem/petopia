@@ -20,76 +20,84 @@
       </div>
       <!-- /jumbotron -->
       <!-- ==== Page Content ==== -->
-      <div class="page">
-         <div class="container block-padding pt-0">
-
-
-
-                          <div class="organizationsearchformcontainer">
-
-  <form method="post" action="">
-          {% csrf_token %}
-        <div class="container d-lg-flex justify-content-around align-items-lg-center">
-            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Name</label>
-                <input type="text" name="name" class="form-control" placeholder="" value="">
-            </div>
-                        <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Location</label>
-                <input type="text" name="location" class="form-control" placeholder="" value="">
-            </div>
-
-              <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
-        </div>
-    </form>
-
+<div class="page">
+   <div class="container block-padding pt-0">
+      <div class="row mt-5">
+         <div class="organizationsearchformcontainer">
+            <form method="post" action="">
+               {% csrf_token %}
+               <div class="container d-lg-flex justify-content-around align-items-lg-center">
+                  <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Name</label>
+                     <input type="text" name="name" class="form-control" placeholder="" value="">
+                  </div>
+                  <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Location</label>
+                     <input type="text" name="location" class="form-control" placeholder="" value="">
+                  </div>
+                  <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
+               </div>
+            </form>
          </div>
-
-
-
-         <div class="table100 ver1 m-b-110">
-         <div class="table100-head">
- <table>
- <thead>
-  <tr class="row100 head">
-    <th class="cell100 column1">Name</th>
-    <th class="cell100 column2">Email</th>
-    <th class="cell100 column3">Phone</th>
-    <th class="cell100 column4">Address</th>
-{#    <th class="cell100 column5">Website</th>#}
-  </tr>
- </thead>
- </table>
-         </div>
+         <div class="table100 ver1">
+            <div class="table100-head">
+               <table>
+               <thead>
+               <tr class="row100 head">
+                  <th class="cell100 column1">Name</th>
+                  <th class="cell100 column2">Email</th>
+                  <th class="cell100 column3">Phone</th>
+                  <th class="cell100 column4">Address</th>
+               {#    <th class="cell100 column5">Website</th>#}
+               </tr>
+               </thead>
+               </table>
+            </div>
             <div class="table100-body js-pscroll ps ps-active-y">
-<table>
-  {% for organization in organizations.organizations %}
-  <tr class="row100 body">
-    <td class="cell100 column1">
-      <a href="{% url 'organizations.detail' organization.id %}">{{organization.name}}</a>
-    </td>
-    <td class="cell100 column2">{{organization.email}}</td>
-    <td class="cell100 column3">{{organization.phone}}</td>
-    <td class="cell100 column4">
-      {% if organization.address.address1 %} {{organization.address.address1}}<br />
-      {% endif %} {% if organization.address.address2%}
-      {{organization.address.address2}}<br />
-      {% endif %} {%if organization.address.city %} {{organization.address.city}},
-      {% endif %} {%if organization.address.state %} {{organization.address.state}}
-      {% endif %} {% if organization.address.postcode %}
-      {{organization.address.postcode}} {% endif %}
-    </td>
-  </tr>
-
-  {% endfor %}
-</table>
+               <table>
+               {% for organization in organizations.organizations %}
+               <tr class="row100 body">
+                  <td class="cell100 column1">
+                  <a href="{% url 'organizations.detail' organization.id %}">{{organization.name}}</a>
+                  </td>
+                  <td class="cell100 column2">{{organization.email}}</td>
+                  <td class="cell100 column3">{{organization.phone}}</td>
+                  <td class="cell100 column4">
+                  {% if organization.address.address1 %} {{organization.address.address1}}<br />
+                  {% endif %} {% if organization.address.address2%}
+                  {{organization.address.address2}}<br />
+                  {% endif %} {%if organization.address.city %} {{organization.address.city}},
+                  {% endif %} {%if organization.address.state %} {{organization.address.state}}
+                  {% endif %} {% if organization.address.postcode %}
+                  {{organization.address.postcode}} {% endif %}
+                  </td>
+               </tr>
+               {% endfor %}
+               </table>
             </div>
          </div>
-</div>
-            <!-- /col-md -->
-         </div>
-         <!-- /container -->
       </div>
-      <!-- /page -->
+      <div class="row">
+      <!-- /col-md -->
+         <div class="col-md-12 mt-5">
+            <!-- pagination -->
+            <nav aria-label="pagination">
+               <ul class="pagination float-right">
+                  <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
+                     <a class="page-link" href="{{pagination.previous_url}}" tabindex="-1">Previous</a>
+                  </li>
+                  {% for page in pagination.pages %}
+                  <li class="page-item"><a class="page-link{% if page.page_number == pagination.current_page %} active{% endif %}" href="{{page.page_url}}">{{page.page_number}}</a></li>
+                  {% endfor %}
+                  {% if pagination.current_page|add:5 < pagination.last_page.page_number %}<li class="page-item"><a class="page-link" href="{{pagination.next_chunk}}">+5</a></li>{% endif %}
+                  {% if pagination.current_page|add:4 < pagination.last_page.page_number %}<li class="page-item"><a class="page-link" href="{{pagination.last_page.url}}">{{pagination.last_page.page_number}}</a></li>{% endif %}
+                  <li class="page-item"><a class="page-link" href="{{pagination.next_url}}">Next</a></li>
+               </ul>
+            </nav>
+            <!-- /nav -->
+         </div>
+      </div>
+   </div>
+   <!-- /container -->
+</div>
+<!-- /page -->
 
-
-        <script src="{% static 'js/active/organizations.js' %}"></script>
 {% endblock %}
