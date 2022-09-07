@@ -26,6 +26,67 @@
                <p>Aliquam erat lorem ipsum volutpat In id fermentum augue, ut pellentesque leo. Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
             </div>
 
+
+                 <div class="searchformcontainer">
+
+  <form method="post" action="">
+          {% csrf_token %}
+        <div class="container d-lg-flex justify-content-around align-items-lg-center">
+            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Type</label><select name="type" id="type" onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);" class="form-control">
+
+    <option value="">--Select--</option>
+    <option value="Cat">Cat</option>
+    <option value="Dog">Dog</option>
+
+                </select></div>
+            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Breed</label><select name="breed" id="breed" class="form-control">
+
+    <option value="">--Select a Type--</option>
+
+                </select></div>
+            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Color</label><select name="color" id="color" class="form-control">
+
+    <option value="">--Select a Type--</option>
+
+                </select></div>
+            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Age</label><select name="age" id="age" class="form-control">
+
+    <option value="">--Select--</option>
+    <option value="baby">Baby</option>
+    <option value="young">Young</option>
+    <option value="adult">Adult</option>
+    <option value="senior">Senior</option>
+
+                </select></div>
+            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Gender</label><select name="gender" id="gender" class="form-control">
+
+    <option value="">--Select--</option>
+    <option value="male">Male</option>
+    <option value="Female">Female</option>
+
+                </select></div>
+            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Coat</label><select name="coat" id="coat" class="form-control">
+
+    <option value="">--Select--</option>
+    <option value="short">Short</option>
+    <option value="medium">Medium</option>
+    <option value="long">Long</option>
+    <option value="wire">Wire</option>
+    <option value="hairless">Hairless</option>
+    <option value="curly">Curly</option>
+
+                </select></div>
+{#            <button class="btn btn-primary searchsubmitbutton" type="submit">Search</button>#}
+              <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
+        </div>
+    </form>
+
+         </div>
+
+
+
+
+
            {% for i in "12" %}
     <div class="row mt-5">
         {% for i in "1234" %}
@@ -151,4 +212,41 @@
 {#  {% endfor %}#}
 {#</table>#}
     <script src="{% static 'js/active/animals.js' %}"></script>
+
+            <script>
+  function dynamicDropDown(type) {
+    switch (type)
+    {
+      case "Cat":
+        document.getElementById("breed").options[0] = new Option("--Select--", "");
+        document.getElementById("breed").options[1] = new Option("British Shorthair", "British Shorthair");
+        document.getElementById("breed").options[2] = new Option("Burmese", "Burmese");
+        document.getElementById("breed").options[3] = new Option("Burmilla", "Burmilla");
+        document.getElementById("breed").options[4] = new Option("Calico", "Calico");
+
+        document.getElementById("color").options[0] = new Option("--Select--", "");
+        document.getElementById("color").options[1] = new Option("Cream / Ivory", "Cream / Ivory");
+        document.getElementById("color").options[2] = new Option("Dilute Calico", "Dilute Calico");
+        document.getElementById("color").options[3] = new Option("Dilute Tortoiseshell", "Dilute Tortoiseshell");
+        document.getElementById("color").options[4] = new Option("Gray & White", "Gray & White");
+        break;
+      case "Dog":
+        document.getElementById("breed").options[0] = new Option("--Select--", "");
+        document.getElementById("breed").options[1] = new Option("Affenpinscher", "Affenpinscher");
+        document.getElementById("breed").options[2] = new Option("Afghan Hound", "Afghan Hound");
+        document.getElementById("breed").options[3] = new Option("Airedale Terrier", "Airedale Terrier");
+        document.getElementById("breed").options[4] = new Option("Akbash", "Akbash");
+
+        document.getElementById("color").options[0] = new Option("--Select--", "");
+        document.getElementById("color").options[1] = new Option("Bicolor", "Bicolor");
+        document.getElementById("color").options[2] = new Option("Black", "Black");
+        document.getElementById("color").options[3] = new Option("Brindle", "Brindle");
+        document.getElementById("color").options[4] = new Option("Brown / Chocolate", "Brown / Chocolate");
+        break;
+    }
+
+  }
+</script>
+
+
 {% endblock %}
