@@ -83,16 +83,19 @@
             </div>
          </form>
       </div>
-{% for i in "12" %}
+{% for animal in animals.animals %}
+   {% if forloop.counter0 == 0 %}
    <div class="row mt-5">
-   {% for i in "1234" %}
-      {% for animal in animals.animals %}
+   {% endif %}
+   {% if forloop.counter0|divisibleby:4 and forloop.counter0 > 0 %}
+   </div>
+   <div class="row mt-5">
+   {% endif %}
          <!-- Pet  -->
       <div class="adopt-card col-md-6 col-xl-3 res-margin">
          <div class="card bg-light-custom">
             <div class="thumbnail text-center">
                   <!-- Image -->
-{#                            <img src="{{ animal.photos.0.medium }}" class="border-irregular1 img-fluid" alt="">#}
                   <img src="{% if animal.photos.0.medium %}{{ animal.photos.0.medium }}
                               {% else %}
                                  {% if animal.type == 'Dog' %}{% static 'assets/dogplaceholder.png' %}
@@ -126,6 +129,47 @@
          </div>
          <!-- /card -->
       </div>
+<<<<<<< jeff
+      <!-- /adopt-card -->
+      <!-- /pet -->
+   {% if forloop.counter1 == animals.animals|length %}
+   </div>
+   {% endif %}
+{% endfor %}
+<!-- /row -->
+      <div class="col-md-12 mt-5">
+         <!-- pagination -->
+         <nav aria-label="pagination">
+            <ul class="pagination float-right">
+               <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
+                  <a class="page-link" href="{{pagination.previous_url}}" tabindex="-1">Previous</a>
+               </li>
+               {% for page in pagination.pages %}
+               <li class="page-item"><a class="page-link{% if page.page_number == pagination.current_page %} active{% endif %}" href="{{page.page_url}}">{{page.page_number}}</a></li>
+               {% endfor %}
+               <li class="page-item"><a class="page-link" href="{{pagination.next_chunk}}">+5</a></li>
+               <li class="page-item"><a class="page-link" href="{{pagination.last_page.url}}">{{pagination.last_page.page_number}}</a></li>
+               <li class="page-item"><a class="page-link" href="{{pagination.next_url}}">Next</a></li>
+            </ul>
+         </nav>
+         <!-- /nav -->
+      </div>
+      <!-- /col-md -->
+   </div>
+   <!-- /container -->
+</div>
+<!-- /page -->
+
+<script src="{% static 'js/active/animals.js' %}"></script>
+
+<script>
+   function dynamicDropDown(type) {
+      let i = '';
+      switch (type)
+      {
+      
+=======
+>>>>>>> main
       case "Cat":
          document.getElementById("breed").options[0] = new Option("--Select--", "");
          i = 1;
