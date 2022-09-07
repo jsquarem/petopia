@@ -1,51 +1,91 @@
 {% extends 'base.html' %} {% load static %} 
 {% block content %}
-      <div class="page">
-        <div class="container">
-          <div class="row">
-            <div class="col-8 col-offset-2 pt-5">
-              <div class="messages">
-                {% if confirmation %}
-                  <h2>Thanks {{confirmation.name}}!</h2>
-                  <p>{{confirmation.message}}</p>
-                {% endif %}
-              </div>
-              <form id="contact-form" method="post" action="" role="form">                
-              {% csrf_token %}      
-                <div class="controls">        
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="form_name">Name</label>
-                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your name *" required="required">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="form_email">Email *</label>
-                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="form_message">Message *</label>
-                        <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <input type="submit" class="btn btn-success btn-send" value="Send message">
-                    </div>
-                  </div>                 
-                </div>        
-              </form>
-            </div>
-          </div>
 
-        </div>
+          <!-- /nav --><!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid overlay">
+         <div class="jumbo-heading">
+            <!-- section-heading -->
+            <div class="section-heading" data-aos="zoom-in">
+               <h1>Contact Us</h1>
+            </div>
+            <!-- /section-heading -->
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'animals.index' %}">View All Animals</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+               </ol>
+            </nav>
+         </div>
+         <!-- /jumbo-heading -->
       </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div class="page">
+         <div class="container">
+            <div class="row">
+               <!-- contact-info-->
+               <div class="contact-info col-lg-5">
+                  <h4>Send us a message!</h4>
+                  <!-- Form Starts -->
+                  <div id="contact_form">
+                     <div class="form-group">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <label>Name<span class="required">*</span></label>
+                              <input type="text" name="name" class="form-control input-field" required="">
+                           </div>
+                           <div class="col-md-12">
+                              <label>Email Adresss <span class="required">*</span></label>
+                              <input type="email" name="email" class="form-control input-field" required="">
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                              <label>Subject</label>
+                              <input type="text" name="subject" class="form-control input-field">
+                           </div>
+                           <div class="col-md-12">
+                              <label>Message<span class="required">*</span></label>
+                              <textarea name="message" id="message" class="textarea-field form-control" rows="3"  required=""></textarea>
+                           </div>
+                        </div>
+                        <button type="submit" id="submit_btn" value="Submit" class="btn btn-primary">Send message</button>
+                     </div>
+                     <!-- /form-group-->
+                     <!-- Contact results -->
+                     <div id="contact_results"></div>
+                  </div>
+                  <!-- /contact)form-->
+               </div>
+               <!-- /contact-info-->
+               <div class="col-lg-6 offset-lg-1 h-50 card bg-secondary res-margin ">
+                  <div class="contact-info text-light ">
+                     <!-- contact-info-->
+                     <div class="text-light">
+                        <h5>Information </h5>
+                        <p>Mei te apeirian omittantur reformidans, duo in appetere interesset concludaturque. Est eruditi erroribus liberavisse in.
+                        </p>
+                        <!-- contact icons-->
+                        <ul class="list-unstyled mt-5 list-contact">
+                           <li class="h7"><i class="fa fa-envelope margin-icon"></i><a href="mailto:email@yoursite.com">contact@petopia.com</a></li>
+                           <li class="h7"><i class="fa fa-phone margin-icon"></i>(123) 456-789</li>
+                           <li class="h7" ><i class="fa fa-map-marker margin-icon"></i>Pet Street 123 - New York</li>
+                        </ul>
+                        <!-- /list-->
+                     </div>
+                     <!-- /text-light -->
+                  </div>
+                  <!-- /contact-info-->
+               </div>
+               <!-- /col-lg-->
+            </div>
+
+                  <!-- /col-md-->
+         </div>
+               <!-- /col-lg-->
+      </div>
+            <!-- /row-->
+
 
 {% endblock %}

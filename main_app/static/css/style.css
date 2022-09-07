@@ -1918,6 +1918,7 @@ textarea {
 
 
 
+
 /*=========================== CUSTOM CSS ============================ */
 #logo {
     height: 3.2rem;
@@ -2070,14 +2071,41 @@ tr > .cell100 {
 
 }
 
+/* edited by Olu */
 .contact-info {
-        border-radius: 75px 22px 115px 35px/8px 65px 7px 85px;
+        /*border-radius: 75px 22px 115px 35px/8px 65px 7px 85px;*/
         background-color: #456990!important;
+        padding: 40px;
 }
+
+.contact-info > h4 {
+    text-align: center;
+    color: white;
+}
+
+#contact_form > div.form-group > div.row > div.col-md-12 > label {
+    color: white;
+    text-align: initial;
+}
+
+#top > div.page > div > div > div.col-lg-6.offset-lg-1.h-50.card.bg-secondary.res-margin {
+    border-radius: 0px 0px 0px 0px;
+    background: white!important;
+}
+
+#top > div.page > div > div > div.col-lg-6.offset-lg-1.h-50.card.bg-secondary.res-margin > div > div > ul > li:nth-child(1) > a {
+    color: white;
+}
+
+#submit_btn:hover {
+    background-color: green!important;
+}
+
 
 #signupform {
     /*padding: 3rem;*/
 }
+
 
 div#signupformbox {
     justify-content: center;
@@ -2169,3 +2197,86 @@ justify-content: space-between;
 line-height: 24px;
 text-align: left;
 }
+
+
+@media (min-width: 992px) {
+  .searchselectfield {
+    width: 131.562px;
+  }
+}
+
+@media (min-width: 992px) {
+  .searchsubmitbutton {
+    /*width: 90px;*/
+    /*height: 37px;*/
+    position: relative;
+  }
+}
+
+@media (min-width: 992px) {
+  #searchsubmitbutton {
+    width: 25px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+  }
+}
+
+@media (min-width: 992px) {
+  .fieldlabel {
+    margin-bottom: 1px;
+  }
+}
+
+@media (min-width: 992px) {
+  .searchsubmitbutton {
+    top: 15px;
+      margin-left: 10px;
+  }
+
+    .searchselectfield > .fieldlabel {
+        text-align: left;
+    }
+
+    .searchselectfield {
+        margin-right: 9px;
+    }
+
+    .organizationsearchformcontainer {
+        padding-bottom: 50px;
+        width: 50%;
+        margin: auto;
+    }
+}
+
+@media (min-width: 1200px) {
+  .searchselectfield {
+    width: 175px;
+  }
+    .searchformcontainer {
+    width: 50%;
+    margin: auto;
+}
+}
+
+@media (min-width: 300px) {
+  select {
+  }
+}
+
+@media (min-width: 300px) {
+  .searchselectfield {
+    height: 69px;
+  }
+}
+
+@media (min-width: 300px) {
+  .fieldlabel {
+    margin-bottom: 0px;
+  }
+}
+
+
+

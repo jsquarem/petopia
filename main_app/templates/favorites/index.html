@@ -1,5 +1,84 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
+    	  <!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid overlay">
+         <div class="jumbo-heading">
+            <!-- section-heading -->
+            <div class="section-heading" data-aos="zoom-in">
+               <h1>Adoption</h1>
+            </div>
+            <!-- /section-heading -->
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Adoption</li>
+               </ol>
+            </nav>
+         </div>
+         <!-- /jumbo-heading -->
+      </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div class="page">
+         <div class="container block-padding pt-0">
+            <div class="col-lg-8 offset-lg-2 text-center">
+               <h3>Find a new furry Friend</h3>
+               <p>Aliquam erat lorem ipsum volutpat In id fermentum augue, ut pellentesque leo. Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
+            </div>
+
+                    <div class="row mt-5">
+            {% for favorite in favorites %}
+
+            <!-- Pet  -->
+                <div class="adopt-card col-md-6 col-xl-3 res-margin">
+                    <div class="card bg-light-custom">
+                        <div class="thumbnail text-center">
+                            <!-- Image -->
+{#                            <img src="{{ animal.photos.0.medium }}" class="border-irregular1 img-fluid" alt="">#}
+                              <img src="{% if favorite.photos.0.medium %}{{ favorite.photos.0.medium }}
+                                        {% else %}
+                                            {% if favorite.type == 'Dog' %}{% static 'assets/dogplaceholder.png' %}
+                                            {% elif favorite.type == 'Cat'%}{% static 'assets/catplaceholder.png' %}
+                                            {% else %}{% static 'assets/dogplaceholder.png' %}
+                                            {% endif %}
+                                        {% endif %}" class="border-irregular1 img-fluid" alt="">
+                                    <!-- Name -->
+                                    <div class="caption-adoption">
+                                       <h6 class="adoption-header">{{ favorite.name }}</h6>
+                                       <!-- List -->
+                                       <ul class="list-unstyled">
+                                           <li><strong>Type:</strong> {{ favorite.type }}</li>
+                                          <li><strong>Gender:</strong> {{ favorite.gender }}</li>
+                                          <li><strong>Neutered: </strong>
+                                            {% if favorite.attributes.spayed_neutered %}
+                                                Yes
+                                            {% else %}
+                                                No
+                                            {% endif %}
+                                          </li>
+                                          <li><strong>Age:</strong> {{ favorite.age }}</li>
+                                       </ul>
+                                       <!-- Buttons -->
+                                       <div class="text-center">
+                                          <a href="{% url 'animals.detail' favorite.animal_id %}" class="btn btn-primary">More Info</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <!-- /thumbnail -->
+                              </div>
+                              <!-- /card -->
+                           </div>
+                           <!-- /adopt-card -->
+            <!-- /pet -->
+
+        {% endfor %}
+                    </div>
+
+            <!-- /col-md -->
+         </div>
+         <!-- /container -->
+      </div>
+      <!-- /page -->
 
 
 {% endblock %}
