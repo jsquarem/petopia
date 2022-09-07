@@ -397,5 +397,5 @@ class FavoriteDelete(DeleteView):
   model = Favorite
   del Favorite.user_id
   #or maybe Favorite.favorite_id
-  # success_url: '/profile/user_id/favorites/'
+  # success_url: '/profiles/'
 
