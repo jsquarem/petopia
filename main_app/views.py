@@ -126,35 +126,38 @@ def get_google_map_url(address):
 '''
 Helper Functions
 '''
-def make_pagination(pagination_dict, current_page):
+def make_pagination(view_type, pagination_dict, current_page):
+  api_url_substring = f'/v2/{view_type}'
   if 'previous' in pagination_dict['_links']:
     previous_query_string = pagination_dict['_links']['previous']['href']
-    previous_url = previous_query_string.replace('/v2/animals', '')
+    previous_url = previous_query_string.replace(api_url_substring, '')
   else:
     previous_url = '#'
   if 'next' in pagination_dict['_links']:
     next_query_string = pagination_dict['_links']['next']['href']
-    next_url = next_query_string.replace('/v2/animals', '')
+    next_url = next_query_string.replace(api_url_substring, '')
   else:
     next_url = '#'
   pages = []
   next_string = f'page={current_page+1}'
+  total_pages = pagination_dict['total_pages']
   if current_page <= 3:
     for i in range(1,6):
-      this_string = f'page={i}'
-      page_url = next_url.replace(next_string, this_string)
-      page_dict = {'page_number': i, 'page_url': page_url}
-      pages.append(page_dict)
+      if i <= total_pages:
+        this_string = f'page={i}'
+        page_url = next_url.replace(next_string, this_string)
+        page_dict = {'page_number': i, 'page_url': page_url}
+        pages.append(page_dict)
   else:
     for i in range(current_page-2, current_page+3):
-      this_string = f'page={i}'
-      page_url = next_url.replace(next_string, this_string)
-      page_dict = {'page_number': i, 'page_url': page_url}
-      pages.append(page_dict)
+      if i <= total_pages:
+        this_string = f'page={i}'
+        page_url = next_url.replace(next_string, this_string)
+        page_dict = {'page_number': i, 'page_url': page_url}
+        pages.append(page_dict)
 
   next_chunk_string = f'page={current_page+5}'
   next_chunk = next_url.replace(next_string, next_chunk_string)
-  total_pages = pagination_dict['total_pages']
   total_pages_string = f'page={total_pages}'
   last_page_url = next_url.replace(next_string, total_pages_string)
   last_page = {'page_number': total_pages, 'page_url': last_page_url}
@@ -167,6 +170,8 @@ def make_pagination(pagination_dict, current_page):
     'last_page': last_page,
     'pages': pages
     }
+
+  print(updated_pagination,'<-updated_pagination')
   
   return updated_pagination 
 
@@ -205,20 +210,23 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def animals_index(request):
+  view_type = 'animals'
   current_query_string = request.META['QUERY_STRING']
+
   if current_query_string:
-    animals = get_petfinder_request(f'animals?{current_query_string}')
+    animals = get_petfinder_request(f'{view_type}?{current_query_string}')
     current_page = int(request.GET['page'])
   else:
-    animals = get_petfinder_request('animals',[('type', 'dog')])
+    animals = get_petfinder_request(view_type,[('type', 'dog')])
     current_page = 1
-  pagination = make_pagination(animals['pagination'], current_page) 
-  animals_clean = clean_api_response('animals/index', animals)
+  pagination = make_pagination(view_type, animals['pagination'], current_page) 
+  animals_clean = clean_api_response(f'{view_type}/index', animals)
   return render(request, 'animals/index.html', {'animals': animals_clean, 'pagination': pagination})
 
 def animals_detail(request, animal_id):
-  animal = get_petfinder_request(f'animals/{animal_id}')
-  animal_clean = clean_api_response('animals/detail', animal)
+  view_type = 'animals'
+  animal = get_petfinder_request(f'{view_type}/{animal_id}')
+  animal_clean = clean_api_response(f'{view_type}/detail', animal)
   organization_id = animal['animal']['organization_id']
   organization = get_petfinder_request(f'organizations/{organization_id}')
   organization_clean = clean_api_response('organizations/detail', organization)
@@ -226,19 +234,26 @@ def animals_detail(request, animal_id):
   return render(request, 'animals/detail.html', {'animal': animal_clean, 'organization': organization_clean, 'google_map_url': google_map_url})
 
 def organizations_index(request):
+  query_list = []
+  if request.POST:
+    for key, value in request.POST.items():
+      if key != 'csrfmiddlewaretoken' and value:
+        query_list.append((key, value))
   current_query_string = request.META['QUERY_STRING']
+  view_type = 'organizations'
   if current_query_string:
-    animals = get_petfinder_request(f'ogranizations?{current_query_string}')
+    organizations = get_petfinder_request(f'{view_type}?{current_query_string}')
     current_page = int(request.GET['page'])
   else:
-    organizations = get_petfinder_request('organizations/') 
+    organizations = get_petfinder_request(view_type, query_list)
     current_page = 1 
-  pagination = make_pagination(organizations['pagination'], current_page) 
-  return render(request, 'organizations/index.html', {'organizations': organizations})
+  pagination = make_pagination(view_type, organizations['pagination'], current_page) 
+  return render(request, 'organizations/index.html', {'organizations': organizations, 'pagination': pagination})
 
 def organizations_detail(request, organization_id):
-  organization = get_petfinder_request(f'organizations/{organization_id}') 
-  organization_clean = clean_api_response('organizations/detail', organization)
+  view_type = 'organizations'
+  organization = get_petfinder_request(f'{view_type}/{organization_id}') 
+  organization_clean = clean_api_response(f'{view_type}/detail', organization)
   animals = get_petfinder_request('animals', ['organization', organization_id])
   animals_clean = clean_api_response('animals/index', animals)
   google_map_url = get_google_map_url(organization['organization']['address'])
