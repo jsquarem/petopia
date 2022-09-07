@@ -159,15 +159,19 @@
 
                   {% comment %} color #9a9a9a for disabled links in pagination {% endcomment %}
                   <ul class="pagination float-right">
-                     <li class="page-item disabled">
+                     <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
                         <a class="page-link" href="{{previous_url}}" tabindex="-1">Previous</a>
                      </li>
-                     <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                     <li class="page-item"><a class="page-link" href="#">2</a></li>
+                     {% for page in pagination_list %}
+                     <li class="page-item"><a class="page-link{% if page.page_number == current_page %} active{% endif %}" href="{{page.page_url}}">{{page.page_number}}</a></li>
+                     {% endfor %}
+                     {% comment %} <li class="page-item"><a class="page-link" href="#">2</a></li>
                      <li class="page-item"><a class="page-link" href="#">3</a></li>
                      <li class="page-item"><a class="page-link" href="#">4</a></li>
-                     <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                     <li class="page-item"><a class="page-link" href="#">123</a></li>
+                     <li class="page-item"><a class="page-link" href="#">5</a></li> {% endcomment %}
+
+                     <li class="page-item"><a class="page-link" href="{{next_chunk}}">+5</a></li>
+                     <li class="page-item"><a class="page-link" href="{{last_page.url}}">{{last_page.page_number}}</a></li>
                      <li class="page-item"><a class="page-link" href="{{next_url}}">Next</a></li>
                   </ul>
                </nav>
