@@ -83,16 +83,19 @@
             </div>
          </form>
       </div>
-{% for i in "12" %}
+{% for animal in animals.animals %}
+   {% if forloop.counter0 == 0 %}
    <div class="row mt-5">
-   {% for i in "1234" %}
-      {% for animal in animals.animals %}
+   {% endif %}
+   {% if forloop.counter0|divisibleby:4 and forloop.counter0 > 0 %}
+   </div>
+   <div class="row mt-5">
+   {% endif %}
          <!-- Pet  -->
       <div class="adopt-card col-md-6 col-xl-3 res-margin">
          <div class="card bg-light-custom">
             <div class="thumbnail text-center">
                   <!-- Image -->
-{#                            <img src="{{ animal.photos.0.medium }}" class="border-irregular1 img-fluid" alt="">#}
                   <img src="{% if animal.photos.0.medium %}{{ animal.photos.0.medium }}
                               {% else %}
                                  {% if animal.type == 'Dog' %}{% static 'assets/dogplaceholder.png' %}
@@ -127,10 +130,10 @@
          <!-- /card -->
       </div>
       <!-- /adopt-card -->
-         <!-- /pet -->
-      {% endfor %}
-   {% endfor %}
+      <!-- /pet -->
+   {% if forloop.counter1 == animals.animals|length %}
    </div>
+   {% endif %}
 {% endfor %}
 <!-- /row -->
       <div class="col-md-12 mt-5">
