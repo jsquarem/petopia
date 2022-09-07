@@ -352,4 +352,5 @@ def favorites_detail(request, favorite_id):
 
 class FavoriteDelete(DeleteView):
   model = Favorite
-  success_url: '/profile/user_id/favorites/'
+  del Favorite.user_id
+  #or maybe Favorite.favorite_id
