@@ -349,3 +349,7 @@ def favorites_index(request, user_id):
 def favorites_detail(request, favorite_id):
   favorites = Favorite.objects.get(id=favorite_id)
   return render(request, 'favorites/detail.html', { 'favorites': favorites })
+
+class FavoriteDelete(DeleteView):
+  model = Favorite
+  success_url: '/profile/user_id/favorites/'
