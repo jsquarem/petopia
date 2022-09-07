@@ -7,7 +7,8 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Petfinder_API_Token, Profile
+from .models import Petfinder_API_Token, Profile, Favorite
+from django.contrib.auth.models import User
 from .forms import CreateUserForm
 from datetime import datetime, timezone
 from requests.structures import CaseInsensitiveDict
@@ -16,6 +17,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import requests
 import os
+import json
 
 '''
 Petfinder API Functions
@@ -57,16 +59,54 @@ def get_petfinder_request(endpoint = '', query_list = []):
   response = requests.get(url, headers=headers)
   return response.json()
 
-def get_expanded_description(url='', type=''):
-  type = 'animal'
+def get_expanded_description(url, type):
+  # type = 'animal'
+    # url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
+  response = requests.get(url)
+  soup = BeautifulSoup(response.content, 'html.parser')  
   if type == 'animal':
-    url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
     description = soup.select('div[data-test="Pet_Story_Section"]')
     description = description[0].contents[3]
     description = description.contents[0].strip()
-  return HttpResponse(description)
+  if type == 'organization':
+    mission_elements = soup.find('h2', string='Our Mission')
+    mission_sibling = mission_elements.find_next_siblings('p')
+    description = mission_sibling[0].text.strip()
+  return description
+
+# Valid values for the view areguement are: 'animal/detail', 'animal/index', 'organization/detail', and 'organization/index'
+def clean_api_response(view, data):  
+  if view == 'animals/detail':
+    description = data['animal']['description']
+    name = data['animal']['name']
+    type = data['animal']['type']    
+    if description is None or description == '':  
+      description = f'{name} the {type} is looking to share their love with you.'
+    if description and description.endswith('...'):
+      url = data['animal']['url']
+      description = get_expanded_description(url, 'animal')
+    if len(name) > 15:
+      data['animal']['name'] = 'Captain Cuddles'    
+    data['animal']['description'] = description
+  
+  if view == 'animals/index':
+    for i, animal in enumerate(data['animals']):
+      name = animal['name']
+      if len(name) > 15:
+        data['animals'][i]['name'] = 'Captain Cuddles'
+  
+  if view == 'organizations/detail':
+    print('in organization')
+    description = data['organization']['mission_statement']        
+    if description is None or description == '':
+      organization_name = data['organization']['name']
+      description = f'{organization_name} is a cool place to adopt pets.'
+    if description and description.endswith('...'):
+      url = data['organization']['url']
+      description = get_expanded_description(url, 'organization')    
+    data['organization']['mission_statement'] = description
+  return data
+
 
 '''
 Google Maps API Function
@@ -116,15 +156,18 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def animals_index(request):
-  animals = get_petfinder_request('animals')
-  return render(request, 'animals/index.html', {'animals': animals})
+  animals = get_petfinder_request('animals')  
+  animals_clean = clean_api_response('animals/index', animals)
+  return render(request, 'animals/index.html', {'animals': animals_clean})
 
 def animals_detail(request, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
+  animal_clean = clean_api_response('animals/detail', animal)
   organization_id = animal['animal']['organization_id']
   organization = get_petfinder_request(f'organizations/{organization_id}')
+  organization_clean = clean_api_response('organizations/detail', organization)
   google_map_url = get_google_map_url(organization['organization']['address'])
-  return render(request, 'animals/detail.html', {'animal': animal, 'organization': organization, 'google_map_url': google_map_url})
+  return render(request, 'animals/detail.html', {'animal': animal_clean, 'organization': organization_clean, 'google_map_url': google_map_url})
 
 def organizations_index(request):
   organizations = get_petfinder_request('organizations/')  
@@ -132,9 +175,11 @@ def organizations_index(request):
 
 def organizations_detail(request, organization_id):
   organization = get_petfinder_request(f'organizations/{organization_id}') 
+  organization_clean = clean_api_response('organizations/detail', organization)
   animals = get_petfinder_request('animals', ['organization', organization_id])
+  animals_clean = clean_api_response('animals/index', animals)
   google_map_url = get_google_map_url(organization['organization']['address'])
-  return render(request, 'organizations/detail.html', {'organization': organization, 'google_map_url': google_map_url, 'animals': animals})
+  return render(request, 'organizations/detail.html', {'organization': organization_clean, 'google_map_url': google_map_url, 'animals': animals_clean})
 
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
@@ -159,8 +204,8 @@ class ProfileDelete(LoginRequiredMixin, DeleteView):
 def add_photo(request):
   pass
 
-def add_favorite(request):
-  pass
+# def add_favorite(request):
+#   pass
 
 def delete_favorite(request):
   pass
@@ -198,3 +243,89 @@ def contact(request):
   else:
     return render(request, 'contact.html')
 
+# class Favorite:
+#   def __init__(self, user_id, animal_id, name, gender, age, breed, size, sterile, shots, description, tags, photos, env_dogs, env_cats, env_child, org_name, org_mission, org_city, org_state, org_email, org_phone, org_url):
+#     self.user_id = user_id
+#     self.animal_id = animal_id
+#     self.name = name
+#     self.gender = gender
+#     self.age = age
+#     self.breed = breed
+#     self.size = size
+#     self.sterile = sterile
+#     self.shots = shots
+#     self.description = description
+#     self.tags = tags
+#     self.photos = photos
+#     self.env_dogs = env_dogs
+#     self.env_cats = env_cats 
+#     self.env_child = env_child
+#     self.org_name = org_name
+#     self.org_mission = org_mission 
+#     self.org_city = org_city
+#     self.org_state = org_state
+#     self.org_email = org_email
+#     self.org_phone = org_phone
+#     self.org_url = org_url
+
+#   def __str__(self):
+#     return self.name
+
+  # @classmethod
+  # def from_json(cls, json_string):
+  #   json_dict = json.loads(json_string)
+  #   return Favorite(**json_dict)
+
+  # def __repr__(self):
+  #   return f'<Favorite { self.name }>'
+
+
+def add_favorite(request, user_id, animal_id):
+  animal = get_petfinder_request(f'animals/{animal_id}')
+  animal_clean = clean_api_response('animals/detail', animal)
+  organization_id = animal['animal']['organization_id']
+  organization = get_petfinder_request(f'organizations/{organization_id}')
+  organization_clean = clean_api_response('organizations/detail', organization)
+  google_map_url = get_google_map_url(organization['organization']['address'])
+  photo_list = animal['animal']['photos']
+  new_photo_list = []
+  for photo in photo_list:
+    photo_url = photo['full']
+    new_photo_list.append(photo_url)
+  print(new_photo_list, '<- Photo List')
+  
+  new_favorite = Favorite.objects.create(
+    user = User.objects.get(id=user_id),
+    animal_id=animal_clean['animal']['id'],
+    name=animal_clean['animal']['name'],
+    gender=animal_clean['animal']['gender'],
+    age=animal_clean['animal']['age'],
+    breed=animal_clean['animal']['breeds']['primary'],
+    size=animal_clean['animal']['size'],
+    sterile=animal_clean['animal']['attributes']['spayed_neutered'],
+    shots=animal_clean['animal']['attributes']['shots_current'],
+    description=animal_clean['animal']['description'],
+    tags=animal_clean['animal']['tags'],
+    photos = new_photo_list,
+    env_dogs=animal_clean['animal']['environment']['dogs'],
+    env_cats=animal_clean['animal']['environment']['cats'],
+    env_child=animal_clean['animal']['environment']['children'],
+    org_name=organization_clean['organization']['name'],
+    org_mission=organization_clean['organization']['mission_statement'],
+    org_city=organization_clean['organization']['address']['city'],
+    org_state=organization_clean['organization']['address']['state'],
+    org_email=organization_clean['organization']['email'],
+    org_phone=organization_clean['organization']['phone'],
+    org_url=organization_clean['organization']['url']
+  )
+  print(new_favorite, '<- New Favorite Animal')
+  return redirect('animals.detail', animal_id=animal_id)
+
+
+def favorites_index(request, user_id):
+  favorites = Favorite.objects.get(user_id=user_id)
+  return render(request, 'favorites/index.html', { 'favorites': favorites })
+
+def favorites_detail(request, favorite_id):
+  favorites = Favorite.objects.get(id=favorite_id)
+  return render(request, 'favorites/detail.html', { 'favorites': favorites })
