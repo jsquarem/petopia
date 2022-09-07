@@ -80,11 +80,27 @@
             <div class="col-md-12 mt-5">
                <!-- pagination -->
                <nav aria-label="pagination">
+
+                  {% comment %} "pagination": {
+                     "count_per_page": 20,
+                     "total_count": 123667,
+                     "current_page": 2,
+                     "total_pages": 6184,
+                     "_links": {
+                       "previous": {
+                         "href": "/v2/animals?page=1&type=dog"
+                       },
+                       "next": {
+                         "href": "/v2/animals?page=3&type=dog"
+                       }
+                     }
+                   } {% endcomment %}
+
                   <ul class="pagination float-right">
                      <li class="page-item"><a class="page-link active" href="#">1</a></li>
                      <li class="page-item"><a class="page-link" href="#">2</a></li>
                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                     <li class="page-item"><a class="page-link" href="?{{api_next_url}}">Next</a></li>
                   </ul>
                </nav>
                <!-- /nav -->
