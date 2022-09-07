@@ -96,11 +96,18 @@
                      }
                    } {% endcomment %}
 
+                  {% comment %} color #9a9a9a for disabled links in pagination {% endcomment %}
                   <ul class="pagination float-right">
+                     <li class="page-item disabled">
+                        <a class="page-link" href="{{previous_url}}" tabindex="-1">Previous</a>
+                     </li>
                      <li class="page-item"><a class="page-link active" href="#">1</a></li>
                      <li class="page-item"><a class="page-link" href="#">2</a></li>
                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                     <li class="page-item"><a class="page-link" href="?{{api_next_url}}">Next</a></li>
+                     <li class="page-item"><a class="page-link" href="#">4</a></li>
+                     <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                     <li class="page-item"><a class="page-link" href="#">123</a></li>
+                     <li class="page-item"><a class="page-link" href="{{next_url}}">Next</a></li>
                   </ul>
                </nav>
                <!-- /nav -->
