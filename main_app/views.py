@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Petfinder_API_Token, Profile, Favorite
+from .models import Petfinder_API_Token, Profile, Favorite, Room
 from django.contrib.auth.models import User
 from .forms import CreateUserForm
 from datetime import datetime, timezone
@@ -185,6 +185,18 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
+def index_view(request):
+    return render(request, 'index.html', {
+        'rooms': Room.objects.all(),
+    })
+
+
+def room_view(request, room_name):
+    chat_room, created = Room.objects.get_or_create(name=room_name)
+    return render(request, 'room.html', {
+        'room': chat_room,
+    })
+
 def signup(request):
   if request.user.is_authenticated:
     return redirect('home')
@@ -320,43 +332,6 @@ def contact(request):
     return render(request, 'contact.html', {'confirmation': confirmation})
   else:
     return render(request, 'contact.html')
-
-# class Favorite:
-#   def __init__(self, user_id, animal_id, name, gender, age, breed, size, sterile, shots, description, tags, photos, env_dogs, env_cats, env_child, org_name, org_mission, org_city, org_state, org_email, org_phone, org_url):
-#     self.user_id = user_id
-#     self.animal_id = animal_id
-#     self.name = name
-#     self.gender = gender
-#     self.age = age
-#     self.breed = breed
-#     self.size = size
-#     self.sterile = sterile
-#     self.shots = shots
-#     self.description = description
-#     self.tags = tags
-#     self.photos = photos
-#     self.env_dogs = env_dogs
-#     self.env_cats = env_cats 
-#     self.env_child = env_child
-#     self.org_name = org_name
-#     self.org_mission = org_mission 
-#     self.org_city = org_city
-#     self.org_state = org_state
-#     self.org_email = org_email
-#     self.org_phone = org_phone
-#     self.org_url = org_url
-
-#   def __str__(self):
-#     return self.name
-
-  # @classmethod
-  # def from_json(cls, json_string):
-  #   json_dict = json.loads(json_string)
-  #   return Favorite(**json_dict)
-
-  # def __repr__(self):
-  #   return f'<Favorite { self.name }>'
-
 
 def add_favorite(request, user_id, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
