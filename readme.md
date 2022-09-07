@@ -24,6 +24,7 @@ Trello link: https://trello.com/b/W2GFMOMH/petopia
 Launch the app:  
 
 ## Contact
+-'Elijiah' 'e.silvereagle@gmx.com'
 -
 -
 -
