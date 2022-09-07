@@ -2278,5 +2278,9 @@ text-align: left;
   }
 }
 
+.nohover {
+/*    disable all hover behavior */
+    pointer-events: none;
+}
 
 
