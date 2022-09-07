@@ -59,7 +59,7 @@ def get_petfinder_request(endpoint = '', query_list = []):
   headers["Accept"] = "application/json"
   headers["Authorization"] = f"Bearer {token}"
   response = requests.get(url, headers=headers)
-  print(response.json(), '<-response.json()')
+  # print(response.json(), '<-response.json()')
   return response.json()
 
 def get_expanded_description(url, type):
@@ -158,15 +158,27 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def animals_index(request):
-  api_current_url = request.META['QUERY_STRING']
-  api_current_url = urllib.parse.unquote(api_current_url)
-  if api_current_url:
-    animals = get_petfinder_request(api_current_url)
+  current_query_string = request.META['QUERY_STRING'] 
+  if current_query_string:
+    animals = get_petfinder_request(f'animals?{current_query_string}')
   else:
-    animals = get_petfinder_request('animals')
-  api_next_url = urllib.parse.quote(animals['pagination']['_links']['next']['href'], safe='')
+    animals = get_petfinder_request('animals',[('type', 'dog')])
+  if 'previous' in animals['pagination']['_links']:
+    previous_query_string = animals['pagination']['_links']['previous']['href']
+    previous_query_string = previous_query_string.replace('/v2/animals', '')
+    previous_url = f'{previous_query_string}'
+  else:
+    previous_url = '#'
+  if 'next' in animals['pagination']['_links']:
+    next_query_string = animals['pagination']['_links']['next']['href']
+    next_query_string = next_query_string.replace('/v2/animals', '')
+    next_url = f'{next_query_string}'
+  else:
+    next_url = '#'
+  # api_next_url = urllib.parse.quote(animals['pagination']['_links']['next']['href'], safe='')
+  # animals = get_petfinder_request('animals')
   animals_clean = clean_api_response('animals/index', animals)
-  return render(request, 'animals/index.html', {'animals': animals_clean, 'api_next_url': api_next_url})
+  return render(request, 'animals/index.html', {'animals': animals_clean, 'next_url': next_url, 'previous_url': previous_url})
 
 def animals_detail(request, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
