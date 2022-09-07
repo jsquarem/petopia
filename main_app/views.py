@@ -158,27 +158,51 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def animals_index(request):
-  current_query_string = request.META['QUERY_STRING'] 
+  current_query_string = request.META['QUERY_STRING']
   if current_query_string:
     animals = get_petfinder_request(f'animals?{current_query_string}')
+    current_page = int(request.GET['page'])
   else:
     animals = get_petfinder_request('animals',[('type', 'dog')])
+    current_page = 1
   if 'previous' in animals['pagination']['_links']:
     previous_query_string = animals['pagination']['_links']['previous']['href']
-    previous_query_string = previous_query_string.replace('/v2/animals', '')
-    previous_url = f'{previous_query_string}'
+    previous_url = previous_query_string.replace('/v2/animals', '')
+
   else:
     previous_url = '#'
   if 'next' in animals['pagination']['_links']:
     next_query_string = animals['pagination']['_links']['next']['href']
-    next_query_string = next_query_string.replace('/v2/animals', '')
-    next_url = f'{next_query_string}'
+    next_url = next_query_string.replace('/v2/animals', '')
   else:
     next_url = '#'
+
+  pagination_list = []
+  next_string = f'page={current_page+1}'
+  if current_page <= 3:
+    for i in range(1,6):
+      this_string = f'page={i}'
+      page_url = next_url.replace(next_string, this_string)
+      page_dict = {'page_number': i, 'page_url': page_url}
+      pagination_list.append(page_dict)
+  else:
+    for i in range(current_page-2, current_page+3):
+      this_string = f'page={i}'
+      page_url = next_url.replace(next_string, this_string)
+      page_dict = {'page_number': i, 'page_url': page_url}
+      pagination_list.append(page_dict)
+
+  next_chunk_string = f'page={current_page+5}'
+  next_chunk = next_url.replace(next_string, next_chunk_string)
+  total_pages = animals['pagination']['total_pages']
+  total_pages_string = f'page={total_pages}'
+  last_page_url = next_url.replace(next_string, total_pages_string)
+  last_page = {'page_number': total_pages, 'page_url': last_page_url}
+  
   # api_next_url = urllib.parse.quote(animals['pagination']['_links']['next']['href'], safe='')
   # animals = get_petfinder_request('animals')
   animals_clean = clean_api_response('animals/index', animals)
-  return render(request, 'animals/index.html', {'animals': animals_clean, 'next_url': next_url, 'previous_url': previous_url})
+  return render(request, 'animals/index.html', {'animals': animals_clean, 'next_url': next_url, 'previous_url': previous_url, 'current_page': current_page, 'next_chunk': next_chunk, 'last_page': last_page, 'pagination_list': pagination_list})
 
 def animals_detail(request, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
@@ -352,5 +376,9 @@ def favorites_detail(request, favorite_id):
 
 class FavoriteDelete(DeleteView):
   model = Favorite
+<<<<<<< HEAD
   del Favorite.user_id
   #or maybe Favorite.favorite_id
+=======
+  # success_url: '/profile/user_id/favorites/'
+>>>>>>> main
