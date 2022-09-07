@@ -23,6 +23,28 @@
       <div class="page">
          <div class="container block-padding pt-0">
 
+
+
+                          <div class="organizationsearchformcontainer">
+
+  <form method="post" action="">
+          {% csrf_token %}
+        <div class="container d-lg-flex justify-content-around align-items-lg-center">
+            <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Name</label>
+                <input type="text" name="name" class="form-control" placeholder="" value="">
+            </div>
+                        <div class="searchselectfield" style="padding-bottom: 11px;"><label class="fieldlabel">Location</label>
+                <input type="text" name="location" class="form-control" placeholder="" value="">
+            </div>
+
+              <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
+        </div>
+    </form>
+
+         </div>
+
+
+
          <div class="table100 ver1 m-b-110">
          <div class="table100-head">
  <table>
