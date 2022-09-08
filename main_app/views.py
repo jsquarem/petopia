@@ -15,6 +15,7 @@ from requests.structures import CaseInsensitiveDict
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 import urllib.parse
+
 import requests
 import os
 import json
@@ -54,6 +55,7 @@ def get_petfinder_request(endpoint = '', query_list = []):
       modifier = '?' if i == 0 else '&'
       query_string += f'{modifier}{query[0]}={query[1]}'
   url +=  query_string
+  print(url,'<-url')
   token = get_petfinder_token()
   headers = CaseInsensitiveDict()
   headers["Accept"] = "application/json"
@@ -226,16 +228,24 @@ def animals_index(request):
   current_query_string = request.META['QUERY_STRING']
   form = request.POST
   form_query_list = [('type', 'dog')]
+  form_query_list_no_escape = [('type', 'dog')]
+  query_list = []
   if len(form) > 0:
     form_query_list = []
+    form_query_list_no_escape = []
     for key, value in form.items():
       if key != 'csrfmiddlewaretoken' and value != '':
         # value = value.lower()
-        form_query_list.append((key, urllib.parse.quote(value.lower())))
+        form_query_list.append((key, urllib.parse.quote(value.lower(), safe='()')))
+        form_query_list_no_escape.append((key, value.lower()))
     if form_query_list != []:
       animals = get_petfinder_request('animals', form_query_list)
       current_page = 1
   elif current_query_string:
+    query_dict = request.GET
+    for key, value in query_dict.items():
+      query_list += (key, value[0])
+    print(query_dict,'<--query_dict')
     animals = get_petfinder_request(f'{view_type}?{current_query_string}')
     current_page = int(request.GET['page'])
   else:
@@ -243,13 +253,17 @@ def animals_index(request):
     current_page = 1
   
   # print(animals,'<-animals')
-  form_query = dict(form_query_list)
-  print(form_query_list,'<-form_query_list')
+  if query_list:
+    form_query = query_dict
+  else:
+    form_query = dict(form_query_list_no_escape)
+  print(form_query,'<-form_query')
   if 'pagination' in animals:
     pagination = make_pagination(view_type, animals['pagination'], current_page)
   else:
     pagination = {}
   if animals:
+    print(animals)
     animals_clean = clean_api_response(f'{view_type}/index', animals)
   else:
     animals_clean = {}
