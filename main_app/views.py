@@ -34,8 +34,12 @@ def update_petfinder_token():
   return response['access_token']
   
 def get_petfinder_token():
-  # TODO add conitional if there is no token in db
   token_object = Petfinder_API_Token.objects.first()
+  if token_object == None:
+    new_token = update_petfinder_token()
+    new_token_object = Petfinder_API_Token(token=new_token)
+    new_token_object.save()
+    token_object = Petfinder_API_Token.objects.first()
   # TODO update timezone awareness if we set a server timezone/use tomezones
   token_age = datetime.now(timezone.utc) - token_object.date
   print(token_age.total_seconds(), '<- Token Age')
