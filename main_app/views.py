@@ -216,7 +216,7 @@ def signup(request):
         messages.success(request, 'Account successfully created for ' + username + '.')
         # This is how we log a user in via code
         login(request, user)
-        return redirect('profiles/detail.html')
+        return redirect('/profiles/create/')
       else:
         error_message = 'Invalid sign up - try again'
     # A bad POST or a GET request, so render signup.html with an empty form
@@ -284,7 +284,7 @@ def animals_detail(request, animal_id):
   # now check if animal_id is in the list of listOfFavoriteIds, if it is, set the is_favorite variable to True
   if int(animal_id) in listOfFavoriteIds:
     is_favorite = True
-
+  
   view_type = 'animals'
   animal = get_petfinder_request(f'{view_type}/{animal_id}')
   animal_clean = clean_api_response(f'{view_type}/detail', animal)
@@ -315,10 +315,10 @@ def organizations_detail(request, organization_id):
   view_type = 'organizations'
   organization = get_petfinder_request(f'{view_type}/{organization_id}') 
   organization_clean = clean_api_response(f'{view_type}/detail', organization)
-  animals = get_petfinder_request('animals', ['organization', organization_id])
-  animals_clean = clean_api_response('animals/index', animals)
+  # animals = get_petfinder_request('animals', ['organization', organization_id])
+  # animals_clean = clean_api_response('animals/index', animals)
   google_map_url = get_google_map_url(organization['organization']['address'])
-  return render(request, 'organizations/detail.html', {'organization': organization_clean, 'google_map_url': google_map_url, 'animals': animals_clean})
+  return render(request, 'organizations/detail.html', {'organization': organization_clean, 'google_map_url': google_map_url})
 
 @login_required
 def profiles_detail(request, user_id):
@@ -379,7 +379,6 @@ def add_favorite(request, user_id, animal_id):
   organization_id = animal['animal']['organization_id']
   organization = get_petfinder_request(f'organizations/{organization_id}')
   organization_clean = clean_api_response('organizations/detail', organization)
-  google_map_url = get_google_map_url(organization['organization']['address'])
   photo_list = animal['animal']['photos']
   new_photo_list = []
   for photo in photo_list:
