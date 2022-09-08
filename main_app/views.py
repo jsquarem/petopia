@@ -416,6 +416,5 @@ def favorites_detail(request, favorite_id):
 class FavoriteDelete(LoginRequiredMixin, DeleteView):
   model = Favorite
   del Favorite.user_id
-  #or maybe Favorite.favorite_id
-  # success_url: '/profiles/'
+  
 
