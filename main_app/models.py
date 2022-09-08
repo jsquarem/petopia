@@ -16,7 +16,7 @@ class Profile(models.Model):
     return self.name
 
   def get_absolute_url(self):
-    return reverse('detail', kwargs={'user_id': self.user.id})
+    return reverse('detail.profile', kwargs={'user_id': self.user.id})
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
