@@ -50,7 +50,7 @@ let chatSocket = null;
 
 function connect() {
   chatSocket = new WebSocket(
-    'wss://' + window.location.host + '/ws/chat/' + roomName + '/'
+    'wss://' + window.location.host + '/wss/chat/' + roomName + '/'
   );
 
   chatSocket.onopen = function (e) {
