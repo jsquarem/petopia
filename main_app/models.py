@@ -19,7 +19,7 @@ class Profile(models.Model):
     return reverse('detail', kwargs={'user_id': self.user.id})
 
 class Favorite(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
     type = models.TextField(null=True)
     animal_id = models.TextField()
     name = models.TextField(null=True)

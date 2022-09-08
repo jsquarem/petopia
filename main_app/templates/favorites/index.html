@@ -31,7 +31,7 @@
                         <div class="thumbnail text-center">
                             <!-- Image -->
 {#                            <img src="{{ animal.photos.0.medium }}" class="border-irregular1 img-fluid" alt="">#}
-                              <img src="{% if favorite.photos.0.medium %}{{ favorite.photos.0.medium }}
+                              <img src="{% if favorite.petphoto %}{{ favorite.petphoto }}
                                         {% else %}
                                             {% if favorite.type == 'Dog' %}{% static 'assets/dogplaceholder.png' %}
                                             {% elif favorite.type == 'Cat'%}{% static 'assets/catplaceholder.png' %}

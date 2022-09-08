@@ -22,4 +22,5 @@ urlpatterns = [
   path('profiles/<int:user_id>/favorites/', views.favorites_index, name='index.favorite'),
   path('profiles/<int:user_id>/favorites/<favorite_id>/', views.favorites_index, name='detail.favorite'),
   path('profiles/<int:user_id>/add_favorite/<int:animal_id>/', views.add_favorite, name='add_favorite'),
+  path('profiles/<int:user_id>/delete_favorite/<int:animal_id>/', views.delete_favorite, name='delete_favorite'),
 ]
