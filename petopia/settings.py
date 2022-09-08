@@ -150,11 +150,17 @@ ssl_context.check_hostname = False
 
 REDIS_URL = os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379')
 
+# heroku_redis_ssl_host = {
+#     'address': 'rediss://:password@127.0.0.1:6379/0',  # The 'rediss' schema denotes a SSL connection.
+#     'ssl': ssl_context
+# }
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             "hosts": [REDIS_URL],
+            "ssl_cert_reqs": None
         },
     },
 }
