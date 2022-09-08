@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Petfinder_API_Token, Profile, Favorite
+from .models import Petfinder_API_Token, Profile, Favorite, Room
 from django.contrib.auth.models import User
 from .forms import CreateUserForm
 from datetime import datetime, timezone
@@ -15,6 +15,7 @@ from requests.structures import CaseInsensitiveDict
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 import urllib.parse
+
 import requests
 import os
 import json
@@ -54,6 +55,7 @@ def get_petfinder_request(endpoint = '', query_list = []):
       modifier = '?' if i == 0 else '&'
       query_string += f'{modifier}{query[0]}={query[1]}'
   url +=  query_string
+  print(url,'<-url')
   token = get_petfinder_token()
   headers = CaseInsensitiveDict()
   headers["Accept"] = "application/json"
@@ -128,16 +130,16 @@ Helper Functions
 '''
 def make_pagination(view_type, pagination_dict, current_page):
   api_url_substring = f'/v2/{view_type}'
-  if 'previous' in pagination_dict['_links']:
-    previous_query_string = pagination_dict['_links']['previous']['href']
-    previous_url = previous_query_string.replace(api_url_substring, '')
-  else:
-    previous_url = '#'
-  if 'next' in pagination_dict['_links']:
-    next_query_string = pagination_dict['_links']['next']['href']
-    next_url = next_query_string.replace(api_url_substring, '')
-  else:
-    next_url = '#'
+
+  previous_url = '#'
+  next_url = '#'
+  if '_links' in pagination_dict:
+    if 'previous' in pagination_dict['_links']:
+      previous_query_string = pagination_dict['_links']['previous']['href']
+      previous_url = previous_query_string.replace(api_url_substring, '')
+    if 'next' in pagination_dict['_links']:
+      next_query_string = pagination_dict['_links']['next']['href']
+      next_url = next_query_string.replace(api_url_substring, '')
   pages = []
   next_string = f'page={current_page+1}'
   total_pages = pagination_dict['total_pages']
@@ -185,9 +187,22 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
+@login_required
+def index_view(request):
+    return render(request, 'index.html', {
+        'rooms': Room.objects.all(),
+    })
+
+@login_required
+def room_view(request, room_name):
+    chat_room, created = Room.objects.get_or_create(name=room_name)
+    return render(request, 'room.html', {
+        'room': chat_room,
+    })
+
 def signup(request):
   if request.user.is_authenticated:
-    return redirect('home')
+    return redirect('profiles/detail.html')
   else:
     error_message = ''
     if request.method == 'POST':
@@ -201,7 +216,7 @@ def signup(request):
         messages.success(request, 'Account successfully created for ' + username + '.')
         # This is how we log a user in via code
         login(request, user)
-        return redirect('home')
+        return redirect('profiles/detail.html')
       else:
         error_message = 'Invalid sign up - try again'
     # A bad POST or a GET request, so render signup.html with an empty form
@@ -209,20 +224,54 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+@login_required
 def animals_index(request):
   view_type = 'animals'
   current_query_string = request.META['QUERY_STRING']
-
-  if current_query_string:
+  form = request.POST
+  form_query_list = [('type', 'dog')]
+  form_query_list_no_escape = [('type', 'dog')]
+  query_list = []
+  if len(form) > 0:
+    form_query_list = []
+    form_query_list_no_escape = []
+    for key, value in form.items():
+      if key != 'csrfmiddlewaretoken' and value != '':
+        # value = value.lower()
+        form_query_list.append((key, urllib.parse.quote(value.lower(), safe='()')))
+        form_query_list_no_escape.append((key, value.lower()))
+    if form_query_list != []:
+      animals = get_petfinder_request('animals', form_query_list)
+      current_page = 1
+  elif current_query_string:
+    query_dict = request.GET
+    for key, value in query_dict.items():
+      query_list += (key, value[0])
+    print(query_dict,'<--query_dict')
     animals = get_petfinder_request(f'{view_type}?{current_query_string}')
     current_page = int(request.GET['page'])
   else:
     animals = get_petfinder_request(view_type,[('type', 'dog')])
     current_page = 1
-  pagination = make_pagination(view_type, animals['pagination'], current_page) 
-  animals_clean = clean_api_response(f'{view_type}/index', animals)
-  return render(request, 'animals/index.html', {'animals': animals_clean, 'pagination': pagination})
+  
+  # print(animals,'<-animals')
+  if query_list:
+    form_query = query_dict
+  else:
+    form_query = dict(form_query_list_no_escape)
+  print(form_query,'<-form_query')
+  if 'pagination' in animals:
+    pagination = make_pagination(view_type, animals['pagination'], current_page)
+  else:
+    pagination = {}
+  if animals:
+    print(animals)
+    animals_clean = clean_api_response(f'{view_type}/index', animals)
+  else:
+    animals_clean = {}
+  return render(request, 'animals/index.html', {'animals': animals_clean, 'pagination': pagination, 'form_query': form_query})
 
+@login_required
 def animals_detail(request, animal_id):
   view_type = 'animals'
   animal = get_petfinder_request(f'{view_type}/{animal_id}')
@@ -259,10 +308,10 @@ def organizations_detail(request, organization_id):
   google_map_url = get_google_map_url(organization['organization']['address'])
   return render(request, 'organizations/detail.html', {'organization': organization_clean, 'google_map_url': google_map_url, 'animals': animals_clean})
 
+@login_required
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
   return render(request, 'profiles/detail.html', { 'profile': profile })
-
 
 class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
@@ -282,17 +331,7 @@ class ProfileDelete(LoginRequiredMixin, DeleteView):
 def add_photo(request):
   pass
 
-# def add_favorite(request):
-#   pass
-
-def delete_favorite(request):
-  pass
-
-def lobby(request):
-  return render(request, 'profiles/lobby.html')
-
-def animals_search(request):
-  animals = get_petfinder_request('animals')
+def animals_search(request, query_list=''):
   form = request.POST
   if len(form) > 0:
     query_list = []
@@ -321,43 +360,7 @@ def contact(request):
   else:
     return render(request, 'contact.html')
 
-# class Favorite:
-#   def __init__(self, user_id, animal_id, name, gender, age, breed, size, sterile, shots, description, tags, photos, env_dogs, env_cats, env_child, org_name, org_mission, org_city, org_state, org_email, org_phone, org_url):
-#     self.user_id = user_id
-#     self.animal_id = animal_id
-#     self.name = name
-#     self.gender = gender
-#     self.age = age
-#     self.breed = breed
-#     self.size = size
-#     self.sterile = sterile
-#     self.shots = shots
-#     self.description = description
-#     self.tags = tags
-#     self.photos = photos
-#     self.env_dogs = env_dogs
-#     self.env_cats = env_cats 
-#     self.env_child = env_child
-#     self.org_name = org_name
-#     self.org_mission = org_mission 
-#     self.org_city = org_city
-#     self.org_state = org_state
-#     self.org_email = org_email
-#     self.org_phone = org_phone
-#     self.org_url = org_url
-
-#   def __str__(self):
-#     return self.name
-
-  # @classmethod
-  # def from_json(cls, json_string):
-  #   json_dict = json.loads(json_string)
-  #   return Favorite(**json_dict)
-
-  # def __repr__(self):
-  #   return f'<Favorite { self.name }>'
-
-
+@login_required
 def add_favorite(request, user_id, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
   animal_clean = clean_api_response('animals/detail', animal)
@@ -374,6 +377,7 @@ def add_favorite(request, user_id, animal_id):
   
   new_favorite = Favorite.objects.create(
     user = User.objects.get(id=user_id),
+    type = animal_clean['animal']['type'],
     animal_id=animal_clean['animal']['id'],
     name=animal_clean['animal']['name'],
     gender=animal_clean['animal']['gender'],
@@ -399,16 +403,17 @@ def add_favorite(request, user_id, animal_id):
   print(new_favorite, '<- New Favorite Animal')
   return redirect('animals.detail', animal_id=animal_id)
 
-
+@login_required
 def favorites_index(request, user_id):
   favorites = Favorite.objects.filter(user_id=user_id)
   return render(request, 'favorites/index.html', { 'favorites': favorites })
 
+@login_required
 def favorites_detail(request, favorite_id):
   favorites = Favorite.objects.filter(id=favorite_id)
   return render(request, 'favorites/detail.html', { 'favorites': favorites })
 
-class FavoriteDelete(DeleteView):
+class FavoriteDelete(LoginRequiredMixin, DeleteView):
   model = Favorite
   del Favorite.user_id
   #or maybe Favorite.favorite_id
