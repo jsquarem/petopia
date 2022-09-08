@@ -148,10 +148,10 @@ ASGI_APPLICATION = 'petopia.asgi.application'
 ssl_context = ssl.SSLContext()
 ssl_context.check_hostname = False
 
-# REDIS_URL = os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379')
+REDIS_URL = os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379')
 
 heroku_redis_ssl_host = {
-    'address': 'rediss://localhost:6379',  # The 'rediss' schema denotes a SSL connection.
+    'address': REDIS_URL,  # The 'rediss' schema denotes a SSL connection.
     'ssl': ssl_context
 }
 
