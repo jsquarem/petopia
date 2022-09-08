@@ -1,1 +1,1 @@
-web: gunicorn petopia.wsgi
+web: daphne petopia.asgi:application --port $PORT --bind 0.0.0.0
