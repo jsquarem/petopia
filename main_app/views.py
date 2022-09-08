@@ -349,6 +349,7 @@ def add_favorite(request, user_id, animal_id):
   
   new_favorite = Favorite.objects.create(
     user = User.objects.get(id=user_id),
+    type = animal_clean['animal']['type'],
     animal_id=animal_clean['animal']['id'],
     name=animal_clean['animal']['name'],
     gender=animal_clean['animal']['gender'],

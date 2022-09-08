@@ -20,6 +20,7 @@ class Profile(models.Model):
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    type = models.TextField(null=True)
     animal_id = models.TextField()
     name = models.TextField(null=True)
     gender = models.TextField(null=True)
