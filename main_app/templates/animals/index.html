@@ -205,7 +205,7 @@
          for(breed of breeds['Cat']) {
             current_option = new Option(breed, breed);
             {% if 'breed' in form_query %}
-               if(breed.toLowerCase() == '{{form_query.breed}}') {
+               if(encodeURI(breed.toLowerCase()) == encodeURI('{{form_query.breed}}')) {
                   current_option.selected = 'selected';
                }
             {% endif %}
@@ -217,7 +217,7 @@
          for(color of colors['Cat']) {
             current_option = new Option(color, color);
             {% if 'color' in form_query %}
-               if(color.toLowerCase() == '{{form_query.color}}') {
+               if(encodeURI(color.toLowerCase()) == encodeURI('{{form_query.color}}')) {
                   current_option.selected = 'selected';
                }
             {% endif %}
@@ -231,7 +231,7 @@
          for(breed of breeds['Dog']) {
             current_option = new Option(breed, breed);
             {% if 'breed' in form_query %}
-               if(breed.toLowerCase() == '{{form_query.breed}}') {
+               if(encodeURI(breed.toLowerCase()) == encodeURI('{{form_query.breed}}')) {
                   current_option.selected = 'selected';
                }
             {% endif %}
@@ -242,8 +242,10 @@
          i = 1;
          for(color of colors['Dog']) {
             current_option = new Option(color, color);
+            {% comment %} console.log(encodeURI(color.toLowerCase())); {% endcomment %}
             {% if 'color' in form_query %}
-               if(color.toLowerCase() == '{{form_query.color}}') {
+               if(encodeURI(color.toLowerCase()) == encodeURI('{{form_query.color}}')) {
+                  console.log('this matches')
                   current_option.selected = 'selected';
                }
             {% endif %}
