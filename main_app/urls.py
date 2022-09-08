@@ -6,7 +6,6 @@ urlpatterns = [
   path('index/', views.index_view, name='chat-index'),
   path('chat/<str:room_name>/', views.room_view, name='chat-room'),
   path('about/', views.about, name='about'),
-  path('lobby/', views.lobby, name='lobby'),
   path('contact/', views.contact, name='contact'),
   path('accounts/signup/', views.signup, name='signup'),
   path('animals/', views.animals_index, name='animals.index'),
