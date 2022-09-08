@@ -71,6 +71,7 @@ TEMPLATES = [
     },
 ]
 
+WSGI_APPLICATION = 'petopia.wsgi.application'
 ASGI_APPLICATION = 'petopia.asgi.application'
 
 CHANNEL_LAYERS = {
@@ -83,7 +84,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-WSGI_APPLICATION = 'petopia.wsgi.application'
+
 
 
 # Database
