@@ -72,17 +72,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'petopia.wsgi.application'
-ASGI_APPLICATION = 'petopia.asgi.application'
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379'),('127.0.0.1', 6379)],
-        },
-        "ROUTING": "main_app.routing.channel_routing",
-    },
-}
+
 
 
 
@@ -150,6 +141,19 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 # EMAIL_USE_SSL = False
+
+
+ASGI_APPLICATION = 'petopia.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379'),('127.0.0.1', 6379)],
+        },
+        "ROUTING": "main_app.routing.channel_routing",
+    },
+}
 
 import django_heroku
 django_heroku.settings(locals())
