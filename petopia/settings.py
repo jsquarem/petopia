@@ -71,7 +71,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'petopia.wsgi.application'
 ASGI_APPLICATION = 'petopia.asgi.application'
 
 CHANNEL_LAYERS = {
@@ -83,6 +82,8 @@ CHANNEL_LAYERS = {
         "ROUTING": "main_app.routing.channel_routing",
     },
 }
+
+WSGI_APPLICATION = 'petopia.wsgi.application'
 
 
 # Database
