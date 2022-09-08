@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import ssl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -144,12 +145,16 @@ EMAIL_USE_TLS = False
 
 
 ASGI_APPLICATION = 'petopia.asgi.application'
+ssl_context = ssl.SSLContext()
+ssl_context.check_hostname = False
+
+REDIS_URL = os.environ.get('REDIS_TLS_URL', 'rediss://localhost:6379')
 
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379')],
+            "hosts": [REDIS_URL + '?ssl_cert_reqs=CERT_NONE'],
         },
     },
 }
