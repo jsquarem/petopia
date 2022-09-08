@@ -199,7 +199,7 @@ def room_view(request, room_name):
 
 def signup(request):
   if request.user.is_authenticated:
-    return redirect('home')
+    return redirect('profiles/detail.html')
   else:
     error_message = ''
     if request.method == 'POST':
@@ -213,7 +213,7 @@ def signup(request):
         messages.success(request, 'Account successfully created for ' + username + '.')
         # This is how we log a user in via code
         login(request, user)
-        return redirect('home')
+        return redirect('profiles/detail.html')
       else:
         error_message = 'Invalid sign up - try again'
     # A bad POST or a GET request, so render signup.html with an empty form
@@ -368,6 +368,7 @@ def add_favorite(request, user_id, animal_id):
   
   new_favorite = Favorite.objects.create(
     user = User.objects.get(id=user_id),
+    type = animal_clean['animal']['type'],
     animal_id=animal_clean['animal']['id'],
     name=animal_clean['animal']['name'],
     gender=animal_clean['animal']['gender'],
