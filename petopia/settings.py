@@ -148,14 +148,13 @@ ASGI_APPLICATION = 'petopia.asgi.application'
 ssl_context = ssl.SSLContext()
 ssl_context.check_hostname = False
 
-REDIS_URL = os.environ.get('REDIS_TLS_URL', 'rediss://localhost:6379')
-REDIS_URL_SSL_CERT = REDIS_URL + '?ssl_cert_reqs=CERT_NONE'
-print(REDIS_URL_SSL_CERT,'<-REDIS_URL_SSL_CERT')
+REDIS_URL = os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379')
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [REDIS_URL_SSL_CERT],
+            "hosts": [REDIS_URL],
         },
     },
 }
