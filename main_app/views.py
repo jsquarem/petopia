@@ -187,12 +187,13 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def index_view(request):
     return render(request, 'index.html', {
         'rooms': Room.objects.all(),
     })
 
-
+@login_required
 def room_view(request, room_name):
     chat_room, created = Room.objects.get_or_create(name=room_name)
     return render(request, 'room.html', {
@@ -223,6 +224,7 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+@login_required
 def animals_index(request):
   view_type = 'animals'
   current_query_string = request.META['QUERY_STRING']
@@ -269,6 +271,7 @@ def animals_index(request):
     animals_clean = {}
   return render(request, 'animals/index.html', {'animals': animals_clean, 'pagination': pagination, 'form_query': form_query})
 
+@login_required
 def animals_detail(request, animal_id):
   view_type = 'animals'
   animal = get_petfinder_request(f'{view_type}/{animal_id}')
@@ -305,10 +308,10 @@ def organizations_detail(request, organization_id):
   google_map_url = get_google_map_url(organization['organization']['address'])
   return render(request, 'organizations/detail.html', {'organization': organization_clean, 'google_map_url': google_map_url, 'animals': animals_clean})
 
+@login_required
 def profiles_detail(request, user_id):
   profile = Profile.objects.get(user_id=user_id)
   return render(request, 'profiles/detail.html', { 'profile': profile })
-
 
 class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
@@ -327,15 +330,6 @@ class ProfileDelete(LoginRequiredMixin, DeleteView):
 
 def add_photo(request):
   pass
-
-# def add_favorite(request):
-#   pass
-
-def delete_favorite(request):
-  pass
-
-def lobby(request):
-  return render(request, 'profiles/lobby.html')
 
 def animals_search(request, query_list=''):
   form = request.POST
@@ -366,6 +360,7 @@ def contact(request):
   else:
     return render(request, 'contact.html')
 
+@login_required
 def add_favorite(request, user_id, animal_id):
   animal = get_petfinder_request(f'animals/{animal_id}')
   animal_clean = clean_api_response('animals/detail', animal)
@@ -408,15 +403,16 @@ def add_favorite(request, user_id, animal_id):
   print(new_favorite, '<- New Favorite Animal')
   return redirect('animals.detail', animal_id=animal_id)
 
-
+@login_required
 def favorites_index(request, user_id):
   favorites = Favorite.objects.filter(user_id=user_id)
   return render(request, 'favorites/index.html', { 'favorites': favorites })
 
+@login_required
 def favorites_detail(request, favorite_id):
   favorites = Favorite.objects.filter(id=favorite_id)
   return render(request, 'favorites/detail.html', { 'favorites': favorites })
 
-class FavoriteDelete(DeleteView):
+class FavoriteDelete(LoginRequiredMixin, DeleteView):
   model = Favorite
   # success_url: '/profile/user_id/favorites/'
