@@ -98,10 +98,18 @@
                             <!-- button -->
                             <a href="#" class="btn btn-primary " data-aos="zoom-in" >Adopt now!</a>
                             <!-- eli code -->
-                           <form action="{% url 'add_favorite' user.id animal.animal.id %}" method="POST">
+                         {% if is_favorite %}
+                           <form action="{% url 'delete_favorite' user.id animal.animal.id %}" method="POST">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-success">Remove Favorite</button>
+                           </form>
+                            {% else %}
+                                                    <form action="{% url 'add_favorite' user.id animal.animal.id %}" method="POST">
                               {% csrf_token %}
                               <button type="submit" class="btn btn-success">Favorite</button>
                            </form>
+                            {% endif %}
+                            <!-- /eli code -->
                          </div>
                          <!-- /col-md -->
                       </div>

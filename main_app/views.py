@@ -15,7 +15,7 @@ from requests.structures import CaseInsensitiveDict
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 import urllib.parse
-
+import re
 import requests
 import os
 import json
@@ -273,6 +273,18 @@ def animals_index(request):
 
 @login_required
 def animals_detail(request, animal_id):
+  # retrieve all favorites for the current logged in user, and store each found favorite in a list
+  listOfFavorites = User.objects.get(id=request.user.id).favorites.all()
+  # now go through the list of favorites and store the id of each favorite in a list
+  listOfFavoriteIds = []
+  for favorite in listOfFavorites:
+    listOfFavoriteIds.append(int(favorite.animal_id))
+  # declare a variable to store whether or not the current animal has been favorited by the current user
+  is_favorite = False
+  # now check if animal_id is in the list of listOfFavoriteIds, if it is, set the is_favorite variable to True
+  if int(animal_id) in listOfFavoriteIds:
+    is_favorite = True
+
   view_type = 'animals'
   animal = get_petfinder_request(f'{view_type}/{animal_id}')
   animal_clean = clean_api_response(f'{view_type}/detail', animal)
@@ -280,7 +292,7 @@ def animals_detail(request, animal_id):
   organization = get_petfinder_request(f'organizations/{organization_id}')
   organization_clean = clean_api_response('organizations/detail', organization)
   google_map_url = get_google_map_url(organization['organization']['address'])
-  return render(request, 'animals/detail.html', {'animal': animal_clean, 'organization': organization_clean, 'google_map_url': google_map_url})
+  return render(request, 'animals/detail.html', {'animal': animal_clean, 'organization': organization_clean, 'google_map_url': google_map_url, 'is_favorite': is_favorite})
 
 def organizations_index(request):
   query_list = []
@@ -404,9 +416,26 @@ def add_favorite(request, user_id, animal_id):
   return redirect('animals.detail', animal_id=animal_id)
 
 @login_required
+def delete_favorite(request, user_id, animal_id):
+  # retrieve the favorite that has the user_id and animal_id and delete it
+  favorite = Favorite.objects.get(user_id=user_id, animal_id=animal_id)
+  favorite.delete()
+  return redirect('animals.detail', animal_id=animal_id)
+
+@login_required
 def favorites_index(request, user_id):
+  # retrieve all the favorites for the currently logged in user
   favorites = Favorite.objects.filter(user_id=user_id)
-  return render(request, 'favorites/index.html', { 'favorites': favorites })
+  # convert all photos in favorites to lists
+  for favorite in favorites:
+      if favorite.photos != '[]':
+          favorite.petphoto = re.search(r"'(.+?)'", favorite.photos).group(1)
+      else:
+          favorite.petphoto = None
+
+  # return render the favorites.photos as a list
+  return render(request, 'favorites/index.html', {'favorites': favorites})
+
 
 @login_required
 def favorites_detail(request, favorite_id):
