@@ -128,16 +128,16 @@ Helper Functions
 '''
 def make_pagination(view_type, pagination_dict, current_page):
   api_url_substring = f'/v2/{view_type}'
-  if 'previous' in pagination_dict['_links']:
-    previous_query_string = pagination_dict['_links']['previous']['href']
-    previous_url = previous_query_string.replace(api_url_substring, '')
-  else:
-    previous_url = '#'
-  if 'next' in pagination_dict['_links']:
-    next_query_string = pagination_dict['_links']['next']['href']
-    next_url = next_query_string.replace(api_url_substring, '')
-  else:
-    next_url = '#'
+
+  previous_url = '#'
+  next_url = '#'
+  if '_links' in pagination_dict:
+    if 'previous' in pagination_dict['_links']:
+      previous_query_string = pagination_dict['_links']['previous']['href']
+      previous_url = previous_query_string.replace(api_url_substring, '')
+    if 'next' in pagination_dict['_links']:
+      next_query_string = pagination_dict['_links']['next']['href']
+      next_url = next_query_string.replace(api_url_substring, '')
   pages = []
   next_string = f'page={current_page+1}'
   total_pages = pagination_dict['total_pages']
@@ -212,16 +212,36 @@ def signup(request):
 def animals_index(request):
   view_type = 'animals'
   current_query_string = request.META['QUERY_STRING']
-
-  if current_query_string:
+  form = request.POST
+  form_query_list = [('type', 'dog')]
+  if len(form) > 0:
+    form_query_list = []
+    for key, value in form.items():
+      if key != 'csrfmiddlewaretoken' and value != '':
+        # value = value.lower()
+        form_query_list.append((key, urllib.parse.quote(value.lower())))
+    if form_query_list != []:
+      animals = get_petfinder_request('animals', form_query_list)
+      current_page = 1
+  elif current_query_string:
     animals = get_petfinder_request(f'{view_type}?{current_query_string}')
     current_page = int(request.GET['page'])
   else:
     animals = get_petfinder_request(view_type,[('type', 'dog')])
     current_page = 1
-  pagination = make_pagination(view_type, animals['pagination'], current_page) 
-  animals_clean = clean_api_response(f'{view_type}/index', animals)
-  return render(request, 'animals/index.html', {'animals': animals_clean, 'pagination': pagination})
+  
+  # print(animals,'<-animals')
+  form_query = dict(form_query_list)
+  print(form_query_list,'<-form_query_list')
+  if 'pagination' in animals:
+    pagination = make_pagination(view_type, animals['pagination'], current_page)
+  else:
+    pagination = {}
+  if animals:
+    animals_clean = clean_api_response(f'{view_type}/index', animals)
+  else:
+    animals_clean = {}
+  return render(request, 'animals/index.html', {'animals': animals_clean, 'pagination': pagination, 'form_query': form_query})
 
 def animals_detail(request, animal_id):
   view_type = 'animals'
@@ -291,8 +311,7 @@ def delete_favorite(request):
 def lobby(request):
   return render(request, 'profiles/lobby.html')
 
-def animals_search(request):
-  animals = get_petfinder_request('animals')
+def animals_search(request, query_list=''):
   form = request.POST
   if len(form) > 0:
     query_list = []
