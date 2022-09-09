@@ -31,7 +31,7 @@
                          <div class="col-lg-4 offset-lg-2">
                             <!-- owl slider -->
                             <div id="owl-adopt-single" class="owl-carousel top-centered-nav owl-theme" >
-                                {% for i in animal.animal.photos %}
+                                {% if animal.animal.photos %}{% for i in animal.animal.photos %}
     <div class="col-md-12">
 
         <!-- image -->
@@ -41,6 +41,17 @@
 
     </div>
                                 {% endfor %}
+                                {% else %}
+    <div class="col-md-12">
+
+        <!-- image -->
+            <a href="img/adoption/adoption1.jpg" title="your caption here">
+                <img src="{% if animal.animal.type == 'Dog' %}{% static 'assets/dogplaceholder.png' %}{% elif animal.animal.type == 'Cat'%}{% static 'assets/catplaceholder.png' %}{% else %}{% static 'assets/dogplaceholder.png' %}{% endif %}"  id="petdetailphotoheight" class="border-irregular1 img-fluid hover-opacity" alt="">
+            </a>
+
+    </div>
+                            {% endif %}
+
 <!-- /col-md-12 -->
 {#                               <div class="col-md-12">#}
 {#                                  <!-- image -->#}
@@ -90,9 +101,12 @@
                                <!-- /div-->
                             </div>
                             <!-- /row-->
-                            
+
                          <div>
-                                                                                               <span class="h7">Characteristics:  </span><span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
+                                                                                               {% if animal.animal.tags %}<span class="h7">Characteristics:  </span><span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
+                                                                                                 {% else %}
+                                                                                                 <span class="h7">&nbsp;  </span><span></span>
+                                                                                                 {% endif %}
                          </div>
 
                             <!-- button -->
@@ -130,7 +144,9 @@
     <div class="organizationcontainer">
 {#<div class="card bg-light-custom" style="width: 25rem;">#}
     <div class="card bg-light-custom">
-  <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">
+      {% if organization.organization.photos|length > 0 %}
+      <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">
+      {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{ organization.organization.name }}</h5>
     <p class="card-text">{{ organization.organization.mission_statement }}</p>
@@ -164,12 +180,6 @@
          <!-- /container-->
       </div>
       <!-- /page -->
-                     <div class="alert alert-primary mt-5" role="alert">
-                        <h6 class="text-light">Adoption Rules</h6>
-                        <p>Elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas ellus
-                           ac sodales felis tiam non metus. lorem ipsum dolor sit amet, consectetur adipisicing elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset campas fincas
-                        </p>
-                     </div>
                      <!-- /alert-->
                      <p class="custom-link"><a href="{% url 'animals.index' %}">« Go back to adoption gallery</a></p>
                   </div>
@@ -185,3 +195,5 @@
 
 
 {% endblock %}
+
+

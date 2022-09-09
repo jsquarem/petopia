@@ -90,20 +90,24 @@ def clean_api_response(view, data):
     description = data['animal']['description']
     name = data['animal']['name']
     type = data['animal']['type']    
+    if len(name) >= 14:
+      data['animal']['name'] = 'Captain Cuddles' 
+      name = 'Captain Cuddles'
     if description is None or description == '':  
       description = f'{name} the {type} is looking to share their love with you.'
     if description and description.endswith('...'):
       url = data['animal']['url']
       description = get_expanded_description(url, 'animal')
-    if len(name) > 15:
-      data['animal']['name'] = 'Captain Cuddles'    
     data['animal']['description'] = description
   
   if view == 'animals/index':
     for i, animal in enumerate(data['animals']):
       name = animal['name']
-      if len(name) > 15:
+      if len(name) >= 14:
+        print(data['animals'][i]['name'], '<-name was')
         data['animals'][i]['name'] = 'Captain Cuddles'
+        print(data['animals'][i]['name'],'<-name is')
+        
   
   if view == 'organizations/detail':
     description = data['organization']['mission_statement']        
@@ -151,14 +155,14 @@ def make_pagination(view_type, pagination_dict, current_page):
   if current_page <= 3:
     for i in range(1,6):
       if i <= total_pages:
-        this_string = f'page={i}'
+        this_string = f'page={i}'.lower()
         page_url = next_url.replace(next_string, this_string)
         page_dict = {'page_number': i, 'page_url': page_url}
         pages.append(page_dict)
   else:
     for i in range(current_page-2, current_page+3):
       if i <= total_pages:
-        this_string = f'page={i}'
+        this_string = f'page={i}'.lower()
         page_url = next_url.replace(next_string, this_string)
         page_dict = {'page_number': i, 'page_url': page_url}
         pages.append(page_dict)
@@ -229,7 +233,6 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-@login_required
 def animals_index(request):
   view_type = 'animals'
   current_query_string = request.META['QUERY_STRING']
@@ -243,15 +246,17 @@ def animals_index(request):
     for key, value in form.items():
       if key != 'csrfmiddlewaretoken' and value != '':
         # value = value.lower()
-        form_query_list.append((key, urllib.parse.quote(value.lower(), safe='()')))
-        form_query_list_no_escape.append((key, value.lower()))
+        if key != 'distance' and value != 0:
+          form_query_list.append((key, urllib.parse.quote(value.lower(), safe='()')))
+          form_query_list_no_escape.append((key, value.lower()))
     if form_query_list != []:
       animals = get_petfinder_request('animals', form_query_list)
       current_page = 1
   elif current_query_string:
     query_dict = request.GET
     for key, value in query_dict.items():
-      query_list += (key, value[0])
+      current_value = value[0].lower()
+      query_list += (key, current_value)
     print(query_dict,'<--query_dict')
     animals = get_petfinder_request(f'{view_type}?{current_query_string}')
     current_page = int(request.GET['page'])
@@ -276,7 +281,7 @@ def animals_index(request):
     animals_clean = {}
   return render(request, 'animals/index.html', {'animals': animals_clean, 'pagination': pagination, 'form_query': form_query})
 
-@login_required
+
 def animals_detail(request, animal_id):
   # retrieve all favorites for the current logged in user, and store each found favorite in a list
   listOfFavorites = User.objects.get(id=request.user.id).favorites.all()
@@ -368,10 +373,10 @@ def contact(request):
     send_mail(
       f'Contact Request - {message_name}',
       message,
-      message_email,
-      ['jeffjmart@gmail.com']
+      'jeffjmart@gmail.com',
+      [message_email],
     )
-    confirmation['message'] = 'Thank you for yor message, we will respond as soon as we can.'
+    confirmation['message'] = f"We've got your message, we will respond as soon as we can at {message_email}"
     confirmation['name'] = message_name
     return render(request, 'contact.html', {'confirmation': confirmation})
   else:

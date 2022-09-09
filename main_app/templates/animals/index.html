@@ -23,13 +23,17 @@
    <div class="container block-padding pt-0">
       <div class="col-lg-8 offset-lg-2 text-center">
          <h3>Find a new furry Friend</h3>
+<<<<<<< HEAD
          <p>Refine your search here!</p>
+=======
+         <p>Looking for a new pet? You are in the right place! We are committed to helping you connect with pets in need of homes all over North America. Use Petopia's intuitive search tools to find the perfect pet near you.</p>
+>>>>>>> main
       </div>
       <div class="searchformcontainer">
          <form method="post" action="{% url 'animals.index' %}">
             {% csrf_token %}
             <div class="container d-lg-flex justify-content-around align-items-lg-center">
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Type</label>
                   <select name="type" id="type" onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);" class="form-control">
                      {% if 'type' in form_query %}
@@ -43,19 +47,19 @@
                      {% endif %}
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Breed</label>
                   <select name="breed" id="breed" class="form-control">
                      <option value="">--Select a Type--</option>
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Color</label>
                   <select name="color" id="color" class="form-control">
                      <option value="">--Select a Type--</option>
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Age</label>
                   <select name="age" id="age" class="form-control">
                      {% if 'age' in form_query %}
@@ -73,7 +77,7 @@
                      {% endif %}
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Gender</label>
                   <select name="gender" id="gender" class="form-control">
                      {% if 'gender' in form_query %}
@@ -87,7 +91,7 @@
                      {% endif %}
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Coat</label>
                   <select name="coat" id="coat" class="form-control">
                      {% if 'coat' in form_query %}
@@ -110,6 +114,32 @@
                   </select>
                </div>
                <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
+            </div>
+            <div class="container d-lg-flex justify-content-around align-items-lg-center pt-2">
+               <div id="locationcontainer">
+                  <div id="locationtextfieldcontainer">
+                     <label id="locationlabel" class="fieldlabel">Location</label>
+                     {% if 'location' in form_query %}
+                     <input type="text" name="location" class="form-control" placeholder="" value="{{form_query.location}}">
+                     {% else %}
+                     <input type="text" name="location" class="form-control" placeholder="City, State OR Zip Code" value="">
+                     {% endif %}
+                  </div>
+               </div>
+               <div id="distancecontainer">
+                  {% if 'distance' in form_query %}                  
+                  <div id="slidercontainer">
+                     <label id="distancelabel" class="fieldlabel">Distance</label>
+                     <input id="locationslider" class="form-control-range" type="range" name="distance" value="{{form_query.distance}}" min="0" max="500" step="25">
+                     <output id="distancebox" >{{form_query.distance}} miles</output>
+                  {% else %}
+                  <div id="slidercontainer">
+                     <label id="distancelabel" class="fieldlabel">Distance</label>
+                     <input id="locationslider" class="form-control-range" type="range" name="distance" value="100" min="0" max="500" step="25">
+                     <output id="distancebox" >100 miles</output>
+                  {% endif %}
+                  </div>
+               </div>
             </div>
          </form>
       </div>
@@ -188,10 +218,17 @@
    <!-- /container -->
 </div>
 <!-- /page -->
-
-<script src="{% static 'js/active/animals.js' %}"></script>
-
 <script>
+   let input = document.getElementById('locationslider')
+   let output = document.getElementById('distancebox');
+
+   output.innerHTML = input.value + ' miles';
+
+   // use 'change' instead to see the difference in response
+   input.addEventListener('input', function () {
+      output.innerHTML = input.value + ' miles';
+   }, false);
+
    window.addEventListener('load', function () {
       dynamicDropDown('{{form_query.type}}');
    });
@@ -653,6 +690,13 @@
          'White',
       ]
    }
+</script>
+<script>
+{#    when the id=locationslider changes, append text to the input value using VANILLA JS#}
+    {% comment %} document.getElementById('locationslider').addEventListener('change', function() {
+    {#    append 'miles' to the value of the tag input #}
+    document.getElementById('distancebox').value = document.getElementById('distancebox').value + ' miles';
+    }); {% endcomment %}
 </script>
 
 

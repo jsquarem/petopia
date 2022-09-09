@@ -21,8 +21,10 @@
       <!-- ==== Page Content ==== -->
       <div class="page">
          <div class="container block-padding pt-0">
-
+                    {% if favorites %}
                     <div class="row mt-5">
+
+{#                        <p>favorites returned true</p>#}
             {% for favorite in favorites %}
 
             <!-- Pet  -->
@@ -69,7 +71,21 @@
             <!-- /pet -->
 
         {% endfor %}
-                    </div>
+                                            </div>
+    {% else %}
+        <h2 id="nofavoritesheader">You have no favorites.</h2>
+                                    <div id="nofavoritescontainer" class="row mt-1">
+               <div class="col-md-4 offset-md-1">
+                  <img src="{% static 'assets/photos/nofavorites.png' %}" alt="" class="center-block img-fluid float-right">
+               </div>
+               <div class="col-md-5 h-50 border-irregular1  bg-light-custom text-center">
+                  <h4 class="mt-4">&nbsp;</h4>
+                  <h5>Looking for a new favorite furry companion? Start by viewing all the animals on Petopia here!</h5>
+                  <a href="{% url 'animals.index' %}" class="btn btn-primary mb-5"> View All Animals </a>
+               </div>
+            </div>
+    {% endif %}
+
 
             <!-- /col-md -->
          </div>
@@ -79,3 +95,4 @@
 
 
 {% endblock %}
+
