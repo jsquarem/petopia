@@ -42,6 +42,7 @@
                   <div id="contact_form">
                      <div class="form-group">
                         <form action="" method="post">
+                           {% csrf_token %}
                            <div class="row">
                               <div class="col-md-12">
                                  <label>Name<span class="required">*</span></label>
