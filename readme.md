@@ -28,6 +28,8 @@ Trello link: https://trello.com/b/W2GFMOMH/petopia
 
 Launch the app: https://pet-opia.herokuapp.com/
 
+Pitch deck: https://docs.google.com/presentation/d/1kabr2ZR1QxQTg13HghILt8ev_RzT9kvt_fOwQZLiX44/edit#slide=id.p
+
 ## Contact
 
 <img src="https://i.imgur.com/zNQrQdQ.png" width=500>
