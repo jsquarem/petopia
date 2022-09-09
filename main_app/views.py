@@ -151,14 +151,14 @@ def make_pagination(view_type, pagination_dict, current_page):
   if current_page <= 3:
     for i in range(1,6):
       if i <= total_pages:
-        this_string = f'page={i}'
+        this_string = f'page={i}'.lower()
         page_url = next_url.replace(next_string, this_string)
         page_dict = {'page_number': i, 'page_url': page_url}
         pages.append(page_dict)
   else:
     for i in range(current_page-2, current_page+3):
       if i <= total_pages:
-        this_string = f'page={i}'
+        this_string = f'page={i}'.lower()
         page_url = next_url.replace(next_string, this_string)
         page_dict = {'page_number': i, 'page_url': page_url}
         pages.append(page_dict)
@@ -251,7 +251,8 @@ def animals_index(request):
   elif current_query_string:
     query_dict = request.GET
     for key, value in query_dict.items():
-      query_list += (key, value[0])
+      current_value = value[0].lower()
+      query_list += (key, current_value)
     print(query_dict,'<--query_dict')
     animals = get_petfinder_request(f'{view_type}?{current_query_string}')
     current_page = int(request.GET['page'])
