@@ -29,7 +29,7 @@ Launch the app: https://pet-opia.herokuapp.com/
 ## Contact
 - 'Elijiah' 'e.silvereagle@gmx.com'
 - 'Jeff' 'jeffjmart@gmail.com'
-- 'Olu' 'stprodigy@live.com'
+- 'Olu' 'oluroc@gmail.com'
 - 'Ben' 'ben.schylling@gmail.com'
 ## Future Improvements
 - Improved functionality 
