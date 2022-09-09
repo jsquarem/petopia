@@ -1,6 +1,5 @@
 # **PETOPIA**
 
-Petopia is an app that allows its users to search for adoptable pets in their area, filtering by preference. Users can also add a dog or cat to their favorites if they make an account. New users will also receive a welcome email!
 Petopia is an app that allows its users to search for adoptable pets in their area, filtering by preference. Users can also add a dog or cat to their favorites if they make an account.
 
 ## prerequisites
