@@ -15,6 +15,10 @@
 - Python 3.x+ required to run the app locally.
 - Dependencies are listed in requirements.txt
 
+### Petopia Description
+Did you know that every year, thousands of pets are abandoned or lost without homes? Petopia is a pet adoption website that helps users find pets to adopt all over North America. Users can search for pets by location, breed, age, and size. Users can also save pets to their favorites list and view them later. 
+
+
 ### Screenshots
 
 <img src="https://hedonic.life/wp-content/uploads/2022/09/animals.png" />
