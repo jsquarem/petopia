@@ -8,7 +8,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Petopia</title>
-
+   <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
    <!-- Bootstrap core CSS -->
    <link defer href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
    <!--[if lt IE 9]>
@@ -25,7 +25,7 @@
    <!-- Colors CSS -->
    <link href="{% static 'styles/vetclinic.css' %}" rel="stylesheet">
    <!-- LayerSlider CSS -->
-   <link rel="stylesheet" href="{% static 'vendor/layerslider/css/layerslider.css' %}" type="text/css">
+   <link rel="stylesheet" href="{% static '/vendor/layerslider/css/layerslider.css' %}" type="text/css">
 </head>
 
 
@@ -206,18 +206,7 @@
       <script src="{% static 'vendor/layerslider/js/layerslider.transitions.js' %}"></script>
       <script src="{% static 'vendor/layerslider/js/layerslider.kreaturamedia.jquery.js' %}"></script>
       <script src="{% static 'vendor/layerslider/js/layerslider.load.js' %}"></script>
-      <!-- Open Street maps -->
-      {% comment %} <script src="{% static 'js/map.js' %}"></script> {% endcomment %}
-      <!-- Mailchimp script -->
-      {% comment %} <script src="{% static 'js/mailchimp.js' %}"></script> {% endcomment %}
-      <!-- number counter script -->
-      {% comment %} <script src="{% static 'js/counter.js' %}"></script> {% endcomment %}
-      <!-- Contact Form script -->
-      {% comment %} <script src="{%  static 'js/contact.js' %}"></script> {% endcomment %}
-	   <!-- Prefix free -->
-      {% comment %} <script src="{% static 'js/prefixfree.min.js' %}"></script> {% endcomment %}
-
-            <script src="{% static 'js/main.js' %}"></script>
+      <script src="{% static 'js/main.js' %}"></script>
 {% comment %} <script defer src="{% static 'js/app.js' %}"></script> {% endcomment %}
 </body>
 </html>
