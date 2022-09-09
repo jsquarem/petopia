@@ -2478,3 +2478,7 @@ input#submit_btn {
 #nofavoritesheader {
   text-align: center;
 }
+
+select#onlineUsersSelector {
+    overflow-y: auto;
+}
