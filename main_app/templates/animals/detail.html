@@ -144,7 +144,9 @@
     <div class="organizationcontainer">
 {#<div class="card bg-light-custom" style="width: 25rem;">#}
     <div class="card bg-light-custom">
-  <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">
+      {% if organization.organization.photos|length > 0 %}
+      <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">
+      {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{ organization.organization.name }}</h5>
     <p class="card-text">{{ organization.organization.mission_statement }}</p>
