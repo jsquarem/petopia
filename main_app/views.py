@@ -90,20 +90,24 @@ def clean_api_response(view, data):
     description = data['animal']['description']
     name = data['animal']['name']
     type = data['animal']['type']    
+    if len(name) >= 14:
+      data['animal']['name'] = 'Captain Cuddles' 
+      name = 'Captain Cuddles'
     if description is None or description == '':  
       description = f'{name} the {type} is looking to share their love with you.'
     if description and description.endswith('...'):
       url = data['animal']['url']
       description = get_expanded_description(url, 'animal')
-    if len(name) > 15:
-      data['animal']['name'] = 'Captain Cuddles'    
     data['animal']['description'] = description
   
   if view == 'animals/index':
     for i, animal in enumerate(data['animals']):
       name = animal['name']
-      if len(name) > 15:
+      if len(name) >= 14:
+        print(data['animals'][i]['name'], '<-name was')
         data['animals'][i]['name'] = 'Captain Cuddles'
+        print(data['animals'][i]['name'],'<-name is')
+        
   
   if view == 'organizations/detail':
     description = data['organization']['mission_statement']        
@@ -229,7 +233,6 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-@login_required
 def animals_index(request):
   view_type = 'animals'
   current_query_string = request.META['QUERY_STRING']
@@ -278,7 +281,7 @@ def animals_index(request):
     animals_clean = {}
   return render(request, 'animals/index.html', {'animals': animals_clean, 'pagination': pagination, 'form_query': form_query})
 
-@login_required
+
 def animals_detail(request, animal_id):
   # retrieve all favorites for the current logged in user, and store each found favorite in a list
   listOfFavorites = User.objects.get(id=request.user.id).favorites.all()
