@@ -2284,3 +2284,133 @@ text-align: left;
 }
 
 
+/* edited by Olu at 9:49pm on Sep 8*/
+#top > div.container.mt-3.p-5 > div {
+    padding-top:  30px;
+}
+
+button#chatMessageSend {
+    margin-left: 20px;
+}
+
+#top > div.container.mt-3.p-5 > div > div.col-12.col-md-8 > div.mb-2 {
+    padding-bottom: 30px;
+}
+
+
+#chatMessageInput, #chatMessageSend {
+        border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+}
+
+select #onlineUsersSelector {
+    overflow-y: auto;
+}
+
+
+#top > div.container.mt-3.p-5 > div > div.col-12.col-md-8 > div.mb-2 > label, #top > div.container.mt-3.p-5 > div > div.col-12.col-md-4 > label {
+    text-align: left;
+}
+
+input#chatMessageInput {
+    height: 45px;
+}
+
+#top > div.container.mt-3.p-5 > div > div.col-12.col-md-8 > div.input-group {
+    align-items: flex-end;
+}
+
+#top > div.page > div > div > div > div > div > div > ul > li > a > i {
+color: white;
+
+}
+
+#top > div.page > div > div > div > div > div > div > ul {
+    float: inline-start;
+}
+
+.aboutcontainer {
+    justify-content: center;
+}
+
+input#locationslider {
+    /*padding-top: 100px;*/
+}
+
+#distancelabel {
+    text-align: left;
+}
+
+#distancecontainer {
+    /*padding-top: 100px;*/
+}
+
+#slidercontainer {
+    width: 35rem;
+}
+
+input#locationslider {
+    margin-right: 2rem;
+}
+
+div#slidercontainer {
+    display: flex;
+    width: 21rem;
+    flex-direction: column;
+}
+
+
+
+input#locationslider {
+    margin-right: 3rem;
+}
+
+#locationdistancecontainer {
+    display: flex;
+    align-items: flex-end;
+    padding-top: 0.3rem;
+}
+
+div#locationdistancecontainer {
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#locationlabel, #distancelabel {
+    text-align: left;
+}
+
+div#locationcontainer {
+    margin-right: 60px;
+}
+
+input#distancebox {
+    width: 100%;
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    text-align: center;
+}
+
+form > .row > .col-md-12 > label {
+    color: white;
+    text-align: left;
+}
+
+#signupform > label {
+    text-align: left;
+}
+
+#signupform > input {
+    width: 100%
+}
+
+input#submit_btn {
+    margin: auto;
+    margin-top: 1rem;
+}
+
+#sociallist {
+    float: none;
+}
+
+#aboutcontact {
+    margin-top: 1rem !important;
+}

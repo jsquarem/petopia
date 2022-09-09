@@ -1,17 +1,67 @@
-{% extends 'base.html' %}
-{% load static %}
-
+{% extends 'base.html' %} {% load static %}
 {% block content %}
 
-<h1>About Us</h1>
+          <!-- /nav --><!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid overlay">
+         <div class="jumbo-heading">
+            <!-- section-heading -->
+            <div class="section-heading" data-aos="zoom-in">
+               <h1>About Petopia</h1>
+            </div>
+         </div>
+         <!-- /jumbo-heading -->
+      </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div class="page">
+         <div class="container">
+            <div class="row aboutcontainer">
+               <!-- contact-info-->
 
-<div>
-If you've been searching for a cat or dog our service is here to help!
-Create a Profile and add a pet to your Favorites!
-Use Petopia to search by:
-Pet type, Breed, Color, Age, and Distance!
+               <!-- /contact-info-->
+               <div class="col-lg-6 offset-lg-1 h-50 card bg-secondary res-margin ">
+                  <div class="contact-info text-light ">
+                     <!-- contact-info-->
+                     <div class="text-light">
+                        <h5>A World Of Pets To Explore </h5>
+                        <p>If you've been searching for a cat or dog to adopt, you are at the right place! <br><br>
+
+                            Petopia is a pet adoption website that helps you find your perfect pet. We have a wide range of pets available for adoption. <br><br>
+                            Create a Profile and add a pet to your Favorites!<br><br>
+Use Petopia to search pets by:
+Pet type, Breed, Color, Age, and Distance! <br><br>
 Communicate with an Admin by chat or email!
-</div>
+Connect with us and reach out on social media!
+
+                        </p>
+
+                                              <div class="col-md-12">
+                                                 <ul id="sociallist" class="social-list list-inline">
+                           <li class="list-inline-item"><a title="Facebook" href="https://www.facebook.com/profile.php?id=100085640221172"><i class="fab fa-facebook-f"></i></a></li>
+                           <li class="list-inline-item"><a title="Twitter" href="https://twitter.com/petopiaapp"><i class="fab fa-twitter"></i></a></li>
+                           <li class="list-inline-item"><a  title="Instagram" href="https://www.instagram.com/petopia_app/"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+                                              </div>
+                        <!-- contact icons-->
+                        <ul id="aboutcontact" class="list-unstyled mt-5 list-contact">
+                           <li class="h7"><i class="fa fa-envelope margin-icon"></i><a href="mailto:email@yoursite.com">contact@petopia.com</a></li>
+                           <li class="h7"><i class="fa fa-phone margin-icon"></i>(123) 456-789</li>
+                           <li class="h7" ><i class="fa fa-map-marker margin-icon"></i>Pet Street 123 - New York</li>
+                        </ul>
+                        <!-- /list-->
+                     </div>
+                     <!-- /text-light -->
+                  </div>
+                  <!-- /contact-info-->
+               </div>
+               <!-- /col-lg-->
+            </div>
+
+                  <!-- /col-md-->
+         </div>
+               <!-- /col-lg-->
+      </div>
+            <!-- /row-->
 
 
 {% endblock %}
