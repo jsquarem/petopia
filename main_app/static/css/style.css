@@ -2482,3 +2482,7 @@ input#submit_btn {
 select#onlineUsersSelector {
     overflow-y: auto;
 }
+
+select#roomSelect {
+    overflow-y: auto;
+}
