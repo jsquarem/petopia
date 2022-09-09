@@ -368,8 +368,8 @@ def contact(request):
     send_mail(
       f'Contact Request - {message_name}',
       message,
-      ['jeffjmart@gmail.com'],
-      message_email,
+      'jeffjmart@gmail.com',
+      [message_email],
     )
     confirmation['message'] = f"We've got your message, we will respond as soon as we can at {message_email}"
     confirmation['name'] = message_name
