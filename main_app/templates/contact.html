@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} 
 {% block content %}
 
-          <!-- /nav --><!-- Jumbotron -->
+      <!-- /nav --><!-- Jumbotron -->
       <div class="jumbotron jumbotron-fluid overlay">
          <div class="jumbo-heading">
             <!-- section-heading -->
@@ -23,6 +23,17 @@
       <!-- ==== Page Content ==== -->
       <div class="page">
          <div class="container">
+            <div class="row">
+               <div class="col-md-8 offset-md-2">
+                  {% if confirmation %}
+                  <p>Thank you {{confirmation.name}}!</p>
+                  <p>{{confirmation.message}}</p>
+                  {% else %}
+                  <h6>&nbsp;</h6>
+                  <p>&nbsp;</p>
+                  {% endif %}
+               </div>
+            </div>
             <div class="row">
                <!-- contact-info-->
                <div class="contact-info col-lg-5">
@@ -53,8 +64,6 @@
                         <button type="submit" id="submit_btn" value="Submit" class="btn btn-primary">Send message</button>
                      </div>
                      <!-- /form-group-->
-                     <!-- Contact results -->
-                     <div id="contact_results"></div>
                   </div>
                   <!-- /contact)form-->
                </div>

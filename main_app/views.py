@@ -371,7 +371,7 @@ def contact(request):
       message_email,
       ['jeffjmart@gmail.com']
     )
-    confirmation['message'] = 'Thank you for yor message, we will respond as soon as we can.'
+    confirmation['message'] = f"We've got your message, we will respond as soon as we can at {message_email}"
     confirmation['name'] = message_name
     return render(request, 'contact.html', {'confirmation': confirmation})
   else:
