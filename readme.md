@@ -1,17 +1,10 @@
 # **PETOPIA**
-
 ** Developed by: The Powerpuff Boys **
-
-Petopia is a pet adoption website that helps users find pets to adopt all over North America.
-Powered by Django, Bootstrap and Petfinder API.
-
-### Contents
 
 - System Requirements
 - Petopia Description
 - Screenshots
 - Technologies Used
-- Description of Operations
 - Getting Started
 - Contact Information
 - Roadmap and Planned Features
@@ -42,10 +35,6 @@ Powered by Django, Bootstrap and Petfinder API.
 - PostgreSQL
 
 ### Description of Operations
-
-Users start by registering for an account. Once registered, users are presented with a profile page where they can edit their profile information.
-
-Logged in users can search for pets by location, breed, age, and size. They can also search for organizations that shelter pets.
 
 Logged in users can also save pets to their favorites list and view them later.
 
