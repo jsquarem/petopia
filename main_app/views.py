@@ -243,8 +243,9 @@ def animals_index(request):
     for key, value in form.items():
       if key != 'csrfmiddlewaretoken' and value != '':
         # value = value.lower()
-        form_query_list.append((key, urllib.parse.quote(value.lower(), safe='()')))
-        form_query_list_no_escape.append((key, value.lower()))
+        if key != 'distance' and value != 0:
+          form_query_list.append((key, urllib.parse.quote(value.lower(), safe='()')))
+          form_query_list_no_escape.append((key, value.lower()))
     if form_query_list != []:
       animals = get_petfinder_request('animals', form_query_list)
       current_page = 1
