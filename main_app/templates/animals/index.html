@@ -111,6 +111,30 @@
                </div>
                <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
             </div>
+                  <div id="locationdistancecontainer">
+         <div id="locationcontainer">
+{#                           <label id="locationlabel" class="fieldlabel">Location</label>#}
+             <div id="locationtextfieldcontainer">
+
+<label id="locationlabel" class="fieldlabel">Location</label>
+                     <input type="text" name="location" class="form-control" placeholder="" value="">
+                 </div>
+{#             <output for="distance" onforminput="value = locationslider.valueAsNumber"></output>#}
+
+         </div>
+
+         <div id="distancecontainer">
+                           <label id="distancelabel" class="fieldlabel">Distance</label>
+             <div id="slidercontainer">
+
+            <input id="locationslider" class="form-control-range" type="range" name="Distance" value="100" min="1" max="500" step="25" oninput="this.nextElementSibling.value = this.value" >
+                          <input id="distancebox"></input>
+                 </div>
+{#             <output for="distance" onforminput="value = locationslider.valueAsNumber"></output>#}
+
+         </div>
+            </div>
+
          </form>
       </div>
 {% for animal in animals.animals %}
@@ -651,6 +675,15 @@
       ]
    }
 </script>
+
+        <script>
+{#    when the id=locationslider changes, append text to the input value using VANILLA JS#}
+    document.getElementById('locationslider').addEventListener('change', function() {
+    {#    append 'miles' to the value of the tag input #}
+    document.getElementById('distancebox').value = document.getElementById('distancebox').value + ' miles';
+    });
+
+    </script>
 
 
 {% endblock %}
