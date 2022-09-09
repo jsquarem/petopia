@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import ssl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-+)2qiv65g0kqsv%l0wvq=pt@704b6x1a3!zgqcnge0$_%1q$ph
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', '.localhost']
 
 
 # Application definition
@@ -71,16 +73,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'petopia.wsgi.application'
-ASGI_APPLICATION = 'petopia.asgi.application'
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
+
+
+
 
 
 # Database
@@ -146,4 +142,29 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 # EMAIL_USE_SSL = False
+
+
+ASGI_APPLICATION = 'petopia.asgi.application'
+ssl_context = ssl.SSLContext()
+ssl_context.check_hostname = False
+
+REDIS_URL = os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379')
+
+heroku_redis_ssl_host = {
+    'address': REDIS_URL,  # The 'rediss' schema denotes a SSL connection.
+    'ssl': ssl_context
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": (heroku_redis_ssl_host,)
+        },
+    },
+}
+
+
+import django_heroku
+django_heroku.settings(locals())
 
