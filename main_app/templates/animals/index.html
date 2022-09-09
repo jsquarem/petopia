@@ -29,7 +29,7 @@
          <form method="post" action="{% url 'animals.index' %}">
             {% csrf_token %}
             <div class="container d-lg-flex justify-content-around align-items-lg-center">
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Type</label>
                   <select name="type" id="type" onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);" class="form-control">
                      {% if 'type' in form_query %}
@@ -43,19 +43,19 @@
                      {% endif %}
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Breed</label>
                   <select name="breed" id="breed" class="form-control">
                      <option value="">--Select a Type--</option>
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Color</label>
                   <select name="color" id="color" class="form-control">
                      <option value="">--Select a Type--</option>
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Age</label>
                   <select name="age" id="age" class="form-control">
                      {% if 'age' in form_query %}
@@ -73,7 +73,7 @@
                      {% endif %}
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Gender</label>
                   <select name="gender" id="gender" class="form-control">
                      {% if 'gender' in form_query %}
@@ -87,7 +87,7 @@
                      {% endif %}
                   </select>
                </div>
-               <div class="searchselectfield" style="padding-bottom: 11px;">
+               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
                   <label class="fieldlabel">Coat</label>
                   <select name="coat" id="coat" class="form-control">
                      {% if 'coat' in form_query %}
@@ -111,7 +111,7 @@
                </div>
                <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
             </div>
-            <div class="container d-lg-flex justify-content-around align-items-lg-center">
+            <div class="container d-lg-flex justify-content-around align-items-lg-center pt-2">
                <div id="locationcontainer">
                   <div id="locationtextfieldcontainer">
                      <label id="locationlabel" class="fieldlabel">Location</label>
@@ -123,14 +123,14 @@
                   </div>
                </div>
                <div id="distancecontainer">
-                  {% if 'distance' in form_query %}
-                  <label id="distancelabel" class="fieldlabel">Distance</label>
+                  {% if 'distance' in form_query %}                  
                   <div id="slidercontainer">
+                     <label id="distancelabel" class="fieldlabel">Distance</label>
                      <input id="locationslider" class="form-control-range" type="range" name="distance" value="{{form_query.distance}}" min="0" max="500" step="25">
                      <output id="distancebox" >{{form_query.distance}} miles</output>
                   {% else %}
-                  <label id="distancelabel" class="fieldlabel">Distance</label>
                   <div id="slidercontainer">
+                     <label id="distancelabel" class="fieldlabel">Distance</label>
                      <input id="locationslider" class="form-control-range" type="range" name="distance" value="100" min="0" max="500" step="25">
                      <output id="distancebox" >100 miles</output>
                   {% endif %}
