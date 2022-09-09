@@ -103,7 +103,10 @@
                             <!-- /row-->
 
                          <div>
-                                                                                               <span class="h7">Characteristics:  </span><span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
+                                                                                               {% if animal.animal.tags %}<span class="h7">Characteristics:  </span><span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
+                                                                                                 {% else %}
+                                                                                                 <span class="h7">&nbsp;  </span><span></span>
+                                                                                                 {% endif %}
                          </div>
 
                             <!-- button -->
