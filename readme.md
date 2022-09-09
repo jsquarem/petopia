@@ -39,6 +39,9 @@ Did you know that every year, thousands of pets are abandoned or lost without ho
 - PostgreSQL
 
 ### Description of Operations
+Users start by registering for an account. Once registered, users are presented with a profile page where they can edit their profile information.
+
+Logged in users can search for pets by location, breed, age, and size. They can also search for organizations that shelter pets. 
 
 Logged in users can also save pets to their favorites list and view them later.
 
