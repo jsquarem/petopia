@@ -19,15 +19,13 @@
     <!-- /jumbo-heading -->
 </div>
 <!-- /jumbotron -->
-
 <div class="section-heading" data-aos="zoom-in">
     <h1>Welcome, {{ profile.name }}!</h1>
     {% if request.user == profile.user %}
-            <a class="btn btn-lg btn-outline-info" href="{% url 'profiles_update' user.id %}">Edit</a>
-            <a class="btn btn-lg btn-outline-danger" href="{% url 'profiles_delete' user.id %}">Delete</a>
+            <a class="btn btn-lg btn-info" href="{% url 'profiles_update' user.id %}">Edit</a>
+            <a class="btn btn-lg btn-danger" href="{% url 'profiles_delete' user.id %}">Delete</a>
     {% endif %}
         <h3 class="">Speak with other Adopters!</h3>
         <a class="btn btn-lg btn-success" href="{% url 'chat-index' %}">Animal Chatroom</a>
 </div>
-
 {% endblock %}
