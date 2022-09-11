@@ -450,19 +450,19 @@ textarea {
   grid-row-start: 7; */
   /* position: relative;
   display: inline-block; */
-  font-family: monospace;
+  /* font-family: monospace;
   font-size: 1vh;
   /* font-weight: bold; */
   /* margin-top: -2.5vh;
   margin-left: -10vw; */
-  border: 0.25vh solid white;
+  /* border: 0.25vh solid white;
   background-color: black;
   color: white;
   text-align: center;
   padding: 0;
   width: 75vw;
   height: 20vh;
-  z-index: 3;
+  z-index: 3; */
 }
 #chat-input {
   background-color: black;
@@ -2210,8 +2210,15 @@ input#id_email,
 input#id_username,
 input#id_password,
 input#id_password1,
-input#id_password2 {
+input#id_password2,
+input#id_name,
+input#id_bio {
   border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
+  text-indent: 10px;
+}
+
+textarea#id_bio {
+  border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
   text-indent: 10px;
 }
 

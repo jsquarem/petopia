@@ -197,14 +197,14 @@ def about(request):
 
 @login_required
 def index_view(request):
-    return render(request, 'index.html', {
+    return render(request, 'chat/index.html', {
         'rooms': Room.objects.all(),
     })
 
 @login_required
 def room_view(request, room_name):
     chat_room, created = Room.objects.get_or_create(name=room_name)
-    return render(request, 'room.html', {
+    return render(request, 'chat/room.html', {
         'room': chat_room,
     })
 

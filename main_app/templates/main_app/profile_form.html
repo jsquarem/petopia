@@ -7,21 +7,28 @@
 <div class="jumbotron jumbotron-fluid overlay">
     <div class="jumbo-heading">
         <div class="section-heading" data-aos="zoom-in">
-        {% if object %}
-            <h1 class="text-info">Edit <span class="teal-text">{{object.name}}</span></h1> 
-        {% else %}
-        <h1 class="text-info">New Profile</h1>
-        {% endif %}
-        <form id="create-profile" action="" method="POST">
-            {% csrf_token %}
-                <h5 class="text-white">Profile Name:</h5>
-            <h5>{{ form.name }}</h5>
-            <h5 class="text-white">Profile Description:</h5>
+            {% if object %}
+                <h1 class="text-info">Edit <span class="teal-text">{{object.name}}</span></h1> 
+            {% else %}
+            <h1 class="text-info">New Profile</h1>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
-            <h5>{{ form.bio }}</h5>
-
-        <input type="submit" value="Submit Profile" class="btn btn-outline-success btn-lg my-4">
-        </form>
+<div class="page">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-6 offset-3 petbox contact-info">
+                <form class="form" id="create-profile" action="" method="POST">
+                    {% csrf_token %}
+                    <h5 class="text-white">Profile Name:</h5>
+                    {{ form.name }}
+                    <h5 class="text-white mt-3">Profile Description:</h5>
+                    {{ form.bio }}
+                    <input type="submit" value="Submit Profile" class="btn btn-success btn-lg my-4">
+                </form>
+            </div>
         </div>
     </div>
 </div>
