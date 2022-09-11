@@ -1551,7 +1551,7 @@ ul.custom li:before {
 /* Page margin*/
 .page {
   background: #fff;
-  padding: 1em;
+  padding: 1em 0;
 }
 /* opacity on hover */
 .hover-opacity {
@@ -1722,7 +1722,8 @@ ul.custom li:before {
   .text-xs-center {
     text-align: center;
   }
-  .pagination {
+  #pet-buttons {
+    padding: auto;
   }
 }
 /* Medium devices (tablets, 768px) The navbar toggle appears at this breakpoint */

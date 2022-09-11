@@ -24,7 +24,7 @@
       <div class="row">
          <div class="col-lg-12">
             <div class="bg-light-custom card py-3">
-               <h1 class="petboxheader pb-3">Pet Details</h1>
+               <h1 class="petboxheader">Pet Details</h1>
                <div class="row">
                   <!-- image -->
                   <div class="col-lg-4 offset-lg-2">
@@ -51,27 +51,17 @@
                   <!-- /owl-carousel -->
                   </div>
                   <!-- adoption info  -->
-                  <div class="col-lg-4 res-margin mt-5 text-xs-center">
-                     <h4><strong>Pet name:</strong> {{ animal.animal.name }}</h4>
-                     <div class="row">
-                        <div class="col-sm-6">
-                           <ul class="list-unstyled pet-adopt-info">
-                              <li class="h7">Type: <span>{{ animal.animal.type }}</span></li>
-                              <li class="h7">Breed: <span>{{ animal.animal.breeds.primary }}</span></li>
-                              <li class="h7">Age: <span>{{ animal.animal.age }}</span></li>
-                           </ul>
-                        </div>
-                        <div class="col-sm-6">
-                           <ul class="list-unstyled pet-adopt-info">
-                              <li class="h7">Size: <span>{{ animal.animal.size }}</span></li>
-                              <li class="h7">Neutered: <span>{% if animal.animal.attributes.spayed_neutered %}Yes{% else %}No{% endif %}</span></li>
-                              <li class="h7">Vaccinated: <span>{% if animal.animal.attributes.shots_current %}Yes{% else %}No{% endif %}</span></li>
-                              <li class="h7">Gender: <span>{{ animal.animal.gender }}</span></li>
-                           </ul>
-                        </div>
-                     </div>
-                     <!-- /row-->
-                     <div>
+                  <div class="col-lg-4 res-margin text-xs-center">
+                        <h4><strong>Pet name:</strong> {{ animal.animal.name }}</h4>
+                        <ul class="list-unstyled pet-adopt-info">
+                           <li class="h7">Type: <span>{{ animal.animal.type }}</span></li>
+                           <li class="h7">Breed: <span>{{ animal.animal.breeds.primary }}</span></li>
+                           <li class="h7">Age: <span>{{ animal.animal.age }}</span></li>
+                           <li class="h7">Size: <span>{{ animal.animal.size }}</span></li>
+                           <li class="h7">Neutered: <span>{% if animal.animal.attributes.spayed_neutered %}Yes{% else %}No{% endif %}</span></li>
+                           <li class="h7">Vaccinated: <span>{% if animal.animal.attributes.shots_current %}Yes{% else %}No{% endif %}</span></li>
+                           <li class="h7">Gender: <span>{{ animal.animal.gender }}</span></li>
+                        </ul>
                         {% if animal.animal.tags %}
                         <span class="h7">Characteristics:  </span>
                         <span>{% for tag in animal.animal.tags %}{{ tag }} {% endfor %}</span>
@@ -79,25 +69,26 @@
                         <span class="h7">&nbsp;</span>
                         <span>&nbsp;</span>
                         {% endif %}
-                     </div>
-                     <!-- button -->
-                     <a href="#" class="btn btn-primary " data-aos="zoom-in">Adopt now!</a><br>
-                     <!-- eli code -->
-                     {% if user.id %}
-                     {% if is_favorite %}
-                     <form action="{% url 'delete_favorite' user.id animal.animal.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-success"  data-aos="zoom-in">Remove Favorite</button>
-                     </form>
-                     {% else %}
-                     <form action="{% url 'add_favorite' user.id animal.animal.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-success"  data-aos="zoom-in">Favorite</button>
-                     </form>
-                     {% endif %}
-                     {% else %}
-                     <a href="{% url 'login' %}" class="btn btn-success"  data-aos="zoom-in">Login to Favorite</a>
-                     {% endif %}
+                     <p>
+                        <!-- button -->
+                        <a href="#" class="btn btn-primary " data-aos="zoom-in">Adopt now!</a><br>
+                        <!-- eli code -->
+                        {% if user.id %}
+                        {% if is_favorite %}
+                        <form action="{% url 'delete_favorite' user.id animal.animal.id %}" method="POST">
+                           {% csrf_token %}
+                           <button type="submit" class="btn btn-success"  data-aos="zoom-in">Remove Favorite</button>
+                        </form>
+                        {% else %}
+                        <form action="{% url 'add_favorite' user.id animal.animal.id %}" method="POST">
+                           {% csrf_token %}
+                           <button type="submit" class="btn btn-success"  data-aos="zoom-in">Favorite</button>
+                        </form>
+                        {% endif %}
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-success"  data-aos="zoom-in">Login to Favorite</a>
+                        {% endif %}
+                     </p>
                      <!-- /eli code -->
                   </div>
                <!-- /col-md -->
@@ -122,9 +113,9 @@
          <div class="col-12">
             <div class="organizationbox card bg-light-custom py-3">
                <h1 class="organizationboxheader">Organization Details</h1>
-               <div class="organizationcontainer pb-3">
-                  <div class="row">
-                     <div class="col-lg-6 bg-light-custom">
+               <div class="organizationcontainer pb-5">
+                  <div class="row px-3">
+                     <div class="col-lg-6">
                      {% if organization.organization.photos|length > 0 %}
                         <img class="card-img-top" src="{{ organization.organization.photos.0.full }}" alt="Card image cap">
                      {% endif %}
@@ -147,9 +138,9 @@
                            </ul>
                         </div>
                      </div>
-                     <div class="col-lg-6 mw-40 mh-80">
+                     <div class="col-sm-6 px-4">
                         <iframe
-                           class="w-100 h-100 mw-40 mh-80"
+                           class="w-100 h-100"
                            style="border:0;"
                            loading="lazy"
                            allowfullscreen
