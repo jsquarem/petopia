@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+)2qiv65g0kqsv%l0wvq=pt@704b6x1a3!zgqcnge0$_%1q$ph'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', '.localhost']
 
@@ -138,11 +138,11 @@ CSRF_TRUSTED_ORIGINS = ['https://pet-opia.herokuapp.com']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email settings
-# EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
 EMAIL_HOST= 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-# EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 # EMAIL_USE_SSL = False
 
 
