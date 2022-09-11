@@ -285,8 +285,7 @@ def animals_index(request):
 def animals_detail(request, animal_id):
   # retrieve all favorites for the current logged in user, and store each found favorite in a list
   is_favorite = False
-  listOfFavorites = []
-  if request.user:
+  if request.user.id:
     listOfFavorites = User.objects.get(id=request.user.id).favorites.all()
   # now go through the list of favorites and store the id of each favorite in a list
     for favorite in listOfFavorites:
