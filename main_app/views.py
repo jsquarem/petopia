@@ -71,7 +71,7 @@ def get_petfinder_request(endpoint = '', query_list = []):
 
 def get_expanded_description(url, type):
   # type = 'animal'
-    # url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
+  # url = 'https://www.petfinder.com/dog/violet-56891221/ca/oakdale/city-of-oakdale-animal-shelter-ca731/?referrer_id=8a971326-6e94-4e90-aa32-70d9748109bd'
   response = requests.get(url)
   soup = BeautifulSoup(response.content, 'html.parser')  
   if type == 'animal':
@@ -284,16 +284,17 @@ def animals_index(request):
 
 def animals_detail(request, animal_id):
   # retrieve all favorites for the current logged in user, and store each found favorite in a list
-  listOfFavorites = User.objects.get(id=request.user.id).favorites.all()
-  # now go through the list of favorites and store the id of each favorite in a list
-  listOfFavoriteIds = []
-  for favorite in listOfFavorites:
-    listOfFavoriteIds.append(int(favorite.animal_id))
-  # declare a variable to store whether or not the current animal has been favorited by the current user
   is_favorite = False
+  if request.user.id:
+    listOfFavorites = User.objects.get(id=request.user.id).favorites.all()
+  # now go through the list of favorites and store the id of each favorite in a list
+    for favorite in listOfFavorites:
+      int(animal_id) == int(favorite.animal_id)
+      is_favorite = True
+  # declare a variable to store whether or not the current animal has been favorited by the current user
+  
   # now check if animal_id is in the list of listOfFavoriteIds, if it is, set the is_favorite variable to True
-  if int(animal_id) in listOfFavoriteIds:
-    is_favorite = True
+  
   
   view_type = 'animals'
   animal = get_petfinder_request(f'{view_type}/{animal_id}')

@@ -110,20 +110,24 @@
                          </div>
 
                             <!-- button -->
-                            <a href="#" class="btn btn-primary " data-aos="zoom-in" >Adopt now!</a>
+                            <a href="#" class="btn btn-primary " data-aos="zoom-in">Adopt now!</a><br>
                             <!-- eli code -->
-                         {% if is_favorite %}
+                           {% if user.id %}
+                           {% if is_favorite %}
                            <form action="{% url 'delete_favorite' user.id animal.animal.id %}" method="POST">
                               {% csrf_token %}
-                              <button type="submit" class="btn btn-success">Remove Favorite</button>
+                              <button type="submit" class="btn btn-success"  data-aos="zoom-in">Remove Favorite</button>
                            </form>
-                            {% else %}
-                                                    <form action="{% url 'add_favorite' user.id animal.animal.id %}" method="POST">
+                           {% else %}
+                           <form action="{% url 'add_favorite' user.id animal.animal.id %}" method="POST">
                               {% csrf_token %}
-                              <button type="submit" class="btn btn-success">Favorite</button>
+                              <button type="submit" class="btn btn-success"  data-aos="zoom-in">Favorite</button>
                            </form>
-                            {% endif %}
-                            <!-- /eli code -->
+                           {% endif %}
+                           {% else %}
+                              <a href="{% url 'login' %}" class="btn btn-success"  data-aos="zoom-in">Login to Favorite</a>
+                           {% endif %}
+                           <!-- /eli code -->
                          </div>
                          <!-- /col-md -->
                       </div>
