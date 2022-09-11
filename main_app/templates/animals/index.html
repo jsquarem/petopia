@@ -21,136 +21,136 @@
 <!-- ==== Page Content ==== -->
 <div class="page">
    <div class="container block-padding pt-0">
-      <div class="col-lg-8 offset-lg-2 text-center">
-         <h3>Find a new furry Friend</h3>
-         <p>Looking for a new pet? You are in the right place! We are committed to helping you connect with pets in need of homes all over North America. Use Petopia's intuitive search tools to find the perfect pet near you.</p>
-      </div>
-      <div class="searchformcontainer">
-         <form method="post" action="{% url 'animals.index' %}">
-            {% csrf_token %}
-            <div class="container d-lg-flex justify-content-around align-items-lg-center">
-               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
-                  <label class="fieldlabel">Type</label>
-                  <select name="type" id="type" onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);" class="form-control">
-                     {% if 'type' in form_query %}
-                     <option value="">--Select--</option>
-                     <option{% if form_query.type == 'cat' %} selected{% endif %} value="cat">Cat</option>
-                     <option{% if form_query.type == 'dog' %} selected{% endif %} value="dog">Dog</option>
+      <div class="row pb-3">
+         <div class="col-lg-8 offset-lg-2 text-center">
+            <h3>Find a new furry Friend</h3>
+            <p>Looking for a new pet? You are in the right place! We are committed to helping you connect with pets in need of homes all over North America. Use Petopia's intuitive search tools to find the perfect pet near you.</p>
+         </div>
+         <div class="searchformcontainer">
+            <form method="post" action="{% url 'animals.index' %}">
+               {% csrf_token %}
+               <div class="container d-lg-flex justify-content-around align-items-lg-center">
+                  <div class="searchselectfield text-left" style="padding-bottom: 11px;">
+                     <label class="fieldlabel">Type</label>
+                     <select name="type" id="type" onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);" class="form-control">
+                        {% if 'type' in form_query %}
+                        <option value="">--Select--</option>
+                        <option{% if form_query.type == 'cat' %} selected{% endif %} value="cat">Cat</option>
+                        <option{% if form_query.type == 'dog' %} selected{% endif %} value="dog">Dog</option>
+                        {% else %}
+                        <option value="">--Select--</option>
+                        <option value="cat">Cat</option>
+                        <option value="dog">Dog</option>
+                        {% endif %}
+                     </select>
+                  </div>
+                  <div class="searchselectfield text-left" style="padding-bottom: 11px;">
+                     <label class="fieldlabel">Breed</label>
+                     <select name="breed" id="breed" class="form-control">
+                        <option value="">--Select a Type--</option>
+                     </select>
+                  </div>
+                  <div class="searchselectfield text-left" style="padding-bottom: 11px;">
+                     <label class="fieldlabel">Color</label>
+                     <select name="color" id="color" class="form-control">
+                        <option value="">--Select a Type--</option>
+                     </select>
+                  </div>
+                  <div class="searchselectfield text-left" style="padding-bottom: 11px;">
+                     <label class="fieldlabel">Age</label>
+                     <select name="age" id="age" class="form-control">
+                        {% if 'age' in form_query %}
+                        <option value="">--Select--</option>
+                        <option{% if form_query.age == 'baby' %} selected{% endif %} value="baby">Baby</option>
+                        <option{% if form_query.age == 'young' %} selected{% endif %} value="young">Young</option>
+                        <option{% if form_query.age == 'adult' %} selected{% endif %} value="baby">Adult</option>
+                        <option{% if form_query.age == 'senior' %} selected{% endif %} value="young">Senior</option>
+                        {% else %}
+                        <option value="">--Select--</option>
+                        <option value="baby">Baby</option>
+                        <option value="young">Young</option>
+                        <option value="adult">Adult</option>
+                        <option value="senior">Senior</option>
+                        {% endif %}
+                     </select>
+                  </div>
+                  <div class="searchselectfield text-left" style="padding-bottom: 11px;">
+                     <label class="fieldlabel">Gender</label>
+                     <select name="gender" id="gender" class="form-control">
+                        {% if 'gender' in form_query %}
+                        <option value="">--Select--</option>
+                        <option{% if form_query.gender == 'male' %} selected{% endif %} value="male">Male</option>
+                        <option{% if form_query.gender == 'female' %} selected{% endif %} value="female">Female</option>
+                        {% else %}
+                        <option value="">--Select--</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        {% endif %}
+                     </select>
+                  </div>
+                  <div class="searchselectfield text-left" style="padding-bottom: 11px;">
+                     <label class="fieldlabel">Coat</label>
+                     <select name="coat" id="coat" class="form-control">
+                        {% if 'coat' in form_query %}
+                        <option value="">--Select--</option>
+                        <option{% if form_query.coat == 'short' %} selected{% endif %} value="short">Short</option>
+                        <option{% if form_query.coat == 'medium' %} selected{% endif %} value="medium">Medium</option>
+                        <option{% if form_query.coat == 'long' %} selected{% endif %} value="long">Long</option>
+                        <option{% if form_query.coat == 'wire' %} selected{% endif %} value="wire">Wire</option>
+                        <option{% if form_query.coat == 'hairless' %} selected{% endif %} value="hairless">Hairless</option>
+                        <option{% if form_query.coat == 'curly' %} selected{% endif %} value="curly">Curly</option>
+                        {% else %}                     
+                        <option value="">--Select--</option>
+                        <option value="short">Short</option>
+                        <option value="medium">Medium</option>
+                        <option value="long">Long</option>
+                        <option value="wire">Wire</option>
+                        <option value="hairless">Hairless</option>
+                        <option value="curly">Curly</option>
+                        {% endif %}
+                     </select>
+                  </div>
+                  <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
+               </div>
+               <div class="container d-lg-flex justify-content-around align-items-lg-center pt-2">
+                  <div id="locationcontainer">
+                     <div id="locationtextfieldcontainer">
+                        <label id="locationlabel" class="fieldlabel">Location</label>
+                        {% if 'location' in form_query %}
+                        <input type="text" name="location" class="form-control" placeholder="" value="{{form_query.location}}">
+                        {% else %}
+                        <input type="text" name="location" class="form-control" placeholder="City, State OR Zip Code" value="">
+                        {% endif %}
+                     </div>
+                  </div>
+                  <div id="distancecontainer">
+                     {% if 'distance' in form_query %}                  
+                     <div id="slidercontainer">
+                        <label id="distancelabel" class="fieldlabel">Distance</label>
+                        <input id="locationslider" class="form-control-range" type="range" name="distance" value="{{form_query.distance}}" min="0" max="500" step="25">
+                        <output id="distancebox" >{{form_query.distance}} miles</output>
                      {% else %}
-                     <option value="">--Select--</option>
-                     <option value="cat">Cat</option>
-                     <option value="dog">Dog</option>
+                     <div id="slidercontainer">
+                        <label id="distancelabel" class="fieldlabel">Distance</label>
+                        <input id="locationslider" class="form-control-range" type="range" name="distance" value="100" min="0" max="500" step="25">
+                        <output id="distancebox" >100 miles</output>
                      {% endif %}
-                  </select>
-               </div>
-               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
-                  <label class="fieldlabel">Breed</label>
-                  <select name="breed" id="breed" class="form-control">
-                     <option value="">--Select a Type--</option>
-                  </select>
-               </div>
-               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
-                  <label class="fieldlabel">Color</label>
-                  <select name="color" id="color" class="form-control">
-                     <option value="">--Select a Type--</option>
-                  </select>
-               </div>
-               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
-                  <label class="fieldlabel">Age</label>
-                  <select name="age" id="age" class="form-control">
-                     {% if 'age' in form_query %}
-                     <option value="">--Select--</option>
-                     <option{% if form_query.age == 'baby' %} selected{% endif %} value="baby">Baby</option>
-                     <option{% if form_query.age == 'young' %} selected{% endif %} value="young">Young</option>
-                     <option{% if form_query.age == 'adult' %} selected{% endif %} value="baby">Adult</option>
-                     <option{% if form_query.age == 'senior' %} selected{% endif %} value="young">Senior</option>
-                     {% else %}
-                     <option value="">--Select--</option>
-                     <option value="baby">Baby</option>
-                     <option value="young">Young</option>
-                     <option value="adult">Adult</option>
-                     <option value="senior">Senior</option>
-                     {% endif %}
-                  </select>
-               </div>
-               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
-                  <label class="fieldlabel">Gender</label>
-                  <select name="gender" id="gender" class="form-control">
-                     {% if 'gender' in form_query %}
-                     <option value="">--Select--</option>
-                     <option{% if form_query.gender == 'male' %} selected{% endif %} value="male">Male</option>
-                     <option{% if form_query.gender == 'female' %} selected{% endif %} value="female">Female</option>
-                     {% else %}
-                     <option value="">--Select--</option>
-                     <option value="male">Male</option>
-                     <option value="female">Female</option>
-                     {% endif %}
-                  </select>
-               </div>
-               <div class="searchselectfield text-left" style="padding-bottom: 11px;">
-                  <label class="fieldlabel">Coat</label>
-                  <select name="coat" id="coat" class="form-control">
-                     {% if 'coat' in form_query %}
-                     <option value="">--Select--</option>
-                     <option{% if form_query.coat == 'short' %} selected{% endif %} value="short">Short</option>
-                     <option{% if form_query.coat == 'medium' %} selected{% endif %} value="medium">Medium</option>
-                     <option{% if form_query.coat == 'long' %} selected{% endif %} value="long">Long</option>
-                     <option{% if form_query.coat == 'wire' %} selected{% endif %} value="wire">Wire</option>
-                     <option{% if form_query.coat == 'hairless' %} selected{% endif %} value="hairless">Hairless</option>
-                     <option{% if form_query.coat == 'curly' %} selected{% endif %} value="curly">Curly</option>
-                     {% else %}                     
-                     <option value="">--Select--</option>
-                     <option value="short">Short</option>
-                     <option value="medium">Medium</option>
-                     <option value="long">Long</option>
-                     <option value="wire">Wire</option>
-                     <option value="hairless">Hairless</option>
-                     <option value="curly">Curly</option>
-                     {% endif %}
-                  </select>
-               </div>
-               <input type="submit" class="searchsubmitbutton btn btn-primary" value="Search">
-            </div>
-            <div class="container d-lg-flex justify-content-around align-items-lg-center pt-2">
-               <div id="locationcontainer">
-                  <div id="locationtextfieldcontainer">
-                     <label id="locationlabel" class="fieldlabel">Location</label>
-                     {% if 'location' in form_query %}
-                     <input type="text" name="location" class="form-control" placeholder="" value="{{form_query.location}}">
-                     {% else %}
-                     <input type="text" name="location" class="form-control" placeholder="City, State OR Zip Code" value="">
-                     {% endif %}
+                     </div>
                   </div>
                </div>
-               <div id="distancecontainer">
-                  {% if 'distance' in form_query %}                  
-                  <div id="slidercontainer">
-                     <label id="distancelabel" class="fieldlabel">Distance</label>
-                     <input id="locationslider" class="form-control-range" type="range" name="distance" value="{{form_query.distance}}" min="0" max="500" step="25">
-                     <output id="distancebox" >{{form_query.distance}} miles</output>
-                  {% else %}
-                  <div id="slidercontainer">
-                     <label id="distancelabel" class="fieldlabel">Distance</label>
-                     <input id="locationslider" class="form-control-range" type="range" name="distance" value="100" min="0" max="500" step="25">
-                     <output id="distancebox" >100 miles</output>
-                  {% endif %}
-                  </div>
-               </div>
-            </div>
-         </form>
+            </form>
+         </div>
       </div>
-{% for animal in animals.animals %}
-   {% if forloop.counter0 == 0 %}
-   <div class="row mt-5">
-   {% endif %}
-   {% if forloop.counter0|divisibleby:4 and forloop.counter0 > 0 %}
-   </div>
-   <div class="row mt-5">
-   {% endif %}
-         <!-- Pet  -->
-      <div class="adopt-card col-md-6 col-xl-3 res-margin">
-         <div class="card bg-light-custom">
-            <div class="thumbnail text-center">
+      <div class="row">
+      {% for animal in animals.animals %}
+      {% if forloop.counter0|divisibleby:4 %}
+      </div>
+      <div class="row">
+      {% endif %}
+            <!-- Pet  -->
+         <div class="adopt-card col-md-6 col-xl-3">
+            <div class="card bg-light-custom">
+               <div class="thumbnail text-center pt-3">
                   <!-- Image -->
                   <img src="{% if animal.photos.0.medium %}{{ animal.photos.0.medium }}
                               {% else %}
@@ -160,58 +160,59 @@
                                  {% endif %}
                               {% endif %}" class="border-irregular1 img-fluid" alt="">
                         <!-- Name -->
-               <div class="caption-adoption">
-                  <h6 class="adoption-header">{{ animal.name }}</h6>
-                  <!-- List -->
-                  <ul class="list-unstyled">
-                        <li><strong>Type:</strong> {{ animal.type }}</li>
-                     <li><strong>Gender:</strong> {{ animal.gender }}</li>
-                     <li><strong>Neutered: </strong>
-                        {% if animal.attributes.spayed_neutered %}
-                           Yes
-                        {% else %}
-                           No
-                        {% endif %}
-                     </li>
-                     <li><strong>Age:</strong> {{ animal.age }}</li>
-                  </ul>
-                  <!-- Buttons -->
-                  <div class="text-center">
-                     <a href="{% url 'animals.detail' animal.id %}" class="btn btn-primary">More Info</a>
+                  <div class="caption-adoption">
+                     <h6 class="adoption-header">{{ animal.name }}</h6>
+                     <!-- List -->
+                     <ul class="list-unstyled">
+                           <li><strong>Type:</strong> {{ animal.type }}</li>
+                        <li><strong>Gender:</strong> {{ animal.gender }}</li>
+                        <li><strong>Neutered: </strong>
+                           {% if animal.attributes.spayed_neutered %}
+                              Yes
+                           {% else %}
+                              No
+                           {% endif %}
+                        </li>
+                        <li><strong>Age:</strong> {{ animal.age }}</li>
+                     </ul>
+                     <!-- Buttons -->
+                     <div class="text-center">
+                        <a href="{% url 'animals.detail' animal.id %}" class="btn btn-primary">More Info</a>
+                     </div>
                   </div>
                </div>
+               <!-- /thumbnail -->
             </div>
-            <!-- /thumbnail -->
+            <!-- /card -->
          </div>
-         <!-- /card -->
+         <!-- /adopt-card -->
+         <!-- /pet -->
+      {% endfor %}
+      <!-- /row -->
       </div>
-      <!-- /adopt-card -->
-      <!-- /pet -->
-   {% if forloop.counter1 == animals.animals|length %}
-   </div>
-   {% endif %}
-{% endfor %}
-<!-- /row -->
-      <div class="col-md-12 mt-5">
-         <!-- pagination -->
-         <nav aria-label="pagination">
-            <ul class="pagination float-right">
-               <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
-                  <a class="page-link" href="{{pagination.previous_url}}" tabindex="-1">Previous</a>
-               </li>
-               {% for page in pagination.pages %}
-               <li class="page-item"><a class="page-link{% if page.page_number == pagination.current_page %} active{% endif %}" href="{{page.page_url}}">{{page.page_number}}</a></li>
-               {% endfor %}
-               {% if pagination.current_page|add:5 < pagination.last_page.page_number %}<li class="page-item"><a class="page-link" href="{{pagination.next_chunk}}">+5</a></li>{% endif %}
-               {% if pagination.current_page|add:4 < pagination.last_page.page_number %}<li class="page-item"><a class="page-link" href="{{pagination.last_page.url}}">{{pagination.last_page.page_number}}</a></li>{% endif %}
-               <li class="page-item"><a class="page-link" href="{{pagination.next_url}}">Next</a></li>
-            </ul>
-         </nav>
-         <!-- /nav -->
+      <div class="row">
+         <div class="col-md-12 mt-5">
+            <!-- pagination -->
+            <nav aria-label="pagination">
+               <ul class="pagination float-right">
+                  <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
+                     <a class="page-link" href="{{pagination.previous_url}}" tabindex="-1">Previous</a>
+                  </li>
+                  {% for page in pagination.pages %}
+                  <li class="page-item"><a class="page-link{% if page.page_number == pagination.current_page %} active{% endif %}" href="{{page.page_url}}">{{page.page_number}}</a></li>
+                  {% endfor %}
+                  {% if pagination.current_page|add:5 < pagination.last_page.page_number %}<li class="page-item"><a class="page-link" href="{{pagination.next_chunk}}">+5</a></li>{% endif %}
+                  {% if pagination.current_page|add:4 < pagination.last_page.page_number %}<li class="page-item"><a class="page-link" href="{{pagination.last_page.url}}">{{pagination.last_page.page_number}}</a></li>{% endif %}
+                  <li class="page-item"><a class="page-link" href="{{pagination.next_url}}">Next</a></li>
+               </ul>
+            </nav>
+            <!-- /nav -->
+         </div>
       </div>
       <!-- /col-md -->
    </div>
    <!-- /container -->
+</div>
 </div>
 <!-- /page -->
 <script>

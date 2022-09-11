@@ -22,7 +22,7 @@
       </div>
       <!-- /jumbotron -->
       <!-- ==== Page Content ==== -->
-      <div class="page pb-0">
+      <div class="page">
          <div class="container">
 
                      <div class="col-lg-8 offset-lg-2 text-center">
@@ -32,11 +32,11 @@
 
             <div id="signupformbox" class="row">
                <!-- contact-info-->
-               <div class="contact-info col-lg-5">
+               <div class="contact-info col-lg-5 petbox">
 
                    {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 
-<form id="signupform" method="post" action="{% url 'signup' %}">
+<form class="form pt-0" id="signupform" method="post" action="{% url 'signup' %}">
     {% csrf_token %}
 
         <label class="signupformfield">{{ form.first_name.label }}</label>
