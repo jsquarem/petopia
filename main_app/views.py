@@ -139,7 +139,6 @@ Helper Functions
 '''
 def make_pagination(view_type, pagination_dict, current_page):
   api_url_substring = f'/v2/{view_type}'
-
   previous_url = '#'
   next_url = '#'
   if '_links' in pagination_dict:
@@ -190,8 +189,8 @@ def make_pagination(view_type, pagination_dict, current_page):
 View Functions
 '''
 def home(request): 
-  response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
-  return render(request, 'home.html', {'response': response})
+  # response = get_petfinder_request('animals', [('type', 'dog'), ('location', '78729')])
+  return render(request, 'home.html')
 
 def about(request):
   return render(request, 'about.html')
