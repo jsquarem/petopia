@@ -24,9 +24,16 @@ Last change: 8th June 2018
 	#Media Queries
 
 /*=========================== General and Typography ============================ */
+
 body {
   font-family: 'Open Sans', sans-serif;
   color: #808080;
+}
+
+.page {
+  background: #fff;
+  padding: 1em 0;
+  min-height: 46.6vh;
 }
 
 p {
@@ -34,6 +41,7 @@ p {
   line-height: 1.6;
   font-weight: 400;
 }
+
 h1 {
   font-size: 3.8em;
   line-height: 1.1em;
@@ -1548,11 +1556,7 @@ ul.custom li:before {
   display: none;
   margin-top: 20px;
 }
-/* Page margin*/
-.page {
-  background: #fff;
-  padding: 1em 0;
-}
+
 /* opacity on hover */
 .hover-opacity {
   transition: all 0.4s ease-in-out;
@@ -2337,7 +2341,7 @@ input#submit_btn:hover {
 }
 
 button#chatMessageSend {
-  margin-left: 20px;
+  margin: 0 0 0 2px;
 }
 
 #top > div.container.mt-3.p-5 > div > div.col-12.col-md-8 > div.mb-2 {
@@ -2356,10 +2360,6 @@ select #onlineUsersSelector {
 #top > div.container.mt-3.p-5 > div > div.col-12.col-md-8 > div.mb-2 > label,
 #top > div.container.mt-3.p-5 > div > div.col-12.col-md-4 > label {
   text-align: left;
-}
-
-input#chatMessageInput {
-  height: 45px;
 }
 
 #top > div.container.mt-3.p-5 > div > div.col-12.col-md-8 > div.input-group {
@@ -2462,4 +2462,5 @@ select#onlineUsersSelector {
 
 select#roomSelect {
   overflow-y: auto;
+  min-height: 300px;
 }

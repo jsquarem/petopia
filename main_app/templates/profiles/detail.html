@@ -1,23 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-<!-- Jumbotron -->
+<!-- /nav --><!-- Jumbotron -->
 <div class="jumbotron jumbotron-fluid overlay">
-
-<div class="jumbo-heading">
-<!-- section-heading -->
-    <div class="section-heading" data-aos="zoom-in">
-        <h1>Welcome, {{ profile.name }}!</h1>
-        {% if request.user == profile.user %}
-                <a class="btn btn-lg btn-outline-info" href="{% url 'profiles_update' user.id %}">Edit</a>
-                <a class="btn btn-lg btn-outline-danger" href="{% url 'profiles_delete' user.id %}">Delete</a>
-        {% endif %}
-            <h3 class="text-white">Speak with other Adopters!</h3>
-            <a class="btn btn-lg btn-outline-success" href="{% url 'chat-index' %}">Animal Chatroom</a>
+    <div class="jumbo-heading">
+        <!-- section-heading -->
+        <div class="section-heading" data-aos="zoom-in">
+            <h1>Profile</h1>
+        </div>
+        <!-- /section-heading -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+            </ol>
+        </nav>
     </div>
+    <!-- /jumbo-heading -->
 </div>
-<!-- /jumbo-heading -->
+<!-- /jumbotron -->
+
+<div class="section-heading" data-aos="zoom-in">
+    <h1>Welcome, {{ profile.name }}!</h1>
+    {% if request.user == profile.user %}
+            <a class="btn btn-lg btn-outline-info" href="{% url 'profiles_update' user.id %}">Edit</a>
+            <a class="btn btn-lg btn-outline-danger" href="{% url 'profiles_delete' user.id %}">Delete</a>
+    {% endif %}
+        <h3 class="">Speak with other Adopters!</h3>
+        <a class="btn btn-lg btn-success" href="{% url 'chat-index' %}">Animal Chatroom</a>
 </div>
 
 {% endblock %}
