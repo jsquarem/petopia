@@ -15,8 +15,7 @@ from requests.structures import CaseInsensitiveDict
 
 # print(out_array)
 
-# with open('main_app/static/colors.csv', 'w') as csvfile:
-    
+# with open('main_app/static/colors.csv', 'w') as csvfile:    
 #     data = out_array
 #     f.write(data)
 
@@ -28,6 +27,7 @@ from requests.structures import CaseInsensitiveDict
 #     csvwriter.writerows(out_array)
 
 import json
+
 
 class Favorite:
     def __init__(self, id, name, gender, age, breed):
